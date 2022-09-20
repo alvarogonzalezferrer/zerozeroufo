@@ -165,6 +165,7 @@ bool MissileTruck::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *sho
 	{
 		sx = -2; // go left
 		ia = rand()%10+30;
+		shoot_ia = 0; // do not track player from outside screen
 	}
 	
 	if (x < 0)
