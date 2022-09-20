@@ -35,7 +35,7 @@ Biplane::Biplane(Datafile *data) : Enemy(data)
 	frame = rand()%3;
 	ia = 0;
 	
-	life = 20;
+	life = 25;
 		
 	bbox = new Collide2D(x, y, sprite->w, sprite->h);
 }
@@ -58,11 +58,10 @@ bool Biplane::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	
 	// animate
 	frame++;
-	
 	if (frame > 2) // 0,1,2 spr frame
 		frame=0;
 	
-	sprite = spr[frame/10];
+	sprite = spr[frame];
 	
 	
 	// IA
@@ -72,7 +71,7 @@ bool Biplane::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	{
 		// move
 		ia = Randomize::random(30, 90); // frames to do the same?
-		sx = Randomize::random(-1.5f, 1.5f);
+		sx = -1.5f; //Randomize::random(-1.5f, 1.5f); // always go left
 		sy = Randomize::random(-1.5f, 1.5f);
 
 		// shoot? 30% chance
@@ -100,11 +99,16 @@ bool Biplane::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	if  (x > m->mapW + sprite->w)
 	{
 		sx = -1.5f; // go left
-		ia = 45;
+		ia = 60;
 	}
 	
 	if (x < -sprite->w) // im gone by left
-		return true; // disappear for good, ran away from battle
+	{
+		//return true; // disappear for good, ran away from battle
+		
+		// appear by left again :p 
+		x = m->mapW + sprite->w + 5;
+	}
 	
 	// dont crash on ground! unless im dead 
 	if (y > m->getHeight(x) - sprite->h*3 && life >0)
@@ -118,7 +122,7 @@ bool Biplane::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	{
 		y  = 0;
 		sy = 1.5f; // dont fly higher
-		ia = 15;
+		ia = 45;
 	}
 
 	// update bounding box collision detection
