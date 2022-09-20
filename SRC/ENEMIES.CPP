@@ -141,7 +141,7 @@ void EnemyList::generate(int n, int t, Map *m)
 	
 	// CHANCES CHANGE ACCORDING TO WAVE 
 	
-	// tier 0 - easy levels
+	// tier 0-1 - easy levels
 	chance[0] = 80; // soldat
 	chance[1] = 20; // tank
 	chance[2] = 0; // heli
@@ -161,7 +161,7 @@ void EnemyList::generate(int n, int t, Map *m)
 	{
 		chance[0] = 70; // soldat
 		chance[1] = 30; // tank
-		chance[2] = 5; // heli
+		chance[2] = 0; // heli
 		chance[3] = 40; // jetpack
 		chance[4] = 0; // zepellin
 		chance[5] = 0; // B17
@@ -176,36 +176,89 @@ void EnemyList::generate(int n, int t, Map *m)
 	// increase according to tier
 	if (t > 2)
 	{
-		chance[0] = 60; // soldat
-		chance[1] = 40; // tank
-		chance[2] = 15; // heli
-		chance[3] = 40; // jetpack
-		chance[4] = 10; // zepellin
-		chance[5] = 20; // B17
-		chance[6] = 15; // missile truck
+		chance[0] = 70; // soldat
+		chance[1] = 30; // tank
+		chance[2] = 30; // heli
+		chance[3] = 30; // jetpack
+		chance[4] = 0; // zepellin
+		chance[5] = 0; // B17
+		chance[6] = 0; // missile truck
 		
-		chance[7] = 15; // weapon power up
-		chance[8] = 10; // health power up
+		chance[7] = 20; // weapon power up
+		chance[8] = 10; // health power up	
 
-		chance[9] = 20; // biplane
+		chance[9] = 10; // biplane
 	}
 	
 	// increase according to tier
 	if (t > 3)
 	{
-		chance[0] = 40; // soldat
-		chance[1] = 50; // tank
-		chance[2] = 25; // heli
-		chance[3] = 40; // jetpack
-		chance[4] = 20; // zepellin
-		chance[5] = 40; // B17
-		chance[6] = 45; // missile truck
+		chance[0] = 60; // soldat
+		chance[1] = 20; // tank
+		chance[2] = 20; // heli
+		chance[3] = 20; // jetpack
+		chance[4] = 30; // zepellin
+		chance[5] = 0; // B17
+		chance[6] = 0; // missile truck
 		
-		chance[7] = 12; // weapon power up
-		chance[8] = 12; // health power up	
+		chance[7] = 20; // weapon power up
+		chance[8] = 10; // health power up	
 
-		chance[9] = 30; // biplane	
+		chance[9] = 5; // biplane
 	}
+	
+	// increase according to tier
+	if (t > 4)
+	{
+		chance[0] = 50; // soldat
+		chance[1] = 20; // tank
+		chance[2] = 20; // heli
+		chance[3] = 20; // jetpack
+		chance[4] = 20; // zepellin
+		chance[5] = 20; // B17
+		chance[6] = 0; // missile truck
+		
+		chance[7] = 20; // weapon power up
+		chance[8] = 10; // health power up	
+
+		chance[9] = 0; // biplane
+	}
+	
+	// increase according to tier
+	if (t > 5)
+	{
+		chance[0] = 40; // soldat
+		chance[1] = 20; // tank
+		chance[2] = 20; // heli
+		chance[3] = 20; // jetpack
+		chance[4] = 20; // zepellin
+		chance[5] = 20; // B17
+		chance[6] = 30; // missile truck
+		
+		chance[7] = 25; // weapon power up
+		chance[8] = 20; // health power up	
+
+		chance[9] = 0; // biplane
+	}
+	
+	// increase according to tier
+	if (t > 6)
+	{
+		chance[0] = 20; // soldat
+		chance[1] = 20; // tank
+		chance[2] = 20; // heli
+		chance[3] = 20; // jetpack
+		chance[4] = 20; // zepellin
+		chance[5] = 20; // B17
+		chance[6] = 20; // missile truck
+		
+		chance[7] = 25; // weapon power up
+		chance[8] = 25; // health power up	
+
+		chance[9] = 5; // biplane
+	}
+	
+	
 
 	
 	// total chance ? 
