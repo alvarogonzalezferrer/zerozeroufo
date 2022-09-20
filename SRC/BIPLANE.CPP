@@ -68,7 +68,7 @@ bool Biplane::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	// IA
 	// easy state machine, when reaches 0, choose another action
 	ia--;
-	if (ia<0 && !insideBeam)
+	if (ia<0)
 	{
 		// move
 		ia = Randomize::random(30, 90); // frames to do the same?
@@ -82,7 +82,7 @@ bool Biplane::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 			float sx = (sx <= 0) ? x : x + sprite->w;
 			
 			Shoot *sn = new Shoot(sx, y + sprite->h / 2,
-								  ssx, ssy, 
+								  ssx, 0, 
 								  200, 
 								  0,
 								  0.01, 
