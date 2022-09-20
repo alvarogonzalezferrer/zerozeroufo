@@ -1,0 +1,20 @@
+Build instructions for MS DOS
+
+You need a GNU GCC compatible compiler, such as GNU GCC, DJGPP or MingW32.
+And the Allegro 4.2 game library. WILL NOT WORK WITH ALLEGRO 5.x
+
+For MS-DOS you need
+- DOSBOX
+- DJGPP C++ compiler
+- ALLEGRO 4.2
+
+To build the project, just type 'make'.
+
+To see other targets for make, such as installing, type 'make help'.
+
+To check the status, type 'make status'.
+
+-- Recommended build order for MS DOS for final release
+
+CLEAN.BAT
+MAKE UPX

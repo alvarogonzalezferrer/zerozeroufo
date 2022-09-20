@@ -1,0 +1,331 @@
+#include "enemies.h"
+#include "logger.h"
+
+// enemies types
+#include "soldat.h"
+#include "tank.h"
+#include "heli.h"
+#include "jetpack.h"
+#include "zepellin.h"
+#include "B17.h" 
+#include "mtruck.h"
+#include "biplane.h"
+
+// prizes - power ups - theyre a special case of enemy
+#include "weapon_p.h"
+#include "health_p.h"
+
+// how many enemy classes we have? -- debug shitty way to do it
+#define ENEMY_CLASSES_COUNT 10
+
+// -----------------------------------------------------------------------
+// base enemy class 
+// -----------------------------------------------------------------------
+// PURE VIRTUAL CLASS, CANT BE USED ON THE GAME
+// IS JUST A BASE FOR THE ENEMIES
+// -----------------------------------------------------------------------
+Enemy::Enemy(Datafile *data)
+{
+	Logger::log("Enemy::Enemy(data)");
+	
+	//life = 100; // default life
+	
+	/* this should be done in each enemy
+	
+	x = y = sx = sy = 0;
+
+	bbox = NULL;
+
+	sprite = NULL;
+	
+	this->data = data;*/
+}
+
+
+// you don't need to call the base destructor, a base destructor is always called for you by the derived destructor
+Enemy::~Enemy()
+{
+	Logger::log("Enemy::~Enemy()");
+	
+}
+
+// -----------------------------------------------------------------------
+// ENEMY LIST MANAGER 
+// -----------------------------------------------------------------------
+EnemyList::EnemyList()
+{
+	Logger::log("EnemyList::EnemyList()");
+	
+	// setup enemies
+	
+	for (int i=0; i<maxENEMIES; i++)
+		enemy[i] = NULL;
+	
+	shootsE = new ShootsList(); // shoot manager 
+	
+	enemies_n = 0;
+	
+	// this data is used by ALL enemy derived classes
+	// so I dont keep loading and unloading data from slow disks
+	data.load("enemies.dat");	
+
+}
+
+
+
+EnemyList::~EnemyList()
+{
+	Logger::log("EnemyList::~EnemyList()");
+	// release resources
+	reset();
+	
+	delete(shootsE);
+	
+	data.unload(); // unload datafile
+}
+
+void EnemyList::reset()
+{
+	Logger::log("EnemyList::reset()");
+	
+	for (int i=0; i<enemies_n; i++)
+	{
+		delete(enemy[i]);
+		enemy[i] = NULL;
+	}
+	
+	enemies_n = 0;
+	
+	shootsE->reset();
+}
+
+// add enemy e to active enemy list, 
+// will DELETE it IF list is full, no need to manage this,
+// returns TRUE if added, FALSE if list is full 
+bool EnemyList::addEnemy(Enemy *e)
+{
+	if (e == NULL)
+		return false; // prevent NULL pointers 
+	
+	if (enemies_n+1 > maxENEMIES)
+	{
+		delete(e);
+		return false; // im full
+	}
+	
+	enemies_n++;
+	
+	// ADD TO LIST
+	enemy[enemies_n-1] = e;
+	
+	return true;
+}
+
+// generate n enemies, of max tier t, on map m
+// will be added to the map from the right
+// generates common enemies, NOT BOSSES
+//
+// to select the enemies, I assign random chance to each like this:
+// Step 1: accumulate all the possible chances 
+// Step 2: pick a random value in proportion to total chance 
+// Step 3: loop through the resources to see in which part it random value falls under.
+// Step 4: Generate the enemy and add to list
+void EnemyList::generate(int n, int t, Map *m)
+{
+	Logger::log("EnemyList::generate() - INIT");
+	
+	// DEBUG -- ADD NEW CLASSES HERE!
+	int chance[ENEMY_CLASSES_COUNT]; // chance of each enemy class
+	
+	int total_chance = 0;
+	
+	// CHANCES CHANGE ACCORDING TO WAVE 
+	
+	// tier 0 - easy levels
+	chance[0] = 80; // soldat
+	chance[1] = 20; // tank
+	chance[2] = 0; // heli
+	chance[3] = 0; // jetpack
+	chance[4] = 0; // zepellin
+	chance[5] = 0; // B17
+	chance[6] = 0; // missile truck
+	
+	chance[7] = 25; // weapon power up
+	chance[8] = 0; // health power up
+	
+	// more enemies
+	chance[9] = 20; // biplane, easy enemy airborne
+	
+	// increase according to tier
+	if (t > 1)
+	{
+		chance[0] = 70; // soldat
+		chance[1] = 30; // tank
+		chance[2] = 5; // heli
+		chance[3] = 40; // jetpack
+		chance[4] = 0; // zepellin
+		chance[5] = 0; // B17
+		chance[6] = 0; // missile truck
+		
+		chance[7] = 20; // weapon power up
+		chance[8] = 10; // health power up	
+
+		chance[9] = 30; // biplane
+	}
+
+	// increase according to tier
+	if (t > 2)
+	{
+		chance[0] = 60; // soldat
+		chance[1] = 40; // tank
+		chance[2] = 15; // heli
+		chance[3] = 40; // jetpack
+		chance[4] = 10; // zepellin
+		chance[5] = 20; // B17
+		chance[6] = 15; // missile truck
+		
+		chance[7] = 15; // weapon power up
+		chance[8] = 10; // health power up
+
+		chance[9] = 20; // biplane
+	}
+	
+	// increase according to tier
+	if (t > 3)
+	{
+		chance[0] = 40; // soldat
+		chance[1] = 50; // tank
+		chance[2] = 25; // heli
+		chance[3] = 40; // jetpack
+		chance[4] = 20; // zepellin
+		chance[5] = 40; // B17
+		chance[6] = 45; // missile truck
+		
+		chance[7] = 12; // weapon power up
+		chance[8] = 12; // health power up	
+
+		chance[9] = 30; // biplane	
+	}
+
+	
+	// total chance ? 
+	for (int i = 0; i < ENEMY_CLASSES_COUNT; i++)
+		total_chance += chance[i];
+		
+	// select according to chance probability
+	for (int z = 0; z < n; z++)
+	{			
+		int rt = rand() % total_chance; // do the selection
+		
+		int type_e = 0; // type selected
+		
+		int previous_chance = 0; // previous chance range
+		for (int i = 0; i < ENEMY_CLASSES_COUNT; i++)
+		{
+			if (rt >= previous_chance && rt < previous_chance + chance[i])
+			{
+				type_e = i;
+				
+				// bug correction when chance 0
+				if (chance[i] == 0) // should never appear in this level 
+					type_e = 0 ; // soldat instead
+				
+				break; // found it
+			}
+			previous_chance += chance[i]; // increase test range for next iteration
+		}
+		
+		Enemy *s = NULL;
+		
+		switch(type_e)
+		{
+			case 0: // default enemy
+				s = new Soldat(&data);
+			break;
+
+			case 1: 
+				s = new Tank(&data);
+			break;			
+			
+			case 2: 
+				s = new Helicopter(&data);
+			break;
+			
+			case 3:
+				s = new Jetpack(&data);
+			break;
+			
+			case 4: 
+				s = new Zepellin(&data);
+			break;
+			
+			case 5: 
+				s = new B17(&data);
+			break;
+			
+			case 6:
+				s = new MissileTruck(&data);
+			break;
+			
+			case 7: 
+				s = new WeaponPrize(&data);
+			break;
+			
+			case 8:
+				s = new HealthPrize(&data);
+			break;
+			
+			case 9:
+				s = new Biplane(&data);
+			break;
+			
+			default:
+				// ERROR!
+				Logger::log("EnemyList::generate() - ERROR default type reached! :O");
+				return; // abort
+			break;
+		}
+			
+		// this positioning sucks! TODO fix properly
+		s->x = rand() % m->mapW + m->mapW;
+		s->y = rand() % m->mapH;
+		
+		if (!addEnemy(s)) // add to list
+		{
+			Logger::log("EnemyList::generate() - Enemy list full!");
+			return;  // abort generation if Im already full of enemies
+		}
+	}
+	
+	Logger::log("EnemyList::generate() - OK, return");
+}
+
+
+int EnemyList::update(Map *m, UFO *ufo, ParticleManager *pm)
+{
+	for (int i=0; i<enemies_n; i++)
+	{
+			if (enemy[i]->update(m, ufo, pm, shootsE))
+			{
+				// Im dead 
+				// move last here, and reduce list size
+				delete(enemy[i]);
+				enemy[i] = enemy[enemies_n-1];
+				enemies_n--;
+			}
+	}
+	
+	// test enemies shoots against player
+	shootsE->update(m, pm, ufo, NULL);
+	
+	return enemies_n; // how many are alive yet, used by game loop master to decide next wave,  etc
+}
+
+void EnemyList::render(BITMAP *bmp)
+{
+	for (int i=0; i<enemies_n; i++)
+		enemy[i]->render(bmp);
+	
+	// render shoots!
+	shootsE->render(bmp);
+}

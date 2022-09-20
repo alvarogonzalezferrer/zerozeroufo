@@ -1,0 +1,666 @@
+* KBall *
+ 
+___________________
+ 
+A game developed by Kronoman.
+ 
+Copyright (c) 2003, 2004, Kronoman.
+ 
+* In loving memory of my father. *
+ 
+* Made in Argentina *
+ 
+
+
+Sphere mapping code by
+* Martijn "amarillion" van Iersel *
+
+ 
+___________________
+ 
+ 
+* Thankz * 
+ 
+ 
+GAC, co-pilot and right hand of organization.
+ 
+Odriozola Brothers, beta testers. 
+ 
+Iron Chelo "The Bodyguard", care of integrity of programmer.
+ 
+Al Nachone "The Last Don", disposal of all "troubles".
+ 
+Diego, co-pilot in the big city of doom.
+ 
+Cellphones provided by /me.
+ 
+The programmer guy uses Harley Davidson(r) products.
+ 
+Bruce Perry, theory about ball bounce.
+ 
+C++ code, powered by Allegro, a game programming library.
+ 
+Get Allegro at http://alleg.sf.net/.
+ 
+The guys of Allegro & Pixelate Magazine.
+ 
+Mel, shake it babe!
+ 
+** Special thankz to Mother & Father. **
+ 
+___________________
+ 
+ 
+* Greetz *
+ 
+ 
+SkaarjScout, Yaco, Iron Chelo,
+Dj Nanga, J Monytor, Bloody Mary,
+El Mago Eddy, Super666, 
+Veronica, Yunni, Claudia,
+GAC, Junior, Al Nachone "The last Don",
+Don Provolone, Vampira Lacrimosa, 
+Static-X, BloodLust, Matu,
+Abominable Dr. Phibes, 
+DiEgO, Leonardo De Luk,
+Error catastrofico, Gabriel, 
+David A. Capello, 
+Childrens of the damned.
+George & Patrick, bikers of trust.
+ 
+People at #punk, #darkland, #elotroyo.
+ 
+Staff at Sourceforge.net
+
+Victoria, I used to love her, but I had to kill her. 
+ 
+Nice guys of Harley Davidson Argentina
+ 
+Riders of H.O.G Buenos Aires
+ 
+GNU GCC, MingW32 & DJGPP developers. 
+ 
+F3N1X Team, thanks for the Linux CDs!
+ 
+Allegro developers.
+ 
+Slaves from sector 7 G.
+ 
+Argentina, generous country.
+ 
+ 
+___________________
+ 
+ 
+* License *
+ 
+ 
+This program is distributed under The MIT License
+ 
+Permission is hereby granted, free of charge, 
+to any person obtaining a copy of this software 
+and associated documentation files (the "Software"), 
+to deal in the Software without restriction, 
+including without limitation the rights to use, 
+copy, modify, merge, publish, distribute, sublicense, 
+and/or sell copies of the Software, and to permit persons 
+to whom the Software is furnished to do so, subject 
+to the following conditions:
+ 
+The above copyright notice and this permission notice 
+shall be included in all copies or substantial 
+portions of the Software.
+ 
+THE SOFTWARE IS PROVIDED "AS IS", 
+WITHOUT WARRANTY OF ANY KIND, 
+EXPRESS OR IMPLIED, 
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE 
+AND NONINFRINGEMENT. 
+IN NO EVENT SHALL THE AUTHORS 
+OR COPYRIGHT HOLDERS BE LIABLE 
+FOR ANY CLAIM, 
+DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, 
+TORT OR OTHERWISE, 
+ARISING FROM, 
+OUT OF OR IN CONNECTION 
+WITH THE SOFTWARE OR THE USE 
+OR OTHER DEALINGS IN THE SOFTWARE.
+ 
+ 
+___________________ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+In short, little lawyer, STFU
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Damn, I'm looking good in my Harley!
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+What are you waiting for? Christmas?
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Go home d00d, this is over...
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+You really have time in your hands... don't you?
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Get a life!
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Anime sucks...
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+I kill children...
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ The KKK took my baby away...
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+You forgot your panties in the oven!
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ OK, d00d, this is my own summer...
+ Go to wander somewhere else...
+ or go to play with your little friends...
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+From hell they came...
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Don't open 'til doomsday...
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Evil walk among us...
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+"Programming today is a race between software engineers 
+striving to build bigger and better idiot-proof programs, 
+and the Universe trying to produce bigger and better idiots. 
+So far, the Universe is winning." -Rich Cook 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

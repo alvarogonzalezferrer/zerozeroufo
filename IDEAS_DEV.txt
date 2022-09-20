@@ -1,0 +1,133 @@
+ALGUNAS IDEAS RANDOM DEL DESARROLLO
+
+--- 
+
+DESARROLLO
+
+El juego fue creado usando el emulador DOSBOX para poder ejecutar el compilador para MS DOS y probarlo. 
+
+No tengo hardware real para probarlo, tengo una 486 DX2 real, pero no funciona por ahora.
+
+---
+MENUS
+
+	new game
+		story mode
+		infinite arcade 
+		
+	save game
+	continue game
+
+	configure
+		sound on
+		music on
+		cofigure joystick
+		configure keyboard
+		configure mouse
+
+	about 
+	exit
+
+---
+INSTALADOR PARA MS DOS
+
+Tengo planeado un instalador basado en los archivos SFX de RAR 2.5 para MS DOS 
+
+Ver mi lanzamiento de KBall para entender como hacerlo.
+
+Tambien una version partida en diskettes con la opcion "volume".
+
+---
+NUMEROS AL AZAR
+
+Randomiz.h es mi libreria de numeros al azar, la hice luego de hacer el juego, asi que estoy convirtiendo todo a eso, que es mas claro
+
+Se usa: Randomize::random(minimo, maximo)
+
+Por ahora, en el codigo veran muchos codigos asi: 
+
+(rand()%40-20)/10.0
+
+es mi manera de elegir numeros flotantes en un rango
+
+el codigo de arriba elije primero un numero entre 20 y -20 y luego lo divide por 10
+
+entonces me da un numero entre 2.0 y -2.0, por ejemplo -1.2  , 1.5, etc 
+
+tengo un generador de numeros en rango: debo reemplazar todo ese codigo
+
+explico esto pq es codigo que creo que no quedo muy claro lo que hace para alguien que lee por primera vez el codigo
+
+---
+FONDOS POSIBLES
+
+cañones cowboy tipo sunset riders 
+
+volcan 
+
+piramides
+
+atardecer playero 
+
+noche ciudad 
+
+montañas 
+
+bosque 
+
+nevado 
+
+isla de pascua 
+
+totems
+
+
+
+// pantallas
+kronoman
+winners
+intro
+proximo wave
+game over
+gano
+puntaje
+instrucciones
+------
+
+capturar las vacas recarga energia de vida, y permite sobrecargar la energia, a mas de 100% aunque se descarga lentamente (tipo el nuevo doom)
+
+------
+* UFO TIRA HUMO AL ROMPERSE {ok}
+* TABLA DE PUNTAJES 
+* MUSICA Y SONIDO STEREO
+* MAPA AUTOGENERADO CON ARBOLES Y CASAS {ok}
+* USANDO EL BEAM NO PODES MOVERTE EN ALTURA {OK} 
+* DISPAROS EN 8 DIRECCIONES {OK}
+
+
+* AEREOS
+	HELICOPTERO AMETRALLADORA 
+	HELICOPTERO MISILES {OK}
+	SOLDADO JETPACK {ok}
+	AVIONES GRANDES Y CHICOS {ok}
+	MISILES CRUCERO
+	
+	
+	
+* TIERRA
+	SOLDADO {OK}
+	SOLDADO BAZOOKA
+	TANQUE {OK}
+	ARTILLERIA {ok}
+	FLAK
+	MISILES
+	
+* GANADO
+	VACAS {OK}
+	GRANJEROS
+	GENTE
+	
+* PREMIOS
+	ENERGIA {SON LAS VACAS}
+	ARMAS {ok}
+	
