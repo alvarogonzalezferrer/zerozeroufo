@@ -82,9 +82,15 @@ bool APC::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 			float shoot_dx = 0;
 			
 			if (ufo->x > x)
+			{
 				shoot_dx = 4;
+				sx = 0.5;
+			}
 			else
+			{
 				shoot_dx = -4;
+				sx = -0.5;
+			}
 			
 			float delta = -2; 
 								
