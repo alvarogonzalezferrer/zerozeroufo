@@ -76,7 +76,7 @@ bool APC::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		shoot_ia--;
 		
 		// when shoot ia is < 20 , shoot in rapid fire each 4 frames	
-		if (shoot_ia % 4 == 0)
+		if (shoot_ia % 5 == 0)
 		{
 			// double shoot
 			float shoot_dx = 0;
@@ -120,11 +120,8 @@ bool APC::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		if (rand()%100 < 50)
 		{	
 			// setup the shoot ia counter
-			shoot_ia = 40; 
-
-			// stand still
-			ia = 60;
-			sx = sy = 0;
+			shoot_ia = 25; 
+			ia = 30;
 		}
 	}
 	
