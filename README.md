@@ -34,6 +34,8 @@ Abduct cows to regain energy, fight the army that will try impede your mission. 
 
 ![Screenshoot](/docs/screen2.jpg)
 
+![Screenshoot](/docs/screen3.jpg)
+
 ## How to Play 🎮
 
 A,S,D,W or arrow keys : move the UFO ↕️ ↔️
