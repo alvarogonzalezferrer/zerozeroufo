@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <style>
+         html, body, #jsdos {
+             width: 95%;
+             height: 95%;
+             margin: 5px;
+             padding: 5px;
+         }
+        </style>
+        <script src="web/js-dos.js"></script>
+        <link href="web/js-dos.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="jsdos" />
+        <script>
+         emulators.pathPrefix = "web/js-dos/";
+         Dos(document.getElementById("jsdos"))
+             .run("web/zeroufo_0.23.09.2022.jsdos");
+        </script>
+    </body>
+</html>
+
+<!-- 
+
+So we can run the game on the web  
+Krono 2022 
+
+https://js-dos.com/
+
+-->
