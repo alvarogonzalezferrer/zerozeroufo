@@ -5,7 +5,7 @@
 #include "enemy.h"
 
 // static data for all the objects
-BITMAP *MechMini::spr[3];
+BITMAP *MechMini::spr[4];
 Datafile *MechMini::spr_data = NULL;
 int MechMini::count = 0;
 

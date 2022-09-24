@@ -255,6 +255,7 @@ void MainGameLoop::update()
 
 	default:
 		// probably a error if we go here... a unhandled state... mmm
+		Error::error("ERROR\nUnhandled state in mloop.cpp (state = %d); %s in line %d\n", currentState, __FILE__, __LINE__ );
 	break;
 	}
 
@@ -297,7 +298,8 @@ void MainGameLoop::render()
 	break; 
 	
 	case STATE_KRONOMAN:
-		blit(kronoman_bmp, doubleBuffer, 0, 0, 0, 0, kronoman_bmp->w, kronoman_bmp->h);
+		clear_to_color(doubleBuffer, makecol(0, 0, 0));
+		blit(kronoman_bmp, doubleBuffer, 0, 0, (doubleBuffer->w - kronoman_bmp->w) / 2 , (doubleBuffer->h - kronoman_bmp->h) / 2, kronoman_bmp->w, kronoman_bmp->h);
 	break;
 
 	// shows intro screen
@@ -325,7 +327,7 @@ void MainGameLoop::render()
 
 
 	case STATE_OK: // main game state
-	
+	{
 		parallax->render(doubleBuffer); // render background
 		
 		map->render(doubleBuffer); // render map
@@ -349,11 +351,12 @@ void MainGameLoop::render()
 		// DEBUG
 		if (debug)
 			textprintf_ex(doubleBuffer, font, 0, doubleBuffer->h - text_height(font)*2, makecol(255,255,255), -1, "e %d - t %lu - FPS %d", enemyList->enemies_n, ticks, fps_counted);
-		
+	}	
 	break;
 
 	default:
 		// should never be here
+		Error::error("ERROR\nUnhandled state in mloop.cpp (state = %d); %s in line %d\n", currentState, __FILE__, __LINE__ );
 	break;
 	}
 
