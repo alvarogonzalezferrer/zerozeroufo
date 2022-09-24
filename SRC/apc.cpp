@@ -35,8 +35,7 @@ APC::APC(Datafile *data) : Enemy(data)
 	sprite = spr[0];
 	frame = rand()%40;
 	ia = 0;
-	
-	shoot_ia = aim_x = aim_y = 0;
+	shoot_ia = 0;
 	
 	bbox = new Collide2D(x, y, sprite->w, sprite->h);
 }
