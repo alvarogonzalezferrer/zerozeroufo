@@ -1,0 +1,7 @@
+v0.23.09.2022
+
+MS-DOS version
+
+Allegro 4.2 + DJGPP + DOSBOX
+
+Kronoman 2022
