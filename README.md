@@ -28,6 +28,12 @@ A open source game that you play as a UFO 🛸
 
 Abduct cows to regain energy, fight the army that will try impede your mission. 🐄
 
+**Thanks to testers**
+
+* Zir, Joel, Slava, Sebas, Juane, Nacho!
+
+Thanks for playing!
+
 ## Screenshoots
 
 ![Screenshoot](/docs/screen1.jpg)
