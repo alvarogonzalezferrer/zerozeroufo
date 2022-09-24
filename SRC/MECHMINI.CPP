@@ -102,7 +102,7 @@ bool MechMini::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	{
 		shoot_c--;
 		
-		if (shoot_c % 4 == 0)
+		if (shoot_c % 5 == 0)
 		{
 			// shoot
 			
@@ -111,10 +111,10 @@ bool MechMini::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 			
 			shoots->add(new Shoot(x + sprite->w/2, y + sprite->h /2,
 									ssx, 0, 
-									rand()%100+200, 
+									200, 
 									3, 
-									0.00, 
-									rand()%8+10, 
+									0.01, 
+									10, 
 									makecol(255,255,85),
 									0));
 									
