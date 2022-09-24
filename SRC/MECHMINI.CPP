@@ -73,21 +73,21 @@ bool MechMini::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	if (ia<0)
 	{
 		ia = Randomize::random(30, 120); // frames to do the same?
-		sx = Randomize::random(-1.5f, 1.5f); // spr left or right?
-		sy = Randomize::random(-1.5f, 1.5f); // spr up or down?
+		sx = Randomize::random(-1.5f, 1.5f); //  left or right?
+		sy = Randomize::random(-1.5f, 1.5f); //  up or down?
 		
 		// chase enemy?
-		if (rand()%100 < 70)
+		if (rand()%100 < 40)
 		{
 			if (ufo->x > x)
 				sx = abs(sx);
 			else
 				sx = -abs(sx);
 
-			if (ufo->y > y)
+			/*if (ufo->y > y)
 				sy = abs(sy);
 			else
-				sy = -abs(sy);
+				sy = -abs(sy);*/
 		}
 		
 		// shoot? 75% chance
@@ -108,13 +108,14 @@ bool MechMini::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 			
 			// left or right?
 			float ssx = (sx <= 0) ? -3.5 : 3.5;
+			float sxd = (sx <= 0) ? x : x + sprite->w; // shoot from gun cannon
 			
-			shoots->add(new Shoot(x + sprite->w/2, y + sprite->h /2,
+			shoots->add(new Shoot(  sxd, y + 15,
 									ssx, 0, 
 									200, 
 									3, 
 									0.01, 
-									10, 
+									5, 
 									makecol(255,255,85),
 									0));
 									
@@ -129,10 +130,10 @@ bool MechMini::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	// bounce on borders 
 	
 	// dont crash on ground! unless im dead 
-	if (y > m->getHeight(x) - sprite->h*3 && life >0)
+	if (y > m->getHeight(x) - sprite->h - 5 && life >0)
 	{
 		sy = -1.5; // dont fly lower!
-		y = m->getHeight(x) - sprite->h*3;
+		y = m->getHeight(x) - sprite->h - 5;
 	}
 	
 	if (y < 0)

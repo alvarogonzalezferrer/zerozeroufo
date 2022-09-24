@@ -216,7 +216,7 @@ bool B17::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 							100, 
 							2, 
 							0.01, 
-							rand()%3+3, 
+							3, 
 							makecol(255,255,85),
 							0));
 							
@@ -226,7 +226,7 @@ bool B17::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 							100, 
 							2, 
 							0.02, 
-							rand()%3+3, 
+							3, 
 							makecol(255,255,85),
 							0));
 
@@ -236,7 +236,7 @@ bool B17::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 							100, 
 							2, 
 							0.01, 
-							rand()%3+3, 
+							3, 
 							makecol(255,255,85),
 							0));
 	}
@@ -248,7 +248,7 @@ bool B17::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 								300, 
 								spr_bomb, 
 								0.05, 
-								rand()%5+5, 
+								5, 
 								makecol(255,255,85),
 								0));
 	}

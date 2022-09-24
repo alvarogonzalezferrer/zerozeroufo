@@ -107,7 +107,7 @@ bool MissileTruck::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *sho
 								rand()%100+100, 
 								2, 
 								0.02, 
-								12, 
+								4, 
 								makecol(255,255,85),
 								1));
 								
@@ -117,7 +117,7 @@ bool MissileTruck::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *sho
 								rand()%100+100, 
 								2, 
 								0.02, 
-								10,
+								3,
 								makecol(255,255,85),
 								1));
 			delta = -3;
@@ -126,7 +126,7 @@ bool MissileTruck::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *sho
 								rand()%100+100, 
 								2, 
 								0.02, 
-								8, 
+								2, 
 								makecol(255,255,85),
 								1));								
 		}

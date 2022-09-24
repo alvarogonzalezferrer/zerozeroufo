@@ -255,7 +255,7 @@ void MainGameLoop::update()
 
 	default:
 		// probably a error if we go here... a unhandled state... mmm
-		Error::error("ERROR\nUnhandled state in mloop.cpp (state = %d); %s in line %d\n", currentState, __FILE__, __LINE__ );
+		//Error::error("ERROR\nUnhandled state in mloop.cpp (state = %d); %s in line %d\n", currentState, __FILE__, __LINE__ );
 	break;
 	}
 
@@ -356,7 +356,7 @@ void MainGameLoop::render()
 
 	default:
 		// should never be here
-		Error::error("ERROR\nUnhandled state in mloop.cpp (state = %d); %s in line %d\n", currentState, __FILE__, __LINE__ );
+		//Error::error("ERROR\nUnhandled state in mloop.cpp (state = %d); %s in line %d\n", currentState, __FILE__, __LINE__ );
 	break;
 	}
 
