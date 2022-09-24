@@ -112,10 +112,10 @@ bool Helicopter::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoot
 	// bounce on borders 
 	
 	// dont crash on ground! unless im dead 
-	if (y > m->getHeight(x) - sprite->h*3 && life >0)
+	if (y > m->getHeight(x) - sprite->h*2 && life >0)
 	{
 		sy = (rand()%15) / -10.0;; // dont fly lower!
-		y = m->getHeight(x) - sprite->h*3;
+		y = m->getHeight(x) - sprite->h*2;
 	}
 	
 	if (y < 0)
