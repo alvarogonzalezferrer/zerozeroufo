@@ -96,7 +96,12 @@ void MainGameLoop::update()
 		
 		// help screen
 		help_bmp = (BITMAP *)intro_screens_data.getObject("HELP_BMP")->dat;
-		    
+		  
+
+		// kronoman screen 
+		kronoman_bmp =  (BITMAP *)intro_screens_data.getObject("KRONOMAN_BMP")->dat;
+		kronoman_wav =  (SAMPLE *)intro_screens_data.getObject("KRONOMAN_WAV")->dat;
+		  
 		/*
 		// sounds
 		shootSND=(SAMPLE *)data.getObject("SHOOTSND")->dat;
@@ -111,6 +116,16 @@ void MainGameLoop::update()
 	break;
 	
 	case STATE_FBI:
+		if (--wait < 0)
+		{
+			// play sample for next screen 
+			play_sample(kronoman_wav, 255, 128, 1000, 0);
+			wait = 90;
+			changeState(STATE_KRONOMAN);
+		}
+	break;
+	
+	case STATE_KRONOMAN:
 		if (--wait < 0)
 		{
 			wait = 150;
@@ -278,8 +293,12 @@ void MainGameLoop::render()
 	break;
 	
 	case STATE_FBI:
-		blit(fbi_bmp, doubleBuffer, 0, 0, 0, 0, intro_bmp->w, intro_bmp->h);
+		blit(fbi_bmp, doubleBuffer, 0, 0, 0, 0, fbi_bmp->w, fbi_bmp->h);
 	break; 
+	
+	case STATE_KRONOMAN:
+		blit(kronoman_bmp, doubleBuffer, 0, 0, 0, 0, kronoman_bmp->w, kronoman_bmp->h);
+	break;
 
 	// shows intro screen
 	case STATE_INTRO:
@@ -342,6 +361,11 @@ void MainGameLoop::render()
 	if (camerashake > 0) // do camera shake effect, for explosions
 		stretch_blit(doubleBuffer, screen, 0, 0, doubleBuffer->w, doubleBuffer->h, rand()%8-4, rand()%8-4, SCREEN_W+rand()%5, SCREEN_H+rand()%5);
 	else
-		stretch_blit(doubleBuffer, screen, 0, 0, doubleBuffer->w, doubleBuffer->h, 0, 0, SCREEN_W, SCREEN_H);
+	{
+		if (doubleBuffer->w == SCREEN_W && doubleBuffer->h == SCREEN_H)
+			blit(doubleBuffer, screen, 0, 0, 0, 0, doubleBuffer->w, doubleBuffer->h);
+		else
+			stretch_blit(doubleBuffer, screen, 0, 0, doubleBuffer->w, doubleBuffer->h, 0, 0, SCREEN_W, SCREEN_H); 
+	}
 }
 

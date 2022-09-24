@@ -41,6 +41,7 @@ class MainGameLoop : public GameMachine
 		static const unsigned int STATE_INTRO = 4; 
 		static const unsigned int STATE_GAMEOVER = 5; 
 		static const unsigned int STATE_FBI = 6; 
+		static const unsigned int STATE_KRONOMAN = 7; 
 
 		int wait; // delay for various screen pauses...
 		int camerashake; // delay for camera shake effects...
@@ -81,6 +82,8 @@ class MainGameLoop : public GameMachine
 		BITMAP *gameover_bmp; // game over
 		BITMAP *help_bmp; // help screen
 		
+		BITMAP *kronoman_bmp; // kronoman logo
+		SAMPLE *kronoman_wav; // kronoman sound
 		
 		int help_show; // frames of help info?
 		
