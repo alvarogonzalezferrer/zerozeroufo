@@ -1,16 +1,22 @@
 # Zero Zero UFO 👽
 
-By Kronoman 🇦🇷 🇨🇷
+By Kronoman 🇦🇷 🇨🇷 👽
 
 Under the MIT license
 
 Copyright (c) Kronoman, 2022
 
-## Play online 🎮
+## Play online 🎮 👽
 
 **EXPERIMENTAL FEATURE**
 
+Thanks to the magic of js-dos , you can play online this game. ( https://js-dos.com/ )
+
+Check it out here: 
+
 https://alvarogonzalezferrer.github.io/zerozeroufo/
+
+All feedback welcome. REMEMBER THE GAME IS UNFINISHED! Im working on it, this is a live **preview**
 
 ## About the Game
 
@@ -23,6 +29,7 @@ Abduct cows to regain energy, fight the army that will try impede your mission. 
 A,S,D,W or arrow keys : move the UFO ↕️ ↔️
 
 Z or SPACE - use your beam to abduct cows and solders 🐄 
+
 X or ENTER - shoot in the direction you're moving  ⚡
 
 F1 to see help screen
