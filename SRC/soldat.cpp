@@ -210,6 +210,8 @@ bool Soldat::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 			else
 				insideBeam = false;
 	}
+	else
+		insideBeam = false; // no beam to be inside
 	
 	// update bounding box collision detection
 	bbox->x = x;

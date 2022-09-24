@@ -1,36 +1,39 @@
 // -----------------------------------------------------------------------
-// jetpack.h
+// apc.h
 // -----------------------------------------------------------------------
-// jetpack soldier enemy
+// armored personal carrier enemy
 // -----------------------------------------------------------------------
 // Copyright (c) 2022, Kronoman
 // In loving memory of my father.
 // -----------------------------------------------------------------------
 // Released under The MIT License.
 // -----------------------------------------------------------------------
-#ifndef JETPACK_H
-#define JETPACK_H
+#ifndef APC_H
+#define APC_H
 
 #include <allegro.h>
 #include "enemy.h"
 #include "datafile.h"
 
-class Jetpack : public Enemy
+class APC : public Enemy
 {
 	public:
-		Jetpack(Datafile *data); // needs preloaded datafile with sprites, sound, etc
-		~Jetpack();
+		APC(Datafile *data); // needs preloaded datafile with sprites, sound, etc
+		~APC();
 	
 		bool update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots ); 
 
 		void render(BITMAP *bmp);
 		
-		int frame; // sprite frame, goes in 1 increments 0,1,2
+		int frame; // sprite frame, goes in 10 increments 0..10..20..0
+
 		int ia; // IA counter
-		bool insideBeam; // Im inside UFO beam?
 		
-		static BITMAP *spr[3];	
-		static Datafile *spr_data;
+		int shoot_ia; // IA for shooting countdown
+		
+	
+		static BITMAP *spr[4];	
+		static Datafile *enemy_data;
 		static int count;
 };
 

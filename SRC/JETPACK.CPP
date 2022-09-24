@@ -3,6 +3,7 @@
 #include "jetpack.h"
 #include "logger.h"
 #include "enemy.h"
+#include "randomiz.h"
 
 // static data for all the objects
 BITMAP *Jetpack::spr[3];
@@ -33,6 +34,7 @@ Jetpack::Jetpack(Datafile *data) : Enemy(data)
 	sprite = spr[0];
 	frame = rand()%3;
 	ia = 0;
+	insideBeam = false;
 		
 	bbox = new Collide2D(x, y, sprite->w, sprite->h);
 }
@@ -64,7 +66,7 @@ bool Jetpack::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	// IA
 	// easy state machine, when reaches 0, choose another action
 	ia--;
-	if (ia<0)
+	if (ia<0 && !insideBeam)
 	{
 		ia = rand()%90+30; // frames to do the same?
 		sx = (rand()%30-15) / 10.0; // spr left or right?
@@ -107,6 +109,65 @@ bool Jetpack::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		}
 
 	}
+	
+	// Take damage from ufo beam ray!!
+	if (ufo->beam_size > 0)
+	{
+		// middle x,y
+		int cmx = x + sprite->w/2;
+		int cmy = y + sprite->h/2;
+		
+		// is this point inside the beam? 
+		
+		if (cmx > ufo->beam_x1 &&
+			cmx < ufo->beam_x2 &&
+			cmy > ufo->beam_y1 - 5 &&
+			cmy < ufo->beam_y2 )
+			{
+				// fly up towards the UFO
+				sy = -(rand()%2+1); // up!
+
+				// fly X to center of UFO
+				if (cmx > ufo->beam_xu + 3)
+					sx = -(rand()%2+1);
+				else if (cmx < ufo->beam_xu - 3)
+					sx = rand()%2+1;
+				else
+					sx = 0; // keep it centered, already reached center, prevents flip seizure!
+					
+				insideBeam = true;
+				
+				// I hit the UFO ?? near 5 px y = hit
+				if (abs(cmx - ufo->beam_xu) < 5 &&
+					abs(cmy - ufo->beam_y1) < 5 )
+					{
+						// im in the UFO, bye
+						life = 0;
+						insideBeam = false;
+						// add score
+						ufo->score++;
+						
+						// add some blood particles
+						int pz = rand()%5+5; // particle ammount
+						int cp = makecol(170,0,0); // red
+						for (int p=0; p<pz;p++)
+							pm->add(new Spark(cmx, cmy, Randomize::random(-2.0f, 2.0f), Randomize::random(2.0f, 3.0f), Randomize::random(8, 16), cp));
+						
+						return true; // no crash animation 
+					}
+				
+				// Im above the UFO??
+				if (cmy < ufo->beam_y1)
+				{
+					y = ufo->beam_y1 + 6; // hover below UFO level
+					x = ufo->beam_xu + Randomize::random(-3, 3);
+				}
+			}
+			else
+				insideBeam = false;
+	}
+	else
+		insideBeam = false; // no beam to be inside
 	
 	// bounce on borders 
 	
