@@ -1,12 +1,12 @@
-# Zero Zero UFO
+# Zero Zero UFO 👽
 
-By Kronoman
+By Kronoman 🇦🇷 🇨🇷
 
 Under the MIT license
 
 Copyright (c) Kronoman, 2022
 
-## Play online 
+## Play online 🎮
 
 **EXPERIMENTAL FEATURE**
 
@@ -14,16 +14,16 @@ https://alvarogonzalezferrer.github.io/zerozeroufo/
 
 ## About the Game
 
-A open source game that you play as a UFO 
+A open source game that you play as a UFO 🛸
 
-Abduct cows to regain energy, fight the army that will try impede your mission.
+Abduct cows to regain energy, fight the army that will try impede your mission. 🐄
 
-## How to Play
+## How to Play 🎮
 
-A,S,D,W or arrow keys : move the UFO
+A,S,D,W or arrow keys : move the UFO ↕️ ↔️
 
-Z or SPACE - use your beam to abduct cows and solders
-X or ENTER - shoot in the direction you're moving
+Z or SPACE - use your beam to abduct cows and solders 🐄 
+X or ENTER - shoot in the direction you're moving  ⚡
 
 F1 to see help screen
 F2 to configure keyboard / mouse / joystick
@@ -33,7 +33,7 @@ SPACE to skip intro screen, etc
 The command line takes some switches.
 Try -? to see the commands.
 
-## Tools and Libraries Used
+## Tools and Libraries Used 🔧
 
 Tools I used:
 
@@ -77,7 +77,7 @@ http://www.mingw.org/
 You need Allegro 4.2 dev package and g++ compiler. Run 'make'
 
 
-### Game data
+## Game data
 
 Sprites drawn by me with ASE sprite using the standard VGA 13h palette.
 
@@ -119,6 +119,6 @@ The terrain is procedurally generated randomly, so no two games are the same.
 
 I reused a Arcade Game Framework that I'm making since years ago (2007?).
 
-No third party game engines used, all the engine is written by me.
+No third party game engines used, all the engine is written by me. 🇦🇷 🇨🇷
 
 
