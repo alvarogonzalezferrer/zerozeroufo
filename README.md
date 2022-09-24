@@ -30,9 +30,9 @@ Abduct cows to regain energy, fight the army that will try impede your mission. 
 
 ## Screenshoots
 
-![Screenshoot](docs/screen1.jpg)
+![Screenshoot](/docs/screen1.jpg)
 
-![Screenshoot](docs/screen2.jpg)
+![Screenshoot](/docs/screen2.jpg)
 
 ## How to Play 🎮
 
