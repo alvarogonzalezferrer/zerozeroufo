@@ -10,15 +10,17 @@
              padding: 5px;
          }
         </style>
-        <script src="web/js-dos.js"></script>
-        <link href="web/js-dos.css" rel="stylesheet">
+        <script src="js-dos.js"></script>
+        <link href="js-dos.css" rel="stylesheet">
     </head>
     <body>
+		<h1>Zero Zero UFO</h1>
+		<p>Online gameplay</p>
         <div id="jsdos" />
         <script>
-         emulators.pathPrefix = "web/js-dos/";
+         emulators.pathPrefix = "";
          Dos(document.getElementById("jsdos"))
-             .run("web/zeroufo_0.23.09.2022.jsdos");
+             .run("zeroufo_0.23.09.2022.jsdos");
         </script>
     </body>
 </html>
