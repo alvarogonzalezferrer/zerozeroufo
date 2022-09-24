@@ -3,6 +3,7 @@
 #include "mechmini.h"
 #include "logger.h"
 #include "enemy.h"
+#include "randomiz.h"
 
 // static data for all the objects
 BITMAP *MechMini::spr[4];
@@ -37,6 +38,7 @@ MechMini::MechMini(Datafile *data) : Enemy(data)
 	sprite = spr[0];
 	frame = rand()%30;
 	ia = 0;
+	shoot_c = 0;
 		
 	bbox = new Collide2D(x, y, sprite->w, sprite->h);
 }
@@ -70,12 +72,12 @@ bool MechMini::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	ia--;
 	if (ia<0)
 	{
-		ia = rand()%90+30; // frames to do the same?
-		sx = (rand()%30-15) / 10.0; // spr left or right?
-		sy = (rand()%30-15) / 10.0; // spr up or down?
+		ia = Randomize::random(30, 120); // frames to do the same?
+		sx = Randomize::random(-1.5f, 1.5f); // spr left or right?
+		sy = Randomize::random(-1.5f, 1.5f); // spr up or down?
 		
 		// chase enemy?
-		if (rand()%100 < 80)
+		if (rand()%100 < 70)
 		{
 			if (ufo->x > x)
 				sx = abs(sx);
@@ -86,32 +88,42 @@ bool MechMini::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 				sy = abs(sy);
 			else
 				sy = -abs(sy);
-
 		}
 		
-		// shoot? 60% chance
-		if (rand()%100 < 60)
+		// shoot? 75% chance
+		if (rand()%100 < 75)
 		{	
-			// shoot straigh
-			float ssy = 0;
+			shoot_c = 20;
+			ia = 20;
+		}
+	}
+	
+	if (shoot_c > 0)
+	{
+		shoot_c--;
+		
+		if (shoot_c % 4 == 0)
+		{
+			// shoot
 			
 			// left or right?
-			float ssx = (sx <= 0) ? -3 : 3;
+			float ssx = (sx <= 0) ? -3.5 : 3.5;
 			
-			Shoot *sn = new Shoot(x + sprite->w/2, y + sprite->h /2,
-									ssx, ssy, 
+			shoots->add(new Shoot(x + sprite->w/2, y + sprite->h /2,
+									ssx, 0, 
 									rand()%100+200, 
-									4, 
-									0.01, 
+									3, 
+									0.00, 
 									rand()%8+10, 
 									makecol(255,255,85),
-									1);
-			
-			shoots->add(sn);
-			
+									0));
+									
 			sprite = spr[3]; // shoot frame
+			
+			// DEBUG ADD SOUND!
 		}
-
+		else
+			sprite = spr[frame/10];
 	}
 	
 	// bounce on borders 
@@ -119,14 +131,14 @@ bool MechMini::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	// dont crash on ground! unless im dead 
 	if (y > m->getHeight(x) - sprite->h*3 && life >0)
 	{
-		sy = (rand()%15) / -10.0;; // dont fly lower!
+		sy = -1.5; // dont fly lower!
 		y = m->getHeight(x) - sprite->h*3;
 	}
 	
 	if (y < 0)
 	{
 		y = 0;
-		sy = (rand()%15) / 10.0;; // dont fly higher
+		sy = 1.5; // dont fly higher
 	}
 	
 	// sides

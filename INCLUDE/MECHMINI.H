@@ -27,6 +27,7 @@ class MechMini : public Enemy
 		
 		int frame; // sprite frame, goes in 1 increments 0,1,2
 		int ia; // IA counter
+		int shoot_c; // shoot counter
 	
 		static BITMAP *spr[4];	
 		static Datafile *spr_data;
