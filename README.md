@@ -10,13 +10,17 @@ Copyright (c) Kronoman, 2022
 
 **EXPERIMENTAL FEATURE**
 
-Thanks to the magic of js-dos , you can play online this game. ( https://js-dos.com/ )
+**REMEMBER THE GAME IS UNFINISHED!** 
+
+Im working on it, this is a live **preview**
 
 Check it out here: 
 
 https://alvarogonzalezferrer.github.io/zerozeroufo/
 
-All feedback welcome. REMEMBER THE GAME IS UNFINISHED! Im working on it, this is a live **preview**
+All feedback welcome. 
+
+*Thanks to the magic of js-dos , you can play online this game. ( https://js-dos.com/ )*
 
 ## About the Game
 
