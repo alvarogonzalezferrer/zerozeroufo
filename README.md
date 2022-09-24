@@ -6,6 +6,12 @@ Under the MIT license
 
 Copyright (c) Kronoman, 2022
 
+## Play online 
+
+**EXPERIMENTAL FEATURE**
+
+https://alvarogonzalezferrer.github.io/zerozeroufo/
+
 ## About the Game
 
 A open source game that you play as a UFO 
