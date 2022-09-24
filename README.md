@@ -20,13 +20,19 @@ https://alvarogonzalezferrer.github.io/zerozeroufo/
 
 All feedback welcome. 
 
-*Thanks to the magic of js-dos , you can play online this game. ( https://js-dos.com/ )*
+*Thanks to the magic of [js-dos](https://js-dos.com/) , you can play online this game.*
 
 ## About the Game
 
 A open source game that you play as a UFO 🛸
 
 Abduct cows to regain energy, fight the army that will try impede your mission. 🐄
+
+## Screenshoots
+
+![Screenshoot](docs/screen1.jpg)
+
+![Screenshoot](docs/screen2.jpg)
 
 ## How to Play 🎮
 
