@@ -46,7 +46,7 @@ Thanks for playing!
 
 A,S,D,W or arrow keys : move the UFO ↕️ ↔️
 
-Z or SPACE - use your beam to abduct cows and solders 🐄 
+Z or SPACE - use your beam to abduct cows and soldiers 🐄 
 
 X or ENTER - shoot in the direction you're moving  ⚡
 
