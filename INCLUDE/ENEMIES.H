@@ -59,7 +59,7 @@ class EnemyList
 		
 		ShootsList *shootsE; // enemy shoot list, is tested against UFO
 		
-		int enemies_n; // how much enemies we have now
+		int enemies_n; // how many enemies we have now
 		
 		
 		// sprites and sound data for enemies set

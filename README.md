@@ -30,7 +30,7 @@ Abduct cows to regain energy, fight the army that will try impede your mission. 
 
 **Thanks to testers**
 
-* Zir, Joel, Slava, Sebas, Juane, Nacho!
+* Zir, Joel, Slava, Sebas, Juane, Nacho, Pablo-San, Guille
 
 Thanks for playing!
 
@@ -118,11 +118,11 @@ The terrain is procedurally generated randomly, so no two games are the same.
 
 ## Engine game design considerations
 
+**Random ramblings**
+
 * Most classes has everything public, this is to keep the design simple and fast, since Im a single developer working on my own project, so no get/set pairs for everything. 
 
 * On major projects I would use the proper encapsulation, dont take this as my skill level programming, in fact developing for MS DOS in 2022 takes some skills!
-
-* I'm pretty tired of recruiters wasting my time, they don't know anything about programming and they judge without knowing. 
 
 * Don't take my design decisions for MS DOS like you would for any other project, this is a niche where very specific decisions have to be made because of platform and hardware limitations.
 
@@ -136,9 +136,11 @@ The terrain is procedurally generated randomly, so no two games are the same.
 
 * I couldn't test it on real hardware either, since I left my 486 9000 km from where I am now, if anyone tries it on real hardware and let me know, welcome.
 
+* I'm pretty tired of recruiters wasting my time, they don't know anything about programming and they judge without knowing. 
+
 * **All patches and fixes are welcome. Also the comments, I love receiving comments!**
 
-* Data will be automatically loaded - unloaded when needed to keep RAM usage to a minimum
+* Data will be automatically loaded - unloaded when needed to keep RAM usage to a minimum.
 
 ## REUSED CODE & STUFF
 
