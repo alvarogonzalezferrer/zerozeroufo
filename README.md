@@ -62,17 +62,19 @@ Try -? to see the commands.
 
 Tools I used:
 
+* DOSBOX
 * DJGPP C++ compiler
 * Allegro 4.2
 * Notepad++
 * ASEprite - sprite editor
-* Audacity 
-* Orangator
 * The GIMP
-* Irfanview
-* DOSBOX
 * Volkov Commander
 * FAR Manager 
+* Irfanview
+* Orangator
+* Audacity 
+* Firefox
+* Github
 
 Platform: MS-DOS was main target, Linux, Windows maybe, not tested yet.
 
