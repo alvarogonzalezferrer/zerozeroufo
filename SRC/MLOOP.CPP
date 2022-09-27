@@ -242,10 +242,11 @@ void MainGameLoop::update()
 		int ret_e = enemyList->update(map, ufo, pm); // update enemies
 		
 		// add enemies each screen, dont add if we traveled enough
-		bool finished = ticks > 3000 + wave*300; // each wave the level is a little longer (10 more seconds), min duration is one and a half minute 
+		bool finished = ticks > 2000 + wave*200; // each wave the level is a little longer  
 		
+		// generate new enemies
 		if ((ticks % 300 == 0 || ret_e == 0) && !finished)
-			enemyList->generate(rand() % 5 + wave + 3, wave, map); //  GENERATE TIER / WAVE APPROPIATE ENEMIES // TODO - ADD BOSSES
+			enemyList->generate(rand() % 5 + wave, wave, map); //  GENERATE TIER / WAVE APPROPIATE ENEMIES // TODO - ADD BOSSES
 		
 		// end level when enough travel and no enemies - DEBUG CHECK BOSSES TOO
 		if (ret_e == 0 && finished) 
