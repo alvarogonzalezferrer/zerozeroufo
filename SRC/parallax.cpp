@@ -19,48 +19,53 @@ int Parallax::load(int wave)
 {
 	unload();
 	
-	int bg = wave % 8; // select according to wave -- remember to change % x according to bg number!
+	int bg = wave % 9; // select according to wave -- remember to change % x according to bg number!
 	
 	int ret = 0; // default terrain
 	
 	switch (bg)
 	{
-		case 0:
+		case 0: // last background to be shown, because of modulus %
 			backgrounds_data.load("citybg.dat"); 
 			ret = Map::ROCK;
 		break;
 		
-		case 1:
-			backgrounds_data.load("sunsetbg.dat");
+		case 1: // game starts at wave 1, here!
+			backgrounds_data.load("argentbg.dat");
 			ret = Map::GRASS;
 		break;
 		
 		case 2:
+			backgrounds_data.load("sunsetbg.dat");
+			ret = Map::GRASS;
+		break;
+		
+		case 3:
 			backgrounds_data.load("beachbg.dat");
 			ret = Map::SAND;
 		break;
 
-		case 3: 
+		case 4: 
 			backgrounds_data.load("nightbg.dat");
 			ret = Map::SNOW;
 		break;
 
-		case 4:
+		case 5:
 			backgrounds_data.load("islandbg.dat");
 			ret = Map::GRASS;
 		break;
 
-		case 5:
+		case 6:
 			backgrounds_data.load("desertbg.dat");
 			ret = Map::DARKSAND;
 		break;
 		
-		case 6:
+		case 7:
 			backgrounds_data.load("brazilbg.dat");
 			ret = Map::GRASS;
 		break;
 		
-		case 7:
+		case 8:
 			backgrounds_data.load("1980bg.dat");
 			ret = Map::ROCK;
 		break;
