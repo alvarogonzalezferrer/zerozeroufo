@@ -111,8 +111,8 @@ bool Soldat::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		// shoot? 30% chance
 		if (rand()%100 < 30)
 		{
-			
-			// shoto  up
+	
+			// shoot up
 			float ssy = Randomize::random(-3, -1); //-(rand()%3+1);
 			
 			// left or right?
@@ -122,18 +122,15 @@ bool Soldat::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 			
 			float sx = (sx <= 0) ? x : x + sprite->w;
 			
-			Shoot *sn = new Shoot(sx,y,
+			shoots->add(new Shoot(sx,y,
 								ssx, ssy, 
-								Randomize::random(200, 300), 
+								200, 
 								0, 
 								0.02, 
-								Randomize::random(5, 15), 
+								3, 
 								makecol(255,255,85),
-								1);
-			
-			shoots->add(sn);	
+								1));
 		}
-		
 	}
 	
 	// bounce on borders 

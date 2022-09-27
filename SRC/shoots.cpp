@@ -137,9 +137,11 @@ bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies)
 		{
 			ufo->life -= damage;
 			
-			// downgrade weapon
-			if (ufo->weapon > 0)
-				ufo->weapon--;
+			// downgrade weapon , only if damage is significant, Zir suggestion
+			// DEBUG ADD DIFFICULTY MULTIPLIER!
+			if (damage > 5) 
+				if (ufo->weapon > 0)
+					ufo->weapon--;
 			
 			// add sparks!
 			// DEBUG should be according to damage

@@ -96,18 +96,15 @@ bool Jetpack::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 			// left or right?
 			float ssx = (sx <= 0) ? -3 : 3;
 			
-			Shoot *sn = new Shoot(x + sprite->w/2, y + sprite->h /2,
+			shoots->add(new Shoot(x + sprite->w/2, y + sprite->h /2,
 									ssx, ssy, 
 									rand()%100+200, 
 									2, 
 									0.01, 
-									rand()%8+7, 
+									rand()%5+5, 
 									makecol(255,255,85),
-									1);
-			
-			shoots->add(sn);	
+									1));	
 		}
-
 	}
 	
 	// Take damage from ufo beam ray!!
