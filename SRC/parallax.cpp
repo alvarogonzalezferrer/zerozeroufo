@@ -31,13 +31,13 @@ int Parallax::load(int wave)
 		break;
 		
 		case 1: // game starts at wave 1, here!
-			backgrounds_data.load("argentbg.dat");
+			backgrounds_data.load("sunsetbg.dat");
 			ret = Map::GRASS;
 		break;
 		
 		case 2:
-			backgrounds_data.load("sunsetbg.dat");
-			ret = Map::GRASS;
+			backgrounds_data.load("argentbg.dat");
+			ret = Map::ROCK;
 		break;
 		
 		case 3:
