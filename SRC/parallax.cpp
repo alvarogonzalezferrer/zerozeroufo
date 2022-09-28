@@ -19,7 +19,7 @@ int Parallax::load(int wave)
 {
 	unload();
 	
-	int bg = wave % 9; // select according to wave -- remember to change % x according to bg number!
+	int bg = wave % 10; // select according to wave -- remember to change % x according to bg number!
 	
 	int ret = 0; // default terrain
 	
@@ -69,6 +69,12 @@ int Parallax::load(int wave)
 			backgrounds_data.load("1980bg.dat");
 			ret = Map::ROCK;
 		break;
+		
+		case 9:
+			backgrounds_data.load("egyptbg.dat");
+			ret = Map::SAND;
+		break;
+		
 
 		
 		default:
