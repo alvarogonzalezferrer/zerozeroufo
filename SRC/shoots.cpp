@@ -135,11 +135,10 @@ bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies)
 		// check against UFO
 		if (bbox->collide(ufo->bbox))
 		{
-			ufo->life -= damage;
+			ufo->life -= damage; // DEBUG TODO : ADD DIFFICULTY MULTIPLIER!
 			
-			// downgrade weapon , only if damage is significant, Zir suggestion
-			// DEBUG ADD DIFFICULTY MULTIPLIER!
-			if (damage > 5) 
+			// downgrade weapon , only if does not have shield, Zir suggestion
+			if (ufo->life < UFO::MAX_LIFE) 
 				if (ufo->weapon > 0)
 					ufo->weapon--;
 			
