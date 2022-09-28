@@ -337,7 +337,7 @@ void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies)
 	
 	// SMOKE AND SPARKS IF IM DAMAGED
 	// cant start smoking at random at around 30% damage
-	if (life < 25 + rand()%10)
+	if (life < (MAX_LIFE/4) + rand()%10)
 	{
 		int cmx = x + sprite->w/2 + rand()%8 - 4;
 		int cmy = y + sprite->h/2 + rand()%8 - 4;
@@ -384,13 +384,18 @@ void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies)
 	
 	// life 
 	// if im overcharged, slowly discharge
-	if (life > MAX_LIFE)
+	// I have a shield that goes up to 200 % !
+	if (life > MAX_LIFE * 2)
 		life--;
 }
 
 void UFO::render(BITMAP *bmp)
 {
 	shoots->render(bmp); // render my shoots
+	
+	// do I have a shield ? 
+	if (life > MAX_LIFE)
+		circlefill(bmp, x + sprite->w/2, y+ sprite->h/2, sprite->w/2, beam_color[rand()%3]);
 	
 	draw_sprite(bmp, sprite, x, y); // render ufo
 	 
@@ -420,12 +425,17 @@ void UFO::render_HUD(BITMAP *bmp)
 	
 	
 	int fh = text_height(ufo_hud_font);
-	textprintf_ex(bmp, ufo_hud_font, 0, 0, c, -1, "Score: %lu000000", score);
+	textprintf_ex(bmp, ufo_hud_font, 0, 0, c, -1, "Score : %lu000000", score);
 	
-	textprintf_ex(bmp, ufo_hud_font, 0, fh+2, c, -1, "Power: %d%%", (int)((float)beam_power/(float)MAX_BEAM_POWER*100.0));
+	textprintf_ex(bmp, ufo_hud_font, 0, fh+2, c, -1, "Power : %d%%", (int)((float)beam_power/(float)MAX_BEAM_POWER*100.0));
 	
 	if (life > 0)
-		textprintf_ex(bmp, ufo_hud_font, 0, (fh+2)*2, hc, -1, "Armor: %d%%", (int)((float)life/(float)MAX_LIFE*100.0));
+	{
+		if (life <= MAX_LIFE)
+			textprintf_ex(bmp, ufo_hud_font, 0, (fh+2)*2, hc, -1, "Armor : %d%%", (int)((float)life/(float)MAX_LIFE*100.0));
+		else // shield engaged
+			textprintf_ex(bmp, ufo_hud_font, 0, (fh+2)*2, beam_color[rand()%3], -1, "Shield: %d%%", (int)((float)life/(float)MAX_LIFE*100.0));
+	}
 	else
 		textprintf_ex(bmp, ufo_hud_font, 0, (fh+2)*2, hc, -1, "CRITICAL DAMAGE");
 
