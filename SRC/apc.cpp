@@ -142,11 +142,11 @@ bool APC::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		shoot_ia = 0; // do not track player from outside screen
 	}
 	
-	if (x < 0)
+	if (x < -sprite->w*2)
 	{
-		x = 0;
+		x = -sprite->w*2;
 		sx = 2 + rand()%3; // go right
-		ia = rand()%10+10;
+		ia = rand()%30+30;
 		
 		if (rand()%10 < 3)
 			return true; // disappear for good, ran away from battle
