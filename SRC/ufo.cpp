@@ -395,7 +395,7 @@ void UFO::render(BITMAP *bmp)
 	
 	// do I have a shield ? 
 	if (life > MAX_LIFE)
-		circle(bmp, x + sprite->w/2, y + sprite->h/2, (sprite->w/2) + rand()%3, beam_color[rand()%3]);
+		circle(bmp, x + sprite->w/2 - 1, y + sprite->h/2, (sprite->w/2) + 2, beam_color[rand()%3]);
 	
 	draw_sprite(bmp, sprite, x, y); // render ufo
 	 
