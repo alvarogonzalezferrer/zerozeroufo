@@ -120,8 +120,6 @@ The terrain is procedurally generated randomly, so no two games are the same.
 
 ## Engine game design considerations
 
-**Random ramblings**
-
 * Most classes has everything public, this is to keep the design simple and fast, since Im a single developer working on my own project, so no get/set pairs for everything. 
 
 * On major projects I would use the proper encapsulation, dont take this as my skill level programming, in fact developing for MS DOS in 2022 takes some skills!
@@ -138,11 +136,17 @@ The terrain is procedurally generated randomly, so no two games are the same.
 
 * I couldn't test it on real hardware either, since I left my 486 9000 km from where I am now, if anyone tries it on real hardware and let me know, welcome.
 
-* I'm pretty tired of recruiters wasting my time, they don't know anything about programming and they judge without knowing. 
-
 * **All patches and fixes are welcome. Also the comments, I love receiving comments!**
 
 * Data will be automatically loaded - unloaded when needed to keep RAM usage to a minimum.
+
+**Random ramblings**
+
+* I'm pretty tired of recruiters wasting my time, they don't know anything about programming and they judge without knowing. 
+
+* Some developers think that "retro" is just slapping pixelated sprites on a Unity engine, and making a game thats huge in gigabytes, but small in content. It is not. 
+
+* Electron sucks: consumes a high amount of RAM, and requires an expansive amount of storage.
 
 ## REUSED CODE & STUFF
 
