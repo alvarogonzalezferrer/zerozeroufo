@@ -128,7 +128,7 @@ bool Biplane::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	// update bounding box collision detection
 	bbox->x = x;
 	bbox->y = y;
-
+	
 	// ---- last line still alive ----
 	if (life > 0) 
 		return false ; // im still alive

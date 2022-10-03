@@ -1,5 +1,6 @@
 #include "enemies.h"
 #include "logger.h"
+#include "randomiz.h"
 
 // enemies types
 #include "soldat.h"
@@ -389,6 +390,41 @@ int EnemyList::update(Map *m, UFO *ufo, ParticleManager *pm)
 				delete(enemy[i]);
 				enemy[i] = enemy[enemies_n-1];
 				enemies_n--;
+			}
+			else
+			{
+				// Im still alive
+				// check collision against UFO 
+				if (enemy[i]->bbox->collide(ufo->bbox))
+				{
+					// middle points 
+					int ufomx = ufo->x + ufo->sprite->w/2;
+					int ufomy = ufo->y + ufo->sprite->h/2;
+					
+					int mx = enemy[i]->x + enemy[i]->sprite->w/2;
+					int my = enemy[i]->y + enemy[i]->sprite->h/2;
+					// bounce UFO
+					if (ufomx < mx)
+							ufo->sx = -UFO::MV_X;
+					else
+							ufo->sx = UFO::MV_X;
+
+					if (ufomy < my)
+							ufo->sy = -UFO::MV_Y;
+					else
+							ufo->sy = UFO::MV_Y;
+						
+					// DEBUG ADD SOUND
+					
+					// damage ufo (but not myself) 
+					ufo->life--;
+					
+					// add particles
+					int cp = makecol(255,255, rand()%100 + 85); // yellow
+					int pz = rand()%10+10; // particle ammount
+					for (int p=0; p<pz;p++)
+						pm->add(new Spark(ufomx, ufomy, Randomize::random(-3.0f, 3.0f), Randomize::random(-3.0f, 3.0f), rand()%15+10, cp));
+				}
 			}
 	}
 	
