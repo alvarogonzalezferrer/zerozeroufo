@@ -14,7 +14,7 @@
 #include "ufo.h"
 #include "logger.h"
 #include "enemies.h"
-#include  "shoots.h"
+#include "shoots.h"
 
 UFO::UFO()
 {

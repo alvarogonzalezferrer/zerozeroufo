@@ -39,8 +39,8 @@ int HardwareManager::videoMode = GFX_AUTODETECT_FULLSCREEN; // screen desired gr
 int HardwareManager::colorDepth = 8;  // default color depth, -1 = autodetect from desktop default
 
 bool HardwareManager::wantSound = true;
-bool HardwareManager::wantMouse = false;
-bool HardwareManager::wantJoystick = false;
+bool HardwareManager::wantMouse = true;
+bool HardwareManager::wantJoystick = true;
 
 
 // -----------------------------------------------------------------------
@@ -116,8 +116,8 @@ void HardwareManager::init(int argc, char *argv[])
                 if (check_command( argc, argv, "-nojoy") || check_command( argc, argv, "-nojoystick") )
                         wantJoystick = false;
 
-                /*if (check_command( argc, argv, "-nomouse"))
-                        wantMouse = false;*/
+                if (check_command( argc, argv, "-nomouse"))
+                        wantMouse = false;
 
                 // some extra resolutions -- DEBUG -- ADD TO HELP TOO IF ENABLED
                 if ( check_command( argc, argv, "-800x600" ) )

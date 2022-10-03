@@ -23,6 +23,8 @@
 #include "shoots.h" 
 #include "enemies.h"
 
+#include "control.h" // controller 
+
 // fordward declaration for cross reference dependencies
 class EnemyList;
 class ShootsList;
