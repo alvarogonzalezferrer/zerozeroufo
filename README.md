@@ -75,6 +75,7 @@ Tools I used:
 * Audacity 
 * Firefox
 * Github
+* Piskel - https://www.piskelapp.com/
 
 Platform: MS-DOS was main target, Linux, Windows maybe, not tested yet.
 
@@ -139,6 +140,8 @@ The terrain is procedurally generated randomly, so no two games are the same.
 * **All patches and fixes are welcome. Also the comments, I love receiving comments!**
 
 * Data will be automatically loaded - unloaded when needed to keep RAM usage to a minimum.
+
+* This game is old-school, no DLCs, no loot boxes, no pay walls, no DRM, no phone-home spyware, no monetization bullshit, just art.
 
 **Random ramblings**
 
