@@ -268,7 +268,7 @@ void MainGameLoop::update()
 		if (ufo->life < 1)
 		{
 			ufo->life--;
-			if (ufo->life < 120) // you have 4 seconds to try to grab some energy
+			if (ufo->life < -120) // you have 4 seconds to try to grab some energy
 			{
 				wait = 180;
 				changeState(STATE_GAMEOVER);

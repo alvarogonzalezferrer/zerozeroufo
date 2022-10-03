@@ -355,7 +355,7 @@ void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies)
 		{
 			int f = Randomize::random(25,110); // smoke shade
 			int cp = makecol(f,f,f); // smoke
-			pm->add(new Smoke(cmx, cmy, Randomize::random(0.1f,2.5f)*(-sx), Randomize::random(-2.0f,0.1f), Randomize::random(5,10), cp, Randomize::random(1,4), Randomize::random(0.0f,1.0f));
+			pm->add(new Smoke(cmx, cmy, Randomize::random(0.1f,2.5f)*(-sx), Randomize::random(-2.0f,0.1f), Randomize::random(5,10), cp, Randomize::random(1,4), Randomize::random(0.0f,1.0f)));
 		}
 		else
 		{
