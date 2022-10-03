@@ -31,17 +31,14 @@ Enemy::Enemy(Datafile *data)
 {
 	Logger::log("Enemy::Enemy(data)");
 	
-	//life = 100; // default life
+	sx=sy=x=y=life=0; // default
 	
-	/* this should be done in each enemy
+	// collide with UFO default 
+	collideWithUFO = true;
 	
-	x = y = sx = sy = 0;
-
+	// un init default
 	bbox = NULL;
-
 	sprite = NULL;
-	
-	this->data = data;*/
 }
 
 
@@ -394,8 +391,10 @@ int EnemyList::update(Map *m, UFO *ufo, ParticleManager *pm)
 			else
 			{
 				// Im still alive
-				// check collision against UFO 
-				if (enemy[i]->bbox->collide(ufo->bbox))
+				// check collision against UFO only if enabled and alive (not burning, falling,etc)
+				if ( enemy[i]->collideWithUFO &&
+					 enemy[i]->life > 0 &&	
+					 enemy[i]->bbox->collide(ufo->bbox))
 				{
 					// middle points 
 					int ufomx = ufo->x + ufo->sprite->w/2;
@@ -421,9 +420,9 @@ int EnemyList::update(Map *m, UFO *ufo, ParticleManager *pm)
 					
 					// add particles
 					int cp = makecol(255,255, rand()%100 + 85); // yellow
-					int pz = rand()%10+10; // particle ammount
+					int pz = rand()%12+8; // particle ammount
 					for (int p=0; p<pz;p++)
-						pm->add(new Spark(ufomx, ufomy, Randomize::random(-3.0f, 3.0f), Randomize::random(-3.0f, 3.0f), rand()%15+10, cp));
+						pm->add(new Spark(ufomx, ufomy, ufo->sx * Randomize::random(0.2f, 2.0f), ufo->sy * Randomize::random(0.2f, 2.0f), rand()%15+10, cp));
 				}
 			}
 	}

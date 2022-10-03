@@ -44,7 +44,7 @@ Soldat::Soldat(Datafile *data) : Enemy(data)
 	
 	bbox = new Collide2D(x, y, sprite->w, sprite->h);
 	
-	
+	collideWithUFO = false; // very important so UFO beam can work!
 }
 
 

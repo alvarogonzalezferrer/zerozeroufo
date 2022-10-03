@@ -441,18 +441,18 @@ void UFO::render_HUD(BITMAP *bmp)
 	
 	
 	int fh = text_height(ufo_hud_font);
-	textprintf_ex(bmp, ufo_hud_font, 0, 0, c, -1, "Score %lu000000", score);
+	textprintf_ex(bmp, ufo_hud_font, 0, 0, c, -1, "Score %03lu000000", score);
 	
-	textprintf_ex(bmp, ufo_hud_font, 0, fh+2, c, -1, "Power %d%%", (int)((float)beam_power/(float)MAX_BEAM_POWER*100.0));
+	textprintf_ex(bmp, ufo_hud_font, 0, fh+2, c, -1, "Power %03d%%", (int)((float)beam_power/(float)MAX_BEAM_POWER*100.0));
 	
 	if (life > 0)
 	{
 		if (life <= MAX_LIFE)
-			textprintf_ex(bmp, ufo_hud_font, 0, (fh+2)*2, hc, -1, "Armor  %d%%", (int)((float)life/(float)MAX_LIFE*100.0));
+			textprintf_ex(bmp, ufo_hud_font, 0, (fh+2)*2, hc, -1, "Armor %03d%%", (int)((float)life/(float)MAX_LIFE*100.0));
 		else // shield engaged
-			textprintf_ex(bmp, ufo_hud_font, 0, (fh+2)*2, beam_color[rand()%3], -1, "Armor+ %d%%", (int)((float)life/(float)MAX_LIFE*100.0));
+			textprintf_ex(bmp, ufo_hud_font, 0, (fh+2)*2, beam_color[rand()%3], -1, "ARMOR %03d%%", (int)((float)life/(float)MAX_LIFE*100.0));
 	}
 	else
-		textprintf_ex(bmp, ufo_hud_font, 0, (fh+2)*2, hc, -1, "CRITICAL DAMAGE");
+		textprintf_ex(bmp, ufo_hud_font, 0, (fh+2)*2, makecol(255,255,255), makecol(255,0,0), "CRITICAL DAMAGE");
 
 }

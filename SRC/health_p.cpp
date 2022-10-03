@@ -39,6 +39,8 @@ HealthPrize::HealthPrize(Datafile *data) : Enemy(data)
 	ia = 0;
 
 	bbox = new Collide2D(x, y, sprite->w, sprite->h);
+	
+	collideWithUFO = false; // very important so UFO can pick it up!
 }
 
 

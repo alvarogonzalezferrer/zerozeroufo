@@ -46,7 +46,7 @@ bool HardwareManager::wantJoystick = true;
 // -----------------------------------------------------------------------
 // HELPER : This will return true if the search_command is on the list of commands, false if not found
 // -----------------------------------------------------------------------
-bool HardwareManager::check_command( int argc, char *argv[], char *search_command )
+bool HardwareManager::check_command( int argc, char *argv[], const char *search_command )
 {
         for ( int i = 1; i < argc; i++ )
                 if ( stricmp( argv[ i ], search_command ) == 0 )

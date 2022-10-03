@@ -37,6 +37,8 @@ Jetpack::Jetpack(Datafile *data) : Enemy(data)
 	insideBeam = false;
 		
 	bbox = new Collide2D(x, y, sprite->w, sprite->h);
+	
+	collideWithUFO = false; // very important so UFO beam can work!
 }
 
 

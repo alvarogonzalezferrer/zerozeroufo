@@ -36,7 +36,7 @@ class HardwareManager
 		static void shutdown(); ///< shutdowns hardware
 		
 	private:
-		static bool check_command(int argc, char *argv[], char *search_command);
+		static bool check_command(int argc, char *argv[], const char *search_command);
 };
 
 #endif

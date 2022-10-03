@@ -47,6 +47,8 @@ class Enemy
 		// LIFE LEFT
 		int life;
 		
+		// collide with UFO ? some enemies do not collide against UFO, default TRUE
+		bool collideWithUFO;
 		
 		Collide2D *bbox; // bouding box for collisions
 		
