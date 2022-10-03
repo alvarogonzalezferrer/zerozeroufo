@@ -63,6 +63,7 @@ void MainGameLoop::update()
 	switch (currentState)
 	{
 	case STATE_START: // game starts here , this is state 0 , when you run the exe, this is the entry point
+	{
 		camerashake = 0;
 		// I re create the bitmap as a GAME_W_RES * GAME_H_RES only, to support any resolution
 		if (doubleBuffer)
@@ -96,7 +97,12 @@ void MainGameLoop::update()
 		
 		// help screen
 		help_bmp = (BITMAP *)intro_screens_data.getObject("HELP_BMP")->dat;
-		  
+		 
+		// game over 
+		gameover_bmp = (BITMAP *)intro_screens_data.getObject("GAME_OVER_BMP")->dat;
+		
+		// you won 
+		won_bmp = (BITMAP *)intro_screens_data.getObject("WON_BMP")->dat;
 
 		// kronoman screen 
 		kronoman_bmp =  (BITMAP *)intro_screens_data.getObject("KRONOMAN_BMP")->dat;
@@ -113,6 +119,7 @@ void MainGameLoop::update()
 		
 		wait = 60;
 		changeState(STATE_FBI); // FBI message intro, retro play! // put STATE_INTRO to avoid fbi message!
+	}
 	break;
 	
 	case STATE_FBI:
@@ -143,10 +150,14 @@ void MainGameLoop::update()
 
 	// waits game over message
 	case STATE_GAMEOVER:
+		// TODO highscore , continue, etc 
 		camerashake = 0;
 
 		if (--wait < 0)
 		{
+			// reset score , ufo, etc 
+			ufo->next_game_reset();
+			
 			wait = 150;
 			changeState(STATE_INTRO);
 		}
@@ -178,6 +189,8 @@ void MainGameLoop::update()
 		pm->finish(); // reset particles
 		
 		enemyList->reset(); // bye residual enemies
+		
+		// the shoots of UFO and enemies are handled by themselves, so they get reset without need to call here
 
 		// done, go to level intro
 		wait = 150;
@@ -208,7 +221,7 @@ void MainGameLoop::update()
 		
 		if (key[KEY_F1]) // help
 		{
-			help_show = 300; // show help screen for 10 seconds
+			help_show = 150; // show help screen for 5 seconds
 			while(key[KEY_F1]); // wait key release
 		}
 		
@@ -305,17 +318,12 @@ void MainGameLoop::render()
 
 	// shows intro screen
 	case STATE_INTRO:
-		blit(intro_bmp, doubleBuffer, 0, 0, 0, 0, intro_bmp->w, intro_bmp->h);
-		
-		
-		//textprintf_ex(doubleBuffer, font,0,doubleBuffer->h-text_height(font)*2, makecol(255,0,0), -1, "Kronoman 2022");
-
-		// TODO sound...
+		blit(intro_bmp, doubleBuffer, 0, 0, 0, 0, intro_bmp->w, intro_bmp->h);		
 	break;
 
 	// shows game over screen
 	case STATE_GAMEOVER:
-		// TODO
+		blit(gameover_bmp, doubleBuffer, 0, 0, 0, 0, gameover_bmp->w, gameover_bmp->h);
 	break;
 
 	// shows intro to next level
@@ -356,8 +364,8 @@ void MainGameLoop::render()
 	break;
 
 	default:
-		// should never be here
-		//Error::error("ERROR\nUnhandled state in mloop.cpp (state = %d); %s in line %d\n", currentState, __FILE__, __LINE__ );
+		// sometimes comes here with states that dont have graphic representation, like loading, etc
+		// render nothing
 	break;
 	}
 

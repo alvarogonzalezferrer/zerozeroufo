@@ -15,6 +15,7 @@
 #include "logger.h"
 #include "enemies.h"
 #include "shoots.h"
+#include "randomiz.h"
 
 UFO::UFO()
 {
@@ -119,13 +120,13 @@ void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies)
 	
 	if ((key[KEY_SPACE] || key[KEY_Z]) && beam_power > 10) // only if I have SOME power left
 	{
-		beam_size +=rand()%3+2; // grows in size fast!
+		beam_size += Randomize::random(2,5); // grows in size fast!
 		beam_power -=2;
 	}
 	else
 	{
 		// beam decreases power fast
-		beam_size -= (beam_size / 2) + (rand()%3 + 1);
+		beam_size -= (beam_size / 2) + Randomize::random(1,4);
 		if (beam_size < -10)
 			beam_size = -10; // takes a while to power up!	
 	}
@@ -236,7 +237,7 @@ void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies)
 	
 	// while beam is on, you cant fly vertical! // DEBUG, SURE ABOUT THIS? affects gameplay, makes it harder and annoying - TODO , remove
 	if (beam_size > 0)
-		sy = 0; //sy = (rand()%20-10) / 10.0; // random turbulence?
+		sy = 0; 
 	
 	
 	// LIMIT MAX SPEED!
@@ -271,46 +272,53 @@ void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies)
 	// bounce on ground and give damage
 	if (y > map->getHeight((int)(x + sprite->w/2)) - sprite->h *0.95)
 	{
-		y = map->getHeight((int)(x + sprite->w/2)) - sprite->h - rand()%8 ;		
+		y = map->getHeight((int)(x + sprite->w/2)) - sprite->h -  Randomize::random(0,8) ;		
 
-		sy = -2 - rand()%2;
-		sx = rand()%4-2; // turbulence
+		sy = -2 -  Randomize::random(0,2);
+		sx = Randomize::random(-2,2); // turbulence
 		
-		life -= rand()%7+3;
+		life -=  Randomize::random(3, 10);
 		
 		// sparks
-		int pz = rand()%8+8; // particle ammount
+		int pz =  Randomize::random(8,16); // particle ammount
 		for (int p=0; p<pz;p++)
-			pm->add(new Spark(x + sprite->w/2, y+sprite->h - 2, (rand()%40-20)/10.0, (rand()%10+20)/-10.0, rand()%5+4, makecol(255,255,rand()%170+85)));
+			pm->add(new Spark(x + sprite->w/2, y+sprite->h - 2, 
+							  Randomize::random(-2.0f,2.0f), Randomize::random(-2.0f,-3.0f), 
+							  Randomize::random(4,9), 
+							  makecol(255,255, Randomize::random(85,255))));
 	}
 
 	
 	// FRICTION	
+	// x axis
 	if (sx > 0)
 	{
 		sx -= F_X;
 		if (sx < 0)
 			sx = 0; // clip
 	}
-	else if (sx < 0)
-	{
-		sx += F_X;
-		if (sx > 0)
-			sx = 0; // clip
-	}
+	else 
+		if (sx < 0)
+		{
+			sx += F_X;
+			if (sx > 0)
+				sx = 0; // clip
+		}
 	
+	// y axis
 	if (sy > 0)
 	{
 		sy -= F_Y;
 		if (sy < 0)
 			sy = 0; // clip
 	}
-	else if (sy < 0)
-	{
-		sy += F_Y;
-		if (sy > 0)
-			sy = 0; // clip
-	}
+	else 
+		if (sy < 0)
+		{
+			sy += F_Y;
+			if (sy > 0)
+				sy = 0; // clip
+		}
 	
 	// animate	
 	// frames goes in 10 steps to regulate speed
@@ -337,24 +345,24 @@ void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies)
 	
 	// SMOKE AND SPARKS IF IM DAMAGED
 	// cant start smoking at random at around 30% damage
-	if (life < (MAX_LIFE/4) + rand()%10)
+	if (life < (MAX_LIFE/4) +  Randomize::random(0,10))
 	{
-		int cmx = x + sprite->w/2 + rand()%8 - 4;
-		int cmy = y + sprite->h/2 + rand()%8 - 4;
+		int cmx = x + sprite->w/2 + Randomize::random(-4,4);
+		int cmy = y + sprite->h/2 + Randomize::random(-4,4);
 
 		// add some smoke particles
-		if (rand()%100 < 70) // smoke or sparks?
+		if ( Randomize::random(0,100) < 70) // smoke or sparks?
 		{
-			int f = rand()%85+25; // smoke shade
+			int f = Randomize::random(25,110); // smoke shade
 			int cp = makecol(f,f,f); // smoke
-			pm->add(new Smoke(cmx, cmy, ((rand()%25)/10.0)*(-sx), -(rand()%20)/10.0, rand()%4+5, cp, rand()%3+1, (rand()%100)/100.0));
+			pm->add(new Smoke(cmx, cmy, Randomize::random(0.1f,2.5f)*(-sx), Randomize::random(-2.0f,0.1f), Randomize::random(5,10), cp, Randomize::random(1,4), Randomize::random(0.0f,1.0f));
 		}
 		else
 		{
 			// sparks
-			int f = rand()%55+200; // spark shade
+			int f = Randomize::random(200,255); // spark shade
 			int cp = makecol(f,f,0);
-			pm->add(new Spark(cmx, cmy, (rand()%40-20)/10.0, (rand()%40-20)/10.0, rand()%5+8, cp));
+			pm->add(new Spark(cmx, cmy, Randomize::random(-2.0f,2.0f), Randomize::random(-2.0f,2.0f), Randomize::random(8,15), cp));
 		}
 	}
 	
@@ -387,6 +395,14 @@ void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies)
 	// I have a shield that goes up to 200 % !
 	if (life > MAX_LIFE * 2)
 		life--;
+	
+	// I'm dying?
+	if (life < 0)
+	{
+		// go down 
+		sy += Randomize::random(0.1f, 0.3f);
+		sx += Randomize::random(-0.2f, 0.2f);
+	}
 }
 
 void UFO::render(BITMAP *bmp)
