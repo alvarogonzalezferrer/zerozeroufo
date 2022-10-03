@@ -25,6 +25,11 @@
 
 #include "mloop.h"
 
+#ifdef __DJGPP__
+// to show a little MS DOS message!
+#include <iostream>
+#endif 
+
 // -----------------------------------------------------------------------
 // game entry point from operating system...
 // -----------------------------------------------------------------------
@@ -40,6 +45,12 @@ int main(int argc, char *argv[])
 	mgl.start();
 
 	HardwareManager::shutdown();
+
+#ifdef __DJGPP__
+// little message for MS DOS
+std::cout << "Thanks for playing! Krono 2022" << std::endl;
+#endif 
+
 
 	return 0;
 }

@@ -204,15 +204,10 @@ void HardwareManager::init(int argc, char *argv[])
 
         if (install_keyboard() != 0)
                 Error::error("HardwareManager::init()\nCan't install keyboard driver");
-
-
-        /* DEBUG --- THIS GAME DOES NOT USE A MOUSE */
-        //if (wantMouse)
-        //    if (install_mouse() < 0)
-        //         Error::error("Error! Can't detect mouse and is needed to play! :(");
-        //                Logger::log("Warning! Can't detect mouse.");
-
-
+        
+        if (wantMouse)
+			if (install_mouse() < 0)
+				Logger::log("Warning! Can't detect mouse.");
         
         if (wantJoystick)
                 if (install_joystick(JOY_TYPE_AUTODETECT) != 0)
