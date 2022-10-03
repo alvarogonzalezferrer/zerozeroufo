@@ -199,8 +199,7 @@ void MainGameLoop::update()
 	break;
 
 	// waits presentation of next level
-	case STATE_INTRONEXTLEVEL:		
-
+	case STATE_INTRONEXTLEVEL:
 		if (--wait < 0)
 		{
 			changeState(STATE_OK); // start game!
@@ -264,6 +263,17 @@ void MainGameLoop::update()
 		// end level when enough travel and no enemies - DEBUG CHECK BOSSES TOO
 		if (ret_e == 0 && finished) 
 				changeState(STATE_NEXTLEVEL);
+			
+		// UFO is dying??
+		if (ufo->life < 1)
+		{
+			ufo->life--;
+			if (ufo->life < 120) // you have 4 seconds to try to grab some energy
+			{
+				wait = 180;
+				changeState(STATE_GAMEOVER);
+			}
+		}
 	}
 	break;
 
