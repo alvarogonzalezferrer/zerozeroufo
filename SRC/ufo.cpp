@@ -231,8 +231,8 @@ void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies)
 		
 		shoot_recharge = 10 - weapon; // better weapon shoots faster!
 		
-		// SOUND
-		 play_sample(ufo_laser_wav, 250 + rand()%5, x * 255 / 320, 1000+weapon*100, 0);
+		// SOUND - pans and pitch according to weapon and position
+		play_sample(ufo_laser_wav, 200 + rand()%55, x * 255 / 320, 1000+weapon*100, 0);
 	}
 	
 	// limit beam to ground
