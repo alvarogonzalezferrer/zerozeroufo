@@ -84,6 +84,8 @@ class UFO
 		
 		FONT *ufo_hud_font; // HUD font
 		
+		SAMPLE *ufo_laser_wav; // laser shoot
+		
 		// score
 		unsigned long int score; 
 		

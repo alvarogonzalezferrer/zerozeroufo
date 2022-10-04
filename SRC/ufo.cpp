@@ -32,7 +32,9 @@ UFO::UFO()
 	// HUD FONT
 	ufo_hud_font = (FONT *)data.getObject("UFO_HUD_FONT")->dat;
 	
-	// TODO - add sounds , dead, shooting etc 
+	// SOUNDS
+	ufo_laser_wav = (SAMPLE *)data.getObject("UFO_LASER_WAV")->dat;
+	
 	
 	// setup
 	anm = 0;
@@ -130,10 +132,9 @@ void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies)
 		if (beam_size < -10)
 			beam_size = -10; // takes a while to power up!	
 	}
-	// END KEYBOARD CONTROLS
+	// END MOVEMENT CONTROLS
 	
-	// TODO - RUDIMENTARY SHOOT
-	// TODO ADD DIFFERENT WEAPONS
+	// SHOOTING
 	if ((key[KEY_ENTER] || key[KEY_X]) && shoot_recharge < 1)
 	{
 		
@@ -229,6 +230,9 @@ void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies)
 			weapon = 5;
 		
 		shoot_recharge = 10 - weapon; // better weapon shoots faster!
+		
+		// SOUND
+		 play_sample(ufo_laser_wav, 250 + rand()%5, x * 255 / 320, 1000+weapon*100, 0);
 	}
 	
 	// limit beam to ground
