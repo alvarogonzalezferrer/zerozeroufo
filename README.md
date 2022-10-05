@@ -22,6 +22,12 @@ All feedback welcome.
 
 *Thanks to the magic of [js-dos](https://js-dos.com/) , you can play online this game.*
 
+## Download for MS-DOS 💾
+
+Go to release section : https://github.com/alvarogonzalezferrer/zerozeroufo/releases
+
+Play it on real hardware, or DOSBOX!
+
 ## About the Game
 
 A open source game that you play as a UFO 🛸
