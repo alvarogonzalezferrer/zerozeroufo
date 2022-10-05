@@ -80,7 +80,6 @@ bool Tank::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		// shoot? 50% chance
 		if (rand()%100 < 50)
 		{
-			
 			// shoto at 45 degrees up
 			float ssy = -(rand()%3+2);
 			
@@ -89,20 +88,17 @@ bool Tank::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 			
 			ssx = ssx * (rand()%2+1); // speed up
 			
-			float sx = (sx <= 0) ? x : (x + sprite->w);
+			shoots->add( new Shoot(x + sprite->w/2, y + sprite->h/2,
+									ssx, ssy, 
+									rand()%100+100, 
+									3, 
+									0.03, 
+									rand()%15+10, 
+									makecol(255,255,85),
+									2));
 			
-			Shoot *sn = new Shoot(sx,y,
-								ssx, ssy, 
-								rand()%100+100, 
-								3, 
-								0.03, 
-								rand()%15+10, 
-								makecol(255,255,85),
-								2);
-			
-			shoots->add(sn);	
+				
 		}
-		
 	}
 	
 	// bounce on borders 

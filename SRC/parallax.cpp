@@ -66,8 +66,8 @@ int Parallax::load(int wave)
 		break;
 		
 		case 8:
-			backgrounds_data.load("1980bg.dat");
-			ret = Map::ROCK;
+			backgrounds_data.load("japanbg.dat");
+			ret = Map::SNOW;
 		break;
 		
 		case 9:
@@ -76,8 +76,8 @@ int Parallax::load(int wave)
 		break;
 		
 		case 10:
-			backgrounds_data.load("japanbg.dat");
-			ret = Map::SNOW;
+			backgrounds_data.load("1980bg.dat");
+			ret = Map::ROCK;
 		break;
 		
 		default:

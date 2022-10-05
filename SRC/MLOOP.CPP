@@ -159,7 +159,7 @@ void MainGameLoop::update()
 			ufo->next_game_reset();
 			
 			wait = 150;
-			changeState(STATE_INTRO);
+			changeState(STATE_FBI);
 		}
 	break;
 
