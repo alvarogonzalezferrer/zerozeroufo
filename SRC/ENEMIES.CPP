@@ -140,7 +140,8 @@ void EnemyList::generate(int n, int t, Map *m)
 	
 	int total_chance = 0;
 	
-	// CHANCES CHANGE ACCORDING TO WAVE 
+	// CHANCES CHANGE ACCORDING TO WAVE
+	// DEBUG - THIS CHANCES SHOULD BE LOADED FROM A TXT FILE!
 	
 	// tier 0-1 - easy levels
 	chance[0] = 80; // soldat
@@ -152,13 +153,13 @@ void EnemyList::generate(int n, int t, Map *m)
 	chance[6] = 0; // missile truck
 	
 	chance[7] = 25; // weapon power up
-	chance[8] = 0; // health power up
+	chance[8] = 1; // health power up
 	
 	// more enemies
 	chance[9] = 20; // biplane, easy enemy airborne
 	chance[10] = 0; // mini flying mech
 	chance[11] = 0; // APC
-	chance[12] = 10; // Mine
+	chance[12] = 1; // Mine
 	
 	// increase according to tier
 	if (t > 1)
@@ -188,7 +189,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[1] = 30; // tank
 		chance[2] = 30; // heli
 		chance[3] = 30; // jetpack
-		chance[4] = 0; // zepellin
+		chance[4] = 5; // zepellin
 		chance[5] = 0; // B17
 		chance[6] = 0; // missile truck
 		
@@ -235,7 +236,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[7] = 20; // weapon power up
 		chance[8] = 10; // health power up	
 
-		chance[9] = 0; // biplane
+		chance[9] = 1; // biplane
 		chance[10] = 5; // mini flying mech
 		chance[11] = 15; // APC
 		chance[12] = 15; // Mine
@@ -255,7 +256,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[7] = 25; // weapon power up
 		chance[8] = 20; // health power up	
 
-		chance[9] = 0; // biplane
+		chance[9] = 2; // biplane
 		chance[10] = 10; // mini flying mech
 		chance[11] = 20; // APC
 		chance[12] = 25; // Mine

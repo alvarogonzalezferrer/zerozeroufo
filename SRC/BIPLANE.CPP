@@ -9,6 +9,7 @@
 
 // static data for all the objects
 BITMAP *Biplane::spr[3];
+SAMPLE *Biplane::explosion_wav = NULL;
 Datafile *Biplane::spr_data = NULL;
 int Biplane::count = 0;
 
@@ -27,7 +28,7 @@ Biplane::Biplane(Datafile *data) : Enemy(data)
 		spr[1] = (BITMAP *)data->getObject("BIPLANE_1_BMP")->dat;
 		spr[2] = (BITMAP *)data->getObject("BIPLANE_2_BMP")->dat;
 		
-		// TODO - add sounds
+		explosion_wav = (SAMPLE *)data->getObject("EXPLOSION_WAV")->dat;
 	}
 	count++;
 	
@@ -70,27 +71,25 @@ bool Biplane::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	if (ia<0)
 	{
 		// move
-		ia = Randomize::random(30, 90); // frames to do the same?
-		sx = -1.5f; //Randomize::random(-1.5f, 1.5f); // always go left
+		ia = Randomize::random(30, 75); // frames to do the same?
+		sx = -1.5f;  // always go left
 		sy = Randomize::random(-1.5f, 1.5f);
 
-		// shoot? 30% chance
-		if (rand()%100 < 30)
+		// shoot? 60% chance
+		if (rand()%100 < 60)
 		{			
 			float ssx = (sx <= 0) ? -2.5 : 2.5; // left or right?
 			float sx = (sx <= 0) ? x : x + sprite->w;
 			
-			Shoot *sn = new Shoot(sx, y + sprite->h / 2,
+			shoots->add(new Shoot(sx, y + sprite->h / 2,
 								  ssx, 0, 
 								  200, 
 								  0,
-								  0.01, 
+								  0.0, 
 								  7, 
 								  makecol(255,255,85),
-								  1);
-			
-			shoots->add(sn);
-		}	
+								  1));
+		}
 	}
 	
 	// bounce on borders 
@@ -170,6 +169,7 @@ bool Biplane::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	
 	// dead for good
 	ufo->score++;
+	play_sample(explosion_wav, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
 	return true; // im dead
 }	
 

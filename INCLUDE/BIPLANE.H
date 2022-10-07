@@ -30,6 +30,7 @@ class Biplane : public Enemy
 		int ia; // IA counter
 			
 		static BITMAP *spr[3];	
+		static SAMPLE *explosion_wav;
 		static Datafile *spr_data;
 		static int count;
 };
