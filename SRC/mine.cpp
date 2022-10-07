@@ -19,7 +19,7 @@ Mine::Mine(Datafile *data) : Enemy(data)
 	
 	x = y = sx = sy = 0; // remember to position!
 	
-	life = 10; // EXPLODES EASY
+	life = 50; // 
 	
 	//if (count == 0) // first helicopter, get sprites and sounds 
 	if (spr_data != data)
@@ -150,9 +150,9 @@ bool Mine::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	
 	// leave spark trail IF im alive
 	int color = makecol(rand()%50+200,0,0);
-	int pz = rand()%2+5; // particle ammount
+	int pz = rand()%3+5; // particle ammount
 	for (int p=0; p < pz; p++)
-		pm->add(new Spark(mx, my, Randomize::random(-sx*0.8f, -sx*1.2f), Randomize::random(-sy*0.8f, -sy*1.2f), rand()%5+5, color));
+		pm->add(new Spark(mx, my, Randomize::random(-sx*0.8f, -sx*1.2f), Randomize::random(-sy*0.8f, -sy*1.2f), rand()%5+15, color));
 	
 	
 	return false ; // im still alive
