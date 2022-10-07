@@ -379,15 +379,17 @@ void MainGameLoop::render()
 	break;
 	}
 
-	// fill screen -- lame way to do widescreen :P
-	if (camerashake > 0) // do camera shake effect, for explosions
-		stretch_blit(doubleBuffer, screen, 0, 0, doubleBuffer->w, doubleBuffer->h, rand()%8-4, rand()%8-4, SCREEN_W+rand()%5, SCREEN_H+rand()%5);
+	// fill screen -- lame way to support many resolutions :P
+	if (camerashake > 0) // do camera shake effect, for explosions / damage / etc
+	{
+		stretch_blit(doubleBuffer, screen, 0, 0, doubleBuffer->w, doubleBuffer->h, rand()%10-5, rand()%10-5, SCREEN_W+rand()%15, SCREEN_H+rand()%15); 
+	}
 	else
 	{
 		if (doubleBuffer->w == SCREEN_W && doubleBuffer->h == SCREEN_H)
 			blit(doubleBuffer, screen, 0, 0, 0, 0, doubleBuffer->w, doubleBuffer->h);
 		else
-			stretch_blit(doubleBuffer, screen, 0, 0, doubleBuffer->w, doubleBuffer->h, 0, 0, SCREEN_W, SCREEN_H); 
+			stretch_blit(doubleBuffer, screen, 0, 0, doubleBuffer->w, doubleBuffer->h, 0, 0, SCREEN_W, SCREEN_H);
 	}
 }
 
