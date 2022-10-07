@@ -5,6 +5,7 @@
 #include "mine.h"
 #include "logger.h"
 #include "enemy.h"
+#include "randomiz.h"
 
 // static data for all the objects
 BITMAP *Mine::spr[2];
@@ -18,7 +19,7 @@ Mine::Mine(Datafile *data) : Enemy(data)
 	
 	x = y = sx = sy = 0; // remember to position!
 	
-	life = 20;
+	life = 10; // EXPLODES EASY
 	
 	//if (count == 0) // first helicopter, get sprites and sounds 
 	if (spr_data != data)
@@ -68,18 +69,26 @@ bool Mine::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	if (frame > 1) // (0..1)
 		frame=0;
 	
-	sprite = spr[frame/10];
+	sprite = spr[frame];
 	
 	// IA
 	// easy state machine, when reaches 0, choose another action
 	ia--;
 	if (ia < 0)
 	{
-		ia = 30 + rand()%30; 
+		ia = 5; 
 		
 		// movement
-		sx = -(rand()%20+10) / 10.0; // ALWAYS LEFT
-		sy = (rand()%20-10) / 10.0; // up or down?
+		// semi-chase the player 
+		if (ufo->x < x)
+			sx = -Randomize::random(0.5f, 1.5f);
+		else 
+			sx = Randomize::random(0.5f, 1.5f);
+		
+		if (ufo->y < y)
+			sy = -Randomize::random(0.5f, 1.5f);
+		else 
+			sy = Randomize::random(0.5f, 1.5f);
 	}
 	 
 	// dont crash on ground!
@@ -100,7 +109,7 @@ bool Mine::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	// side right should not clip since i can come from outside screen!
 	if (x > m->mapW + sprite->w)
 	{
-		sx = -3;
+		sx = -2;
 		sy = 0;
 		ia = 5; 
 	}
@@ -112,6 +121,11 @@ bool Mine::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	// update collision detection
 	bbox->x = x;
 	bbox->y = y;
+
+	// middle point for sparks
+	int mx = x+sprite->w/2;
+	int my = y+sprite->h/2;
+
 	
 	// collide against UFO ? 
 	if (bbox->collide(ufo->bbox))
@@ -120,16 +134,26 @@ bool Mine::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		
 		// debug ADD sound!
 		
-		int color = makecol(rand()%50+200,0,0);
-		int pz = rand()%20+20; // particle ammount
-		for (int p=0; p < pz; p++)
-			pm->add(new Spark(x, y, (rand()%40-20)/10.0, (rand()%40-20)/10.0, rand()%10+15, color));
-
-		return true; // I collided 
+		life = -1; // I collided 
 	}
 	
-	//if (life < 0)
-	//	return true; // shoot by player! :O
+	if (life < 0)
+	{
+		// EXPLODE SPARKS 
+		int color = makecol(rand()%50+200,0,0);
+		int pz = rand()%10+35; // particle ammount
+		for (int p=0; p < pz; p++)
+			pm->add(new Spark(mx, my, (rand()%40-20)/10.0, (rand()%40-20)/10.0, rand()%10+15, color));
+		
+		return true; // shoot by player! :O
+	}
+	
+	// leave spark trail IF im alive
+	int color = makecol(rand()%50+200,0,0);
+	int pz = rand()%2+5; // particle ammount
+	for (int p=0; p < pz; p++)
+		pm->add(new Spark(mx, my, (rand()%40-20)/10.0, (rand()%40-20)/10.0, rand()%5+5, color));
+	
 	
 	return false ; // im still alive
 }	
