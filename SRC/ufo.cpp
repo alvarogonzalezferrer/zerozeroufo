@@ -284,12 +284,15 @@ void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies)
 		life -=  Randomize::random(3, 10);
 		
 		// sparks
-		int pz =  Randomize::random(8,16); // particle ammount
+		int pz =  Randomize::random(8,20); // particle ammount
 		for (int p=0; p<pz;p++)
 			pm->add(new Spark(x + sprite->w/2, y+sprite->h - 2, 
-							  Randomize::random(-2.0f,2.0f), Randomize::random(-2.0f,-3.0f), 
-							  Randomize::random(4,9), 
+							  Randomize::random(-3.0f,3.0f), Randomize::random(-2.0f,-4.0f), 
+							  Randomize::random(10,20), 
 							  makecol(255,255, Randomize::random(85,255))));
+							  
+		// PLAY HIT SOUND
+		play_sample(ufo_hit_wav, 255, x * 255 / 320, 900 + rand()%500, 0);
 	}
 
 	

@@ -427,7 +427,7 @@ int EnemyList::update(Map *m, UFO *ufo, ParticleManager *pm)
 							ufo->sy = UFO::MV_Y;
 						
 					// PLAY HIT SOUND
-					play_sample(ufo->ufo_hit_wav, 128 + rand()%128, ufo->x * 255 / 320, 900 + rand()%300, 0);
+					play_sample(ufo->ufo_hit_wav, 255, ufo->x * 255 / 320, 900 + rand()%300, 0);
 
 					
 					// damage ufo (but not myself) 
