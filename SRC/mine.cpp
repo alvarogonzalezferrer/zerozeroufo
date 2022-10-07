@@ -19,7 +19,7 @@ Mine::Mine(Datafile *data) : Enemy(data)
 	
 	x = y = sx = sy = 0; // remember to position!
 	
-	life = 50; // 
+	life = 50; 
 	
 	//if (count == 0) // first helicopter, get sprites and sounds 
 	if (spr_data != data)

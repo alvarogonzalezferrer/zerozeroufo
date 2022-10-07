@@ -137,6 +137,9 @@ bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies)
 		{
 			ufo->life -= damage; // DEBUG TODO : ADD DIFFICULTY MULTIPLIER!
 			
+			// PLAY HIT SOUND
+			play_sample(ufo->ufo_hit_wav, 128 + rand()%128, ufo->x * 255 / 320, 900 + rand()%500, 0);
+			
 			// downgrade weapon , only if does not have shield, Zir suggestion
 			if (ufo->life < UFO::MAX_LIFE) 
 				if (ufo->weapon > 0)
@@ -161,6 +164,7 @@ bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies)
 			{
 				enemies->enemy[i]->life -= damage; // damage enemy
 				
+				// DEBUG - PLAY HIT SOUND
 				
 				// add "damage" sparks
 				int pz = rand()%8 + 8 + (damage/5); // particle ammount

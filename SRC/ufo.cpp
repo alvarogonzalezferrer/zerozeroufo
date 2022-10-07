@@ -34,7 +34,7 @@ UFO::UFO()
 	
 	// SOUNDS
 	ufo_laser_wav = (SAMPLE *)data.getObject("UFO_LASER_WAV")->dat;
-	
+	ufo_hit_wav = (SAMPLE *)data.getObject("UFO_HIT_WAV")->dat;
 	
 	// setup
 	anm = 0;
