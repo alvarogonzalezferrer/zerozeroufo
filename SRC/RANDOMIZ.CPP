@@ -6,9 +6,11 @@
 
 float Randomize::random(float min, float max)
 {
-	// NO SAFETY CHECK, MIN SHOULD BE MIN AND MAX SHOULD BE MAX!
-	
-	return ((float)(rand() % (int)(max*100.0-min*100.0) ) + min*100.0)/100.0;
+	float a=min;
+	float b=max;
+	min = std::min(a, b);
+	max = std::max(a, b);
+	return ((float)(rand() % std::abs((int)(max*100.0-min*100.0)) ) + min*100.0)/100.0;
 }
 
 int Randomize::random(int min, int max)
@@ -22,7 +24,10 @@ int Randomize::random(int min, int max)
 	return s;
 	***/
 	
-	// NO SAFETY CHECK, MIN SHOULD BE MIN AND MAX SHOULD BE MAX!
+	int a = min;
+	int b = max;
+	min = std::min(a, b);
+	max = std::max(a, b);
 	
-	return rand() % (max-min) + min;
+	return rand() % std::abs(max-min) + min;
 }

@@ -158,7 +158,7 @@ void EnemyList::generate(int n, int t, Map *m)
 	chance[9] = 20; // biplane, easy enemy airborne
 	chance[10] = 0; // mini flying mech
 	chance[11] = 0; // APC
-	chance[12] = 0; // Mine
+	chance[12] = 10; // Mine
 	
 	// increase according to tier
 	if (t > 1)
@@ -177,7 +177,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[9] = 30; // biplane
 		chance[10] = 0; // mini flying mech
 		chance[11] = 0; // APC
-		chance[12] = 0; // Mine
+		chance[12] = 5; // Mine
 		
 	}
 
@@ -198,7 +198,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[9] = 10; // biplane
 		chance[10] = 0; // mini flying mech
 		chance[11] = 0; // APC
-		chance[12] = 5; // Mine
+		chance[12] = 7; // Mine
 	}
 	
 	// increase according to tier
@@ -258,7 +258,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[9] = 0; // biplane
 		chance[10] = 10; // mini flying mech
 		chance[11] = 20; // APC
-		chance[12] = 15; // Mine
+		chance[12] = 25; // Mine
 	}
 	
 	// increase according to tier

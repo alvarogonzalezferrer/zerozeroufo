@@ -152,7 +152,7 @@ bool Mine::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	int color = makecol(rand()%50+200,0,0);
 	int pz = rand()%2+5; // particle ammount
 	for (int p=0; p < pz; p++)
-		pm->add(new Spark(mx, my, (rand()%40-20)/10.0, (rand()%40-20)/10.0, rand()%5+5, color));
+		pm->add(new Spark(mx, my, Randomize::random(-sx*0.8f, -sx*1.2f), Randomize::random(-sy*0.8f, -sy*1.2f), rand()%5+5, color));
 	
 	
 	return false ; // im still alive
