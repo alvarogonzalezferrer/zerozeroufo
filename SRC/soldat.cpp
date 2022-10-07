@@ -106,21 +106,21 @@ bool Soldat::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	if (ia<0 && !insideBeam)
 	{
 		// move
-		ia = Randomize::random(30, 90); //rand()%60+30; // frames to do the same?
-		sx = Randomize::random(-1.5f, 1.5f); // (rand()%30-15) / 10.0; // walk left or right?
+		ia = Randomize::random(30, 90); // frames to do the same?
+		sx = Randomize::random(-1.5f, 1.5f); //  walk left or right?
 		sy = 0;
 
-		// shoot? 30% chance
-		if (rand()%100 < 30)
+		// shoot? 40% chance
+		if (rand()%100 < 40)
 		{
 	
 			// shoot up
-			float ssy = Randomize::random(-3, -1); //-(rand()%3+1);
+			float ssy = Randomize::random(-3, -1);
 			
 			// left or right?
 			float ssx = (sx <= 0) ? -1 : 1;
 			
-			ssx = ssx * Randomize::random(1, 2); //(rand()%2+1); // speed up
+			ssx = ssx * Randomize::random(1, 2); // speed up
 			
 			float sx = (sx <= 0) ? x : x + sprite->w;
 			
@@ -138,17 +138,17 @@ bool Soldat::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	// bounce on borders 
 
 	// side right should not clip since i can come from outside screen!
-	if  (x > m->mapW + sprite->w)
+	if  (x > m->mapW)
 	{
 		sx = -2; // go left
-		ia = Randomize::random(15, 25); //rand()%10+15;
+		ia = Randomize::random(15, 25); 
 	}
 	
 	if (x < 0)
 	{
 		x = 0;
 		sx = 3 + rand()%3; // go right
-		ia = Randomize::random(20, 30); //rand()%10+20; 
+		ia = Randomize::random(20, 30); 
 		
 		if (rand()%10 < 5)
 			return true; // disappear for good, ran away from battle
@@ -223,8 +223,8 @@ bool Soldat::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	{
 		ufo->score++;
 		
-		if (rand()%100 < 50)
-			play_sample(scream, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
+		
+		play_sample(scream, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
 		
 		return true; // im dead
 	}
