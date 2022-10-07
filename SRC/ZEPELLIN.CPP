@@ -6,6 +6,7 @@
 
 // static data for all the objects
 BITMAP *Zepellin::spr[2];
+SAMPLE *Zepellin::explosion_wav = NULL;
 Datafile *Zepellin::spr_data = NULL;
 int Zepellin::count = 0;
 
@@ -26,7 +27,7 @@ Zepellin::Zepellin(Datafile *data) : Enemy(data)
 		spr[0] = (BITMAP *)data->getObject("ZEPELLIN_0_BMP")->dat;
 		spr[1] = (BITMAP *)data->getObject("ZEPELLIN_1_BMP")->dat;
 		
-		// TODO - add sounds
+		explosion_wav = (SAMPLE *)data->getObject("EXPLOSION_WAV")->dat;
 	}
 	count++;
 	
@@ -203,6 +204,9 @@ bool Zepellin::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	if (life < -60) // takes 2 seconds to die
 	{
 		ufo->score++;
+		
+		play_sample(explosion_wav, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
+		
 		return true;
 	}
 		

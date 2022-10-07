@@ -30,6 +30,7 @@ class Zepellin : public Enemy
 	
 		static BITMAP *spr[2];	
 		static Datafile *spr_data;
+		static SAMPLE *explosion_wav;
 		static int count;
 };
 
