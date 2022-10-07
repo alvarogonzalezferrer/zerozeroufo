@@ -7,7 +7,7 @@
 #include "enemy.h"
 
 // static data for all the objects
-BITMAP *Mine::spr[4];
+BITMAP *Mine::spr[2];
 Datafile *Mine::spr_data = NULL;
 int Mine::count = 0;
 
