@@ -127,8 +127,8 @@ bool WeaponPrize::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 
 	}
 	
-	if (life < 0)
-		return true; // shoot by player! :O
+	//if (life < 0)
+	//	return true; // shoot by player! :O
 	
 	return false ; // im still alive
 }	

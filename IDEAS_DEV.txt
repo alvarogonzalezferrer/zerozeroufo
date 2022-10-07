@@ -7,7 +7,28 @@ DESARROLLO
 El juego fue creado usando el emulador DOSBOX para poder ejecutar el compilador para MS DOS y probarlo. 
 
 No tengo hardware real para probarlo, tengo una 486 DX2 real, pero no funciona por ahora.
+---
+TRADUCIR AL ESPAÑOL
 
+todo 5 letras par que no se descajete la pantalla
+
+SCORE:TANTO
+
+POWER:PODER
+
+ARMOR:VITAL
+
+
+PANTALLA INICIAL IDIOMA
+
+	PRESS 1 FOR ENGLISH
+	PRESIONE 2 PARA ESPAÑOL
+
+	1 ENGLISH
+	2 ESPAÑOL
+
+	10..9...8 ETC 
+	
 ---
 MENUS
 
