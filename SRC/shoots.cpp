@@ -143,13 +143,10 @@ bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies)
 					ufo->weapon--;
 			
 			// add sparks!
-			// DEBUG should be according to damage
-			// DEBUG PLAY SOUND!
-			// DEBUG TODO: shake camera! (how?)
 			int pz = rand()%5+5+(damage/10); // particle ammount
 			
 			for (int p=0; p<pz;p++)
-				pm->add(new Spark(x, y, (rand()%40-20)/10.0, (rand()%40-20)/10.0, rand()%8+8, color));
+				pm->add(new Spark(x, y, (rand()%40-20)/10.0, (rand()%40-20)/10.0, rand()%8+10, color));
 
 			return true; // I collided 
 		}
@@ -166,10 +163,10 @@ bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies)
 				
 				
 				// add "damage" sparks
-				int pz = rand()%8 + 8 + (damage/10); // particle ammount
+				int pz = rand()%8 + 8 + (damage/5); // particle ammount
 			
 				for (int p=0; p<pz;p++)
-					pm->add(new Spark(x, y, (rand()%50-25)/10.0, (rand()%50-25)/10.0, rand()%8+8, color));
+					pm->add(new Spark(x, y, (rand()%50-25)/10.0, (rand()%50-25)/10.0, rand()%8+10, color));
 
 				return true; // I collided 
 			}
