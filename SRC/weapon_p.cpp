@@ -8,6 +8,7 @@
 
 // static data for all the objects
 BITMAP *WeaponPrize::spr[4];
+SAMPLE *WeaponPrize::snd = NULL;
 Datafile *WeaponPrize::spr_data = NULL;
 int WeaponPrize::count = 0;
 
@@ -30,7 +31,7 @@ WeaponPrize::WeaponPrize(Datafile *data) : Enemy(data)
 		spr[2] = (BITMAP *)data->getObject("WEAPON_PRIZE_2_BMP")->dat;
 		spr[3] = (BITMAP *)data->getObject("WEAPON_PRIZE_3_BMP")->dat;
 
-		// TODO - add sounds
+		snd = (SAMPLE *)data->getObject("WEAPON_PRIZE_WAV")->dat;
 	}
 	count++;
 	
@@ -116,12 +117,12 @@ bool WeaponPrize::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 	{
 		ufo->weapon++;
 		
-		// debug ADD sound!
+		play_sample(snd, 255, 128, 1000, 0);
 		
 		int color = makecol(85,255,85);
 		int pz = rand()%10+10; // particle ammount
 		for (int p=0; p<pz;p++)
-			pm->add(new Spark(x, y, (rand()%40-20)/10.0, (rand()%40-20)/10.0, rand()%10+10, color));
+			pm->add(new Spark(x, y, (rand()%40-20)/10.0, (rand()%40-20)/10.0, rand()%15+15, color));
 
 		return true; // I collided 
 

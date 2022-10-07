@@ -30,7 +30,8 @@ class WeaponPrize : public Enemy
 
 		int ia; // IA counter
 	
-		static BITMAP *spr[4];	
+		static BITMAP *spr[4];
+		static SAMPLE *snd;
 		static Datafile *spr_data;
 		static int count;
 };

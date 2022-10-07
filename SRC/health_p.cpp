@@ -8,6 +8,7 @@
 
 // static data for all the objects
 BITMAP *HealthPrize::spr[4];
+SAMPLE *HealthPrize::snd = NULL;
 Datafile *HealthPrize::spr_data = NULL;
 int HealthPrize::count = 0;
 
@@ -30,7 +31,7 @@ HealthPrize::HealthPrize(Datafile *data) : Enemy(data)
 		spr[2] = (BITMAP *)data->getObject("HEALTH_PRIZE_2_BMP")->dat;
 		spr[3] = (BITMAP *)data->getObject("HEALTH_PRIZE_3_BMP")->dat;
 
-		// TODO - add sounds
+		snd = (SAMPLE *)data->getObject("HEALTH_PRIZE_WAV")->dat;
 	}
 	count++;
 	
@@ -115,7 +116,7 @@ bool HealthPrize::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 	{
 		ufo->life += rand()%25+25;
 		
-		// debug ADD sound!
+		play_sample(snd, 255, 128, 1000, 0);
 		
 		int color = makecol(255,85,85);
 		int pz = rand()%10+10; // particle ammount
