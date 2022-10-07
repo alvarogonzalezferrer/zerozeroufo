@@ -426,10 +426,12 @@ int EnemyList::update(Map *m, UFO *ufo, ParticleManager *pm)
 					else
 							ufo->sy = UFO::MV_Y;
 						
-					// DEBUG ADD SOUND
+					// PLAY HIT SOUND
+					play_sample(ufo->ufo_hit_wav, 128 + rand()%128, ufo->x * 255 / 320, 900 + rand()%300, 0);
+
 					
 					// damage ufo (but not myself) 
-					ufo->life--;
+					ufo->life -= rand()%3+1;
 					
 					// add particles
 					int cp = makecol(255,255, rand()%100 + 85); // yellow
