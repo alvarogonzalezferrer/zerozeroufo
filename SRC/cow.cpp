@@ -58,9 +58,7 @@ void CowList::render(BITMAP *bmp)
 
 // DEBUG sin esto, tengo errores de "undefined reference" que no se bien por que pasan, en fin, esto lo soluciona
 BITMAP *Cow::walk[4];
-//BITMAP *Cow::jib[3];
-//BITMAP *Cow::dead = NULL;
-//SAMPLE *Cow::cowSND = NULL;
+SAMPLE *Cow::cow_wav = NULL;
 Datafile Cow::data;
 int Cow::count=0; // i have no cows yet
 
@@ -74,11 +72,9 @@ Cow::Cow()
 		walk[1] = (BITMAP *)data.getObject("COW_W_2")->dat;
 		walk[2] = (BITMAP *)data.getObject("COW_W_3")->dat;
 		walk[3] = (BITMAP *)data.getObject("COW_W_4")->dat;
-		//jib[0] = (BITMAP *)data.getObject("JIB_0")->dat;
-		//jib[1] = (BITMAP *)data.getObject("JIB_1")->dat;
-		//jib[2] = (BITMAP *)data.getObject("JIB_2")->dat;
-		//dead = (BITMAP *)data.getObject("DEAD")->dat;
-		//cowSND = (SAMPLE *)data.getObject("BABYSND")->dat;
+		
+		cow_wav = (SAMPLE *)data.getObject("COW_WAV")->dat;
+		
 	}
 
 	sprite = walk[0];
@@ -182,7 +178,9 @@ void Cow::update(Map *m, UFO *ufo, ParticleManager *pm)
 						int cp = makecol(85,255,255); // light cyan
 						for (int p=0; p<pz;p++)
 							pm->add(new Spark(cmx, cmy, (rand()%50-25)/10.0, (rand()%20+25)/10.0, rand()%8+8, cp));
-
+						
+						if (rand()%100 < 50) // sound 
+							play_sample(cow_wav, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
 					}
 				
 				// Im above the UFO??

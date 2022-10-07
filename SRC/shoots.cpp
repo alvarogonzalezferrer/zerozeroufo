@@ -164,7 +164,7 @@ bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies)
 			{
 				enemies->enemy[i]->life -= damage; // damage enemy
 				
-				// DEBUG - PLAY HIT SOUND
+				// DEBUG - PLAY HIT SOUND?
 				
 				// add "damage" sparks
 				int pz = rand()%8 + 8 + (damage/5); // particle ammount

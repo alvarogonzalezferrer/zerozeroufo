@@ -42,13 +42,8 @@ class Cow
 		int anm; // animation frame
 		BITMAP *sprite; // current sprite
 	
-		
-	
+		static SAMPLE *cow_wav; // cow moo
 		static BITMAP *walk[4];
-		//static BITMAP *jib[3];
-		//static BITMAP *dead;
-
-		//static SAMPLE *cowSND;
 
 		static Datafile data;
 		static int count; // how many active, to load and release data mainly
