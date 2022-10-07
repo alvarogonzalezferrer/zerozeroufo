@@ -11,6 +11,7 @@
 
 // static data for all the objects
 BITMAP *Soldat::walk[3];
+SAMPLE *Soldat::scream = NULL;
 Datafile *Soldat::soldat_data = NULL;
 int Soldat::count = 0;
 
@@ -29,7 +30,8 @@ Soldat::Soldat(Datafile *data) : Enemy(data)
 		walk[0] = (BITMAP *)data->getObject("SOLDAT_0_BMP")->dat;
 		walk[1] = (BITMAP *)data->getObject("SOLDAT_1_BMP")->dat;
 		walk[2] = (BITMAP *)data->getObject("SOLDAT_2_BMP")->dat;
-		// TODO - add sounds
+		
+		scream = (SAMPLE *)data->getObject("SCREAM_WAV")->dat;
 	}
 	count++;
 	
@@ -187,7 +189,7 @@ bool Soldat::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 						// im in the UFO, bye
 						life = 0;
 						insideBeam = false;
-						// add score
+						// add score -- debug is counted twice since it falls in life < 0 below too! ok...
 						ufo->score++;
 						
 						// add some blood particles
@@ -220,6 +222,10 @@ bool Soldat::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	else
 	{
 		ufo->score++;
+		
+		if (rand()%100 < 50)
+			play_sample(scream, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
+		
 		return true; // im dead
 	}
 }	

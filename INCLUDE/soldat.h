@@ -32,7 +32,8 @@ class Soldat : public Enemy
 		bool first_frame; // I need this for initial setup (is 1st frame that Im alive?)
 		bool insideBeam; // Im inside UFO beam?
 		
-		static BITMAP *walk[3];	
+		static BITMAP *walk[3];
+		static SAMPLE *scream;
 		static Datafile *soldat_data;
 		static int count;
 };
