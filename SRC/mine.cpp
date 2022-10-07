@@ -38,7 +38,7 @@ Mine::Mine(Datafile *data) : Enemy(data)
 	frame = rand()%2;
 	ia = 0;
 
-	bbox = new Collide2D(x, y, sprite->w); // as circle
+	bbox = new Collide2D(x, y, sprite->w, sprite->h); // DEBUG change as a circle
 	
 	collideWithUFO = false; // very important so UFO can BE DAMAGED BY THE MINE
 }
@@ -82,9 +82,9 @@ bool Mine::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		// movement
 		// semi-chase the player 
 		if (ufo->x < x)
-			sx = -Randomize::random(0.5f, 1.5f);
+			sx = -Randomize::random(0.5f, 2.0f);
 		else 
-			sx = Randomize::random(0.5f, 1.5f);
+			sx = Randomize::random(0.5f, 2.0f);
 		
 		if (ufo->y < y)
 			sy = -Randomize::random(0.5f, 1.5f);

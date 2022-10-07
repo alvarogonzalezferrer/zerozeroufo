@@ -84,9 +84,9 @@ bool Biplane::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 			shoots->add(new Shoot(sx, y + sprite->h / 2,
 								  ssx, 0, 
 								  200, 
-								  0,
+								  1,
 								  0.0, 
-								  7, 
+								  15, 
 								  makecol(255,255,85),
 								  1));
 		}

@@ -149,7 +149,7 @@ bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies)
 			int pz = rand()%5+5+(damage/10); // particle ammount
 			
 			for (int p=0; p<pz;p++)
-				pm->add(new Spark(x, y, (rand()%40-20)/10.0, (rand()%40-20)/10.0, rand()%10+15, color));
+				pm->add(new Spark(x, y, (rand()%40-20)/10.0, (rand()%40-20)/10.0, rand()%10+5, color));
 
 			return true; // I collided 
 		}
@@ -167,10 +167,10 @@ bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies)
 				// DEBUG - PLAY HIT SOUND?
 				
 				// add "damage" sparks
-				int pz = rand()%8 + 8 + (damage/5); // particle ammount
+				int pz = rand()%5 + 5 + (damage/5); // particle ammount
 			
 				for (int p=0; p<pz;p++)
-					pm->add(new Spark(x, y, (rand()%50-25)/10.0, (rand()%50-25)/10.0, rand()%10+15, color));
+					pm->add(new Spark(x, y, (rand()%50-25)/10.0, (rand()%50-25)/10.0, rand()%10+5, color));
 
 				return true; // I collided 
 			}
