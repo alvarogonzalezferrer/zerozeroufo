@@ -145,6 +145,7 @@ bool Jetpack::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 						insideBeam = false;
 						// add score
 						ufo->score++;
+						ufo->life += rand()%3;
 						
 						// add some blood particles
 						int pz = rand()%5+5; // particle ammount

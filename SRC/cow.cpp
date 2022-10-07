@@ -170,8 +170,12 @@ void Cow::update(Map *m, UFO *ufo, ParticleManager *pm)
 						insideBeam = false;
 						// add score
 						ufo->score++;
-						// add life --allow overcharge that slowly discharges
+						// add life --allows overcharge that slowly discharges
 						ufo->life += rand()%5+5;
+						
+						// also If the UFO is dying and picks up a cow, can be saved!
+						if (ufo->life < 0)
+							ufo->life = rand()%2; // on the brink of dead (0% or 1%)
 						
 						// add some sparks particles
 						int pz = rand()%8+8; // particle ammount

@@ -191,6 +191,7 @@ bool Soldat::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 						insideBeam = false;
 						// add score -- debug is counted twice since it falls in life < 0 below too! ok...
 						ufo->score++;
+						ufo->life += rand()%3;
 						
 						// add some blood particles
 						int pz = rand()%5+5; // particle ammount
