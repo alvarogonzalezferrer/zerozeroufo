@@ -133,7 +133,7 @@ bool EnemyList::addEnemy(Enemy *e)
 // Step 4: Generate the enemy and add to list
 void EnemyList::generate(int n, int t, Map *m)
 {
-	Logger::log("EnemyList::generate() - INIT");
+	Logger::log("EnemyList::generate() : start");
 	
 	// DEBUG -- ADD NEW CLASSES HERE!
 	int chance[ENEMY_CLASSES_COUNT]; // chance of each enemy class

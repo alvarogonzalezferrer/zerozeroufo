@@ -179,8 +179,8 @@ void Cow::update(Map *m, UFO *ufo, ParticleManager *pm)
 						for (int p=0; p<pz;p++)
 							pm->add(new Spark(cmx, cmy, (rand()%50-25)/10.0, (rand()%20+25)/10.0, rand()%8+8, cp));
 						
-						if (rand()%100 < 50) // sound 
-							play_sample(cow_wav, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
+						
+						play_sample(cow_wav, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
 					}
 				
 				// Im above the UFO??

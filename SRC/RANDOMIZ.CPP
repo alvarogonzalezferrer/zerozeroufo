@@ -18,7 +18,7 @@ float Randomize::random(float min, float max)
 	int range = (int)std::abs((max - min) * 100.0);
 	if (range == 0) 
 		{
-			Logger::log("Division by zero avoided at Randomize::random(float)");
+			Logger::log("Division by zero avoided at Randomize::random(float, %f, %f)", min, max);
 			return min;
 		}
 		
@@ -34,7 +34,7 @@ int Randomize::random(int min, int max)
 	
 	if (range == 0) 
 		{
-			Logger::log("Division by zero avoided at Randomize::random(int)");
+			Logger::log("Division by zero avoided at Randomize::random(int, %d, %d)", min, max);
 			return min;
 		}
 		
