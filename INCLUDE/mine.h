@@ -33,6 +33,7 @@ class Mine : public Enemy
 		static BITMAP *spr[2];	
 		static Datafile *spr_data;
 		static int count;
+		static SAMPLE *explosion_wav;
 };
 
 #endif

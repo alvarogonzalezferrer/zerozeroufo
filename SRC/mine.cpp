@@ -9,6 +9,7 @@
 
 // static data for all the objects
 BITMAP *Mine::spr[2];
+SAMPLE *Mine::explosion_wav;
 Datafile *Mine::spr_data = NULL;
 int Mine::count = 0;
 
@@ -29,7 +30,7 @@ Mine::Mine(Datafile *data) : Enemy(data)
 		spr[0] = (BITMAP *)data->getObject("MINE_0_BMP")->dat;
 		spr[1] = (BITMAP *)data->getObject("MINE_1_BMP")->dat;
 
-		// TODO - add sounds
+		explosion_wav = (SAMPLE *)data->getObject("EXPLOSION_WAV")->dat;
 	}
 	count++;
 	
@@ -94,14 +95,14 @@ bool Mine::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	// dont crash on ground!
 	if (y > m->getHeight(x) - sprite->h*3)
 	{
-		sy = (rand()%15) / -10.0; // dont fly lower!
+		sy = -Randomize::random(0.5f, 1.5f); // dont fly lower!
 		y = m->getHeight(x) - sprite->h*3;
 	}
 	
 	if (y < 0)
 	{
 		y = 0;
-		sy = (rand()%15) / 10.0; // dont fly higher
+		sy = Randomize::random(0.5f, 1.5f); // dont fly higher
 	}
 	
 	// sides
@@ -132,29 +133,28 @@ bool Mine::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	{
 		ufo->life -= rand()%15+10; // big damage up to 25%
 		
-		// debug ADD sound!
+		// make UFO bounce randomly
+		ufo->sx = UFO::MV_X * sx;
+		ufo->sy = UFO::MV_Y * sy;
 		
 		life = -1; // I collided 
 	}
 	
 	if (life < 0)
 	{
+		ufo->score++;
+		
 		// EXPLODE SPARKS 
 		int color = makecol(rand()%50+200,0,0);
 		int pz = rand()%10+35; // particle ammount
 		for (int p=0; p < pz; p++)
 			pm->add(new Spark(mx, my, (rand()%40-20)/10.0, (rand()%40-20)/10.0, rand()%10+15, color));
 		
+		play_sample(explosion_wav, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
+		
 		return true; // shoot by player! :O
 	}
-	
-	// leave spark trail IF im alive
-	int color = makecol(rand()%50+200,0,0);
-	int pz = rand()%3+5; // particle ammount
-	for (int p=0; p < pz; p++)
-		pm->add(new Spark(mx, my, Randomize::random(-sx*0.8f, -sx*1.2f), Randomize::random(-sy*0.8f, -sy*1.2f), rand()%5+15, color));
-	
-	
+		
 	return false ; // im still alive
 }	
 
