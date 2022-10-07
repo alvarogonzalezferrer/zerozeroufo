@@ -40,6 +40,12 @@ APC::APC(Datafile *data) : Enemy(data)
 	bbox = new Collide2D(x, y, sprite->w, sprite->h);
 }
 
+APC::APC(float x, float y, Datafile *data) : APC(data)
+{
+	this->x = x;
+	this->y = y;
+}
+
 
 APC::~APC()
 {

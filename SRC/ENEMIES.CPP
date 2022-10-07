@@ -13,13 +13,14 @@
 #include "biplane.h"
 #include "mechmini.h"
 #include "apc.h"
+#include "mine.h"
 
 // prizes - power ups - theyre a special case of enemy
 #include "weapon_p.h"
 #include "health_p.h"
 
 // how many enemy classes we have? -- debug shitty way to do it
-#define ENEMY_CLASSES_COUNT 12
+#define ENEMY_CLASSES_COUNT 13
 
 // -----------------------------------------------------------------------
 // base enemy class 
@@ -157,6 +158,7 @@ void EnemyList::generate(int n, int t, Map *m)
 	chance[9] = 20; // biplane, easy enemy airborne
 	chance[10] = 0; // mini flying mech
 	chance[11] = 0; // APC
+	chance[12] = 0; // Mine
 	
 	// increase according to tier
 	if (t > 1)
@@ -175,6 +177,8 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[9] = 30; // biplane
 		chance[10] = 0; // mini flying mech
 		chance[11] = 0; // APC
+		chance[12] = 0; // Mine
+		
 	}
 
 	// increase according to tier
@@ -194,6 +198,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[9] = 10; // biplane
 		chance[10] = 0; // mini flying mech
 		chance[11] = 0; // APC
+		chance[12] = 5; // Mine
 	}
 	
 	// increase according to tier
@@ -213,6 +218,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[9] = 5; // biplane
 		chance[10] = 0; // mini flying mech
 		chance[11] = 5; // APC
+		chance[12] = 10; // Mine
 	}
 	
 	// increase according to tier
@@ -232,6 +238,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[9] = 0; // biplane
 		chance[10] = 5; // mini flying mech
 		chance[11] = 15; // APC
+		chance[12] = 15; // Mine
 	}
 	
 	// increase according to tier
@@ -251,6 +258,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[9] = 0; // biplane
 		chance[10] = 10; // mini flying mech
 		chance[11] = 20; // APC
+		chance[12] = 15; // Mine
 	}
 	
 	// increase according to tier
@@ -264,12 +272,13 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[5] = 20; // B17
 		chance[6] = 20; // missile truck
 		
-		chance[7] = 25; // weapon power up
+		chance[7] = 27; // weapon power up
 		chance[8] = 25; // health power up	
 
 		chance[9] = 5; // biplane
 		chance[10] = 20; // mini flying mech
 		chance[11] = 25; // APC
+		chance[12] = 20; // Mine
 	}
 	
 	
@@ -352,6 +361,10 @@ void EnemyList::generate(int n, int t, Map *m)
 			
 			case 11:
 				s = new APC(&data);
+			break;
+			
+			case 12:
+				s = new Mine(&data);
 			break;
 			
 			default:

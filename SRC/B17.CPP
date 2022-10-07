@@ -113,12 +113,11 @@ Datafile *B17::spr_data = NULL;
 int B17::count = 0;
 
 
-
 B17::B17(Datafile *data) : Enemy(data)
 {
 	Logger::log("B17::B17()");
 	
-	x = y = sx = sy = 0; // remember to position! - TODO make a proper constructor!!
+	x = y = sx = sy = 0; // remember to position!
 	
 	life = 50;
 	
@@ -145,6 +144,12 @@ B17::B17(Datafile *data) : Enemy(data)
 	machine_gun = false;
 	
 	bbox = new Collide2D(x, y, sprite->w, sprite->h);
+}
+
+B17::B17(float x, float y, Datafile *data) : B17(data)
+{
+	this->x = x;
+	this->y = y;
 }
 
 

@@ -26,7 +26,7 @@ class HealthPrize : public Enemy
 
 		void render(BITMAP *bmp);
 		
-		int frame; // sprite frame, goes in 1 increments 0,1,2 because is a chopper!
+		int frame; // sprite frame, goes in 1 increments 0,1,2 
 
 		int ia; // IA counter
 	

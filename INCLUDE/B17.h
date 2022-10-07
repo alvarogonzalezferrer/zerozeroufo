@@ -48,6 +48,7 @@ class B17 : public Enemy
 {
 	public:
 		B17(Datafile *data); // needs preloaded datafile with sprites, sound, etc
+		B17(float x, float y, Datafile *data);
 		~B17();
 	
 		bool update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots ); 
