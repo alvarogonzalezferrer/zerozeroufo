@@ -53,7 +53,7 @@ class EnemyList
 
 		void reset(); // remove all enemies, i.e level change, WILL RESET SHOOTS!
 
-		static const int maxENEMIES = 8; // how many enemies at most at screen? not too much or screen gets too spammed
+		static const int maxENEMIES = 10; // how many enemies at most at screen? not too much or screen gets too spammed
 
 		Enemy *enemy[maxENEMIES];  // enemy container
 		

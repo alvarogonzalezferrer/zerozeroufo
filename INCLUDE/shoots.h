@@ -117,7 +117,7 @@ class ShootsList
 		
 		void render(BITMAP *bmp);
 
-		static const int maxSHOOTS = 400; // how many shoots at most at screen? 
+		static const int maxSHOOTS = 500; // how many shoots at most at screen? 
 
 		Shoot *shoots[maxSHOOTS];  // enemy container
 		int shoots_n; // how much shoots we have now active
