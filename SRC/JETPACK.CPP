@@ -116,8 +116,7 @@ bool Jetpack::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		int cmx = x + sprite->w/2;
 		int cmy = y + sprite->h/2;
 		
-		// is this point inside the beam? 
-		
+		// is this point inside the beam? 	
 		if (cmx > ufo->beam_x1 &&
 			cmx < ufo->beam_x2 &&
 			cmy > ufo->beam_y1 - 5 &&

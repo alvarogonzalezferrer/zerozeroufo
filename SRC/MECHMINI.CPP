@@ -17,7 +17,7 @@ MechMini::MechMini(Datafile *data) : Enemy(data)
 	
 	x = y = sx = sy = 0; // remember to position - TODO make a proper constructor!!
 	
-	life = 70;
+	life = 70+rand()%30;
 	
 	//if (count == 0) // first instance, get sprites and sounds 
 	if (spr_data != data)

@@ -112,6 +112,34 @@ bool WeaponPrize::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 	bbox->x = x;
 	bbox->y = y;
 	
+	// can be picked up using the UFO's beam
+	if (ufo->beam_size > 0)
+	{
+		// middle x,y
+		int cmx = x + sprite->w/2;
+		int cmy = y + sprite->h/2;
+		
+		// is this point inside the beam? 	
+		if (cmx > ufo->beam_x1 &&
+			cmx < ufo->beam_x2 &&
+			cmy > ufo->beam_y1 - 5 &&
+			cmy < ufo->beam_y2 )
+			{
+				ia = 5;
+				// fly up towards the UFO
+				sy = -(rand()%2+1); // up!
+
+				// fly X to center of UFO
+				if (cmx > ufo->beam_xu + 3)
+					sx = -(rand()%2+1);
+				else if (cmx < ufo->beam_xu - 3)
+					sx = rand()%2+1;
+				else
+					sx = 0; // keep it centered, already reached center, prevents flip seizure!
+			}
+	}
+	
+	
 	// collide against UFO ? 
 	if (bbox->collide(ufo->bbox))
 	{
