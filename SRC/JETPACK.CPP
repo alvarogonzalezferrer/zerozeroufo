@@ -8,6 +8,8 @@
 // static data for all the objects
 BITMAP *Jetpack::spr[3];
 Datafile *Jetpack::spr_data = NULL;
+SAMPLE *Jetpack::scream = NULL;
+SAMPLE *Zepellin::explosion = NULL;
 int Jetpack::count = 0;
 
 
@@ -27,7 +29,9 @@ Jetpack::Jetpack(Datafile *data) : Enemy(data)
 		spr[0] = (BITMAP *)data->getObject("JETPACK_0_BMP")->dat;
 		spr[1] = (BITMAP *)data->getObject("JETPACK_1_BMP")->dat;
 		spr[2] = (BITMAP *)data->getObject("JETPACK_2_BMP")->dat;
-		// TODO - add sounds
+		
+		scream = (SAMPLE *)data->getObject("SCREAM_WAV")->dat;
+		explosion = (SAMPLE *)data->getObject("EXPLOSION_WAV")->dat;
 	}
 	count++;
 	
@@ -109,7 +113,7 @@ bool Jetpack::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		}
 	}
 	
-	// Take damage from ufo beam ray!!
+	// Ufo beam ray!!
 	if (ufo->beam_size > 0)
 	{
 		// middle x,y
@@ -151,6 +155,8 @@ bool Jetpack::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 						int cp = makecol(170,0,0); // red
 						for (int p=0; p<pz;p++)
 							pm->add(new Spark(cmx, cmy, Randomize::random(-2.0f, 2.0f), Randomize::random(2.0f, 3.0f), Randomize::random(8, 16), cp));
+						
+						play_sample(scream, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
 						
 						return true; // no crash animation 
 					}
@@ -252,6 +258,11 @@ bool Jetpack::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	if (life < -40) // takes 2 seconds to die
 	{
 		ufo->score++;
+		
+		play_sample(scream, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
+		
+		play_sample(explosion, 200 + rand()%55, x * 255 / 320, 1000+rand()%500, 0);
+		
 		return true;
 	}
 		

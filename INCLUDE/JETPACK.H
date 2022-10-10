@@ -29,7 +29,9 @@ class Jetpack : public Enemy
 		int ia; // IA counter
 		bool insideBeam; // Im inside UFO beam?
 		
-		static BITMAP *spr[3];	
+		static BITMAP *spr[3];
+		static SAMPLE *scream;
+		static SAMPLE *explosion;
 		static Datafile *spr_data;
 		static int count;
 };
