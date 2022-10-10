@@ -9,7 +9,7 @@
 BITMAP *Jetpack::spr[3];
 Datafile *Jetpack::spr_data = NULL;
 SAMPLE *Jetpack::scream = NULL;
-SAMPLE *Zepellin::explosion = NULL;
+SAMPLE *Jetpack::explosion = NULL;
 int Jetpack::count = 0;
 
 
