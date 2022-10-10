@@ -221,19 +221,27 @@ bool Jetpack::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	
 	if (life > 0) 
 		return false ; // im still alive
+	
+	// --------------------------------------
 	// if im still alive I end doing AI here 
 	// if not, I do a dying sequence below
 	
 	// IM DEAD , do the fall animation
 	ia = 1000; // disable IA next step
 	life--; // keep going below 0
-	sy = abs(sy) + .3; // go down fast
+	sy = abs(sy) + .2; // go down fast
 	
 	// dont crash below ground
 	if (y > m->getHeight(x) - sprite->h+10)
 	{
 		y = m->getHeight(x) - sprite->h+10;
 		sy = 0;
+	}
+	
+	if (life % 10 == 0 && rand()%100 < 80)
+	{
+		// agony screams
+		play_sample(scream, 200 + rand()%55, x * 255 / 320, 1000+rand()%600, 0);
 	}
 	
 	// smoke and burn
