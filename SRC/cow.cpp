@@ -197,6 +197,8 @@ void Cow::update(Map *m, UFO *ufo, ParticleManager *pm)
 			else
 				insideBeam = false;
 	}
+	else
+		insideBeam = false; // so the cow doesnt fly randomly - fix a bug
 
 
 	// animate
