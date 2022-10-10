@@ -145,7 +145,7 @@ bool Mine::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		ufo->score++;
 		
 		// EXPLODE SPARKS 
-		int color = makecol(rand()%50+200,0,0);
+		int color = makecol(255, rand()%255,0);
 		int pz = rand()%10+35; // particle ammount
 		for (int p=0; p < pz; p++)
 			pm->add(new Spark(mx, my, (rand()%40-20)/10.0, (rand()%40-20)/10.0, rand()%10+15, color));
