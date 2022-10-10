@@ -14,13 +14,14 @@
 #include "mechmini.h"
 #include "apc.h"
 #include "mine.h"
+#include "icbm.h"
 
 // prizes - power ups - theyre a special case of enemy
 #include "weapon_p.h"
 #include "health_p.h"
 
 // how many enemy classes we have? -- debug shitty way to do it
-#define ENEMY_CLASSES_COUNT 13
+#define ENEMY_CLASSES_COUNT 14
 
 // -----------------------------------------------------------------------
 // base enemy class 
@@ -159,7 +160,8 @@ void EnemyList::generate(int n, int t, Map *m)
 	chance[9] = 20; // biplane, easy enemy airborne
 	chance[10] = 0; // mini flying mech
 	chance[11] = 0; // APC
-	chance[12] = 1; // Mine
+	chance[12] = 0; // Mine
+	chance[13] = 0; // ICBM
 	
 	// increase according to tier
 	if (t > 1)
@@ -179,6 +181,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[10] = 0; // mini flying mech
 		chance[11] = 0; // APC
 		chance[12] = 5; // Mine
+		chance[13] = 1; // ICBM
 		
 	}
 
@@ -200,6 +203,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[10] = 0; // mini flying mech
 		chance[11] = 0; // APC
 		chance[12] = 7; // Mine
+		chance[13] = 10; // ICBM
 	}
 	
 	// increase according to tier
@@ -220,6 +224,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[10] = 0; // mini flying mech
 		chance[11] = 5; // APC
 		chance[12] = 10; // Mine
+		chance[13] = 10; // ICBM
 	}
 	
 	// increase according to tier
@@ -240,6 +245,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[10] = 5; // mini flying mech
 		chance[11] = 15; // APC
 		chance[12] = 15; // Mine
+		chance[13] = 18; // ICBM
 	}
 	
 	// increase according to tier
@@ -260,6 +266,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[10] = 10; // mini flying mech
 		chance[11] = 20; // APC
 		chance[12] = 25; // Mine
+		chance[13] = 25; // ICBM
 	}
 	
 	// increase according to tier
@@ -280,6 +287,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[10] = 20; // mini flying mech
 		chance[11] = 25; // APC
 		chance[12] = 20; // Mine
+		chance[13] = 20; // ICBM
 	}
 	
 	
@@ -368,6 +376,10 @@ void EnemyList::generate(int n, int t, Map *m)
 				s = new Mine(&data);
 			break;
 			
+			case 13:
+				s = new ICBM(&data);
+			break;
+			
 			default:
 				// ERROR!
 				Logger::log("EnemyList::generate() - ERROR default type reached! :O");
@@ -375,7 +387,7 @@ void EnemyList::generate(int n, int t, Map *m)
 			break;
 		}
 			
-		// this positioning sucks! TODO fix properly
+		// this positioning sucks! but works... outside screen at right, any heigth
 		s->x = rand() % m->mapW + m->mapW;
 		s->y = rand() % m->mapH;
 		
