@@ -146,7 +146,7 @@ void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies)
 		if ((key[KEY_SPACE] || key[KEY_Z]) &&  weapon < 1)
 		{
 			// if we press both beam & shoot, we shoot down, only in first weapon tier
-			ssy = rand()%3 + 1 + sy;
+			ssy = rand()%3 + 2 + sy;
 		}
 
 		// main shoot left or right?
