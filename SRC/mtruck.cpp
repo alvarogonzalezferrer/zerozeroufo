@@ -90,7 +90,7 @@ bool MissileTruck::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *sho
 		
 		
 		// when shoot ia is < 20 , shoot in rapid fire each 4 frames	
-		if (shoot_ia < 20 && shoot_ia % 4 == 0)
+		if (shoot_ia < 20 && shoot_ia % 5 == 0)
 		{
 			// triple shoot
 			float shoot_dx = 0;
