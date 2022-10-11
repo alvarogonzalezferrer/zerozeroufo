@@ -162,8 +162,8 @@ bool Paratrooper::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 			sx = Randomize::random(-1.5f, 1.5f); //  walk left or right?
 			sy = 0;
 
-			// shoot? 60% chance
-			if (rand()%100 < 60)
+			// shoot? 
+			if (rand()%100 < 30)
 			{
 				// shoot up
 				float ssy = Randomize::random(-3, -1);
@@ -285,9 +285,9 @@ bool Paratrooper::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 }
 
 void Paratrooper::render(BITMAP *bmp)
-{
-	if (sx <= 0) // left or right?
+{	
+	if (sx <= 0 || airborne) // left or right? -- only if not airborne we flip the sprite (because shadows gets funky otherwise)
 		draw_sprite(bmp, sprite, (int)x, (int)y); // left
 	else
-		draw_sprite_h_flip(bmp, sprite, (int)x, (int)y);
+		draw_sprite_h_flip(bmp, sprite, (int)x, (int)y);	
 }

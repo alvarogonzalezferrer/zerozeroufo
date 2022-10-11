@@ -88,7 +88,7 @@ bool B52::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	if (ia < 0)
 	{
 		ia = rand()%15+30; // frames to do the same?
-		sx = -0.15; // always left very slow
+		sx = -0.25; // always left very slow
 		
 		sy = (rand()%30-15) / 10.0; // up or down?
 	
@@ -178,7 +178,7 @@ bool B52::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	// side right should not clip since i can come from outside screen!
 	if (x > m->mapW + sprite->w)
 	{
-		
+		jumps=0; // dont drop paratroopers outside screen
 		sx = -3;
 		sy = 0;
 		ia = 5; 
