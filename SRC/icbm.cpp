@@ -20,7 +20,7 @@ ICBM::ICBM(Datafile *data) : Enemy(data)
 	
 	x = y = sx = sy = 0; // remember to position!
 	
-	life = rand()%25+50; 
+	life = rand()%25+35; 
 	
 	//if (count == 0) // first helicopter, get sprites and sounds 
 	if (spr_data != data)
