@@ -296,7 +296,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[6] = 20; // missile truck
 		
 		chance[7] = 27; // weapon power up
-		chance[8] = 25; // health power up	
+		chance[8] = 35; // health power up	
 
 		chance[9] = 5; // biplane
 		chance[10] = 20; // mini flying mech
@@ -471,8 +471,9 @@ int EnemyList::update(Map *m, UFO *ufo, ParticleManager *pm)
 					play_sample(ufo->ufo_hit_wav, 255, ufo->x * 255 / 320, 900 + rand()%300, 0);
 
 					
-					// damage ufo (but not myself) 
+					// damage ufo and myself) 
 					ufo->life -= rand()%3+1;
+					enemy[i]->life -= rand()%3+1;
 					
 					// add particles
 					int cp = makecol(255,255, rand()%100 + 85); // yellow
