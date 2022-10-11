@@ -15,13 +15,14 @@
 #include "apc.h"
 #include "mine.h"
 #include "icbm.h"
+#include "f117.h"
 
 // prizes - power ups - theyre a special case of enemy
 #include "weapon_p.h"
 #include "health_p.h"
 
 // how many enemy classes we have? -- debug shitty way to do it
-#define ENEMY_CLASSES_COUNT 14
+#define ENEMY_CLASSES_COUNT 15
 
 // -----------------------------------------------------------------------
 // base enemy class 
@@ -143,6 +144,7 @@ void EnemyList::generate(int n, int t, Map *m)
 	
 	// CHANCES CHANGE ACCORDING TO WAVE
 	// DEBUG - THIS CHANCES SHOULD BE LOADED FROM A TXT FILE!
+	// DEBUG - THIS SHOULD BE LOADED ONCE, NOT EVERY TIME WE GENERATE ENEMIES!! - MOVE AT LEAST TO ANOTHER FUNCTION!
 	
 	// tier 0-1 - easy levels
 	chance[0] = 80; // soldat
@@ -162,6 +164,7 @@ void EnemyList::generate(int n, int t, Map *m)
 	chance[11] = 0; // APC
 	chance[12] = 0; // Mine
 	chance[13] = 0; // ICBM
+	chance[14] = 1000; // F177	
 	
 	// increase according to tier
 	if (t > 1)
@@ -182,6 +185,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[11] = 0; // APC
 		chance[12] = 5; // Mine
 		chance[13] = 1; // ICBM
+		chance[14] = 0; // F177
 		
 	}
 
@@ -204,6 +208,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[11] = 0; // APC
 		chance[12] = 7; // Mine
 		chance[13] = 10; // ICBM
+		chance[14] = 2; // F177
 	}
 	
 	// increase according to tier
@@ -225,6 +230,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[11] = 5; // APC
 		chance[12] = 10; // Mine
 		chance[13] = 10; // ICBM
+		chance[14] = 5; // F177
 	}
 	
 	// increase according to tier
@@ -246,12 +252,13 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[11] = 15; // APC
 		chance[12] = 15; // Mine
 		chance[13] = 18; // ICBM
+		chance[14] = 10; // F177
 	}
 	
 	// increase according to tier
 	if (t > 5)
 	{
-		chance[0] = 40; // soldat
+		chance[0] = 35; // soldat
 		chance[1] = 10; // tank
 		chance[2] = 20; // heli
 		chance[3] = 20; // jetpack
@@ -267,6 +274,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[11] = 20; // APC
 		chance[12] = 25; // Mine
 		chance[13] = 25; // ICBM
+		chance[14] = 30; // F177
 	}
 	
 	// increase according to tier
@@ -288,15 +296,14 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[11] = 25; // APC
 		chance[12] = 20; // Mine
 		chance[13] = 20; // ICBM
+		chance[14] = 35; // F177
 	}
-	
-	
-
-	
+		
 	// total chance ? 
 	for (int i = 0; i < ENEMY_CLASSES_COUNT; i++)
 		total_chance += chance[i];
-		
+	// DEBUG - UP TO HERE SHOULD BE MOVED TO ANOTHER FUNCTION CALLED ONCE PER WAVE!
+	
 	// select according to chance probability
 	for (int z = 0; z < n; z++)
 	{			
@@ -321,6 +328,8 @@ void EnemyList::generate(int n, int t, Map *m)
 		}
 		
 		Enemy *s = NULL;
+		
+		Logger::log("EnemyList::type_e(%d)", type_e);
 		
 		switch(type_e)
 		{

@@ -2,7 +2,7 @@
 
 // this is a special enemy, is a MISSILE
 
-#include "mine.h"
+#include "icbm.h"
 #include "logger.h"
 #include "enemy.h"
 #include "randomiz.h"
@@ -20,7 +20,7 @@ ICBM::ICBM(Datafile *data) : Enemy(data)
 	
 	x = y = sx = sy = 0; // remember to position!
 	
-	life = rand()%50+75; 
+	life = rand()%25+50; 
 	
 	//if (count == 0) // first helicopter, get sprites and sounds 
 	if (spr_data != data)
@@ -38,7 +38,7 @@ ICBM::ICBM(Datafile *data) : Enemy(data)
 	frame = rand()%2;
 	ia = 0;
 
-	bbox = new Collide2D(x, y, sprite->w, sprite->h); // DEBUG change as a circle
+	bbox = new Collide2D(x, y, sprite->w, sprite->h);
 	
 	collideWithUFO = false; // very important so UFO can BE DAMAGED BY THE MINE
 }
@@ -80,7 +80,7 @@ bool ICBM::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		ia = 5; 
 		
 		// movement
-		sx = -1.5f; // always go left
+		sx = -1; // always go left
 		
 		// semi-chase the player 
 		if (ufo->y < y)
@@ -103,14 +103,6 @@ bool ICBM::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	}
 	
 	// sides
-	
-	// side right should not clip since i can come from outside screen!
-	if (x > m->mapW + sprite->w)
-	{
-		sx = -2;
-		sy = 0;
-		ia = 5; 
-	}
 	
 	// if I go out of screen by left, Im gone by good
 	if (x < -sprite->w )
