@@ -334,6 +334,7 @@ void MainGameLoop::render()
 	// shows game over screen
 	case STATE_GAMEOVER:
 		blit(gameover_bmp, doubleBuffer, 0, 0, 0, 0, gameover_bmp->w, gameover_bmp->h);
+		textprintf_ex(doubleBuffer, font,  0, 0, makecol(255,255,255), makecol(85,85,85) , "FINAL SCORE %03lu000000", ufo->score);
 	break;
 
 	// shows intro to next level
