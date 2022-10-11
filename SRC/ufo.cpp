@@ -107,6 +107,9 @@ void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies)
 	// DEBUG ADD JOYSTICK CONTROL FROM MY ARCADE FRAMEWORK
 	// DEBUT TODO KEYS SHOULD BE CONFIGURABLE
 	
+	if (keyboard_needs_poll())
+		poll_keyboard(); // not needed for MS DOS, is for other platforms, but better to have this here
+	
 	// KEYBOARD CONTROL
 	if (key[KEY_W] || key[KEY_UP])
 		sy -= V_Y;
@@ -462,4 +465,7 @@ void UFO::render_HUD(BITMAP *bmp)
 	else
 		textprintf_ex(bmp, ufo_hud_font, 0, (fh+2)*2, makecol(255,255,255), makecol(255,0,0), "CRITICAL DAMAGE");
 
+
+	// debug - alpha message - remove when finished
+	textprintf_ex(bmp, ufo_hud_font, 0, bmp->h - text_height(ufo_hud_font), makecol(128,128,128), -1, "Alpha preview version.");
 }
