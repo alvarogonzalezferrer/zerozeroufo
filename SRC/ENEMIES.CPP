@@ -16,13 +16,14 @@
 #include "mine.h"
 #include "icbm.h"
 #include "f117.h"
+#include "b52.h"
 
 // prizes - power ups - theyre a special case of enemy
 #include "weapon_p.h"
 #include "health_p.h"
 
 // how many enemy classes we have? -- debug shitty way to do it
-#define ENEMY_CLASSES_COUNT 15
+#define ENEMY_CLASSES_COUNT 16
 
 // -----------------------------------------------------------------------
 // base enemy class 
@@ -165,6 +166,7 @@ void EnemyList::generate(int n, int t, Map *m)
 	chance[12] = 0; // Mine
 	chance[13] = 0; // ICBM
 	chance[14] = 0; // F177	
+	chance[15] = 2; // B52	
 	
 	// increase according to tier
 	if (t > 1)
@@ -186,6 +188,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[12] = 5; // Mine
 		chance[13] = 1; // ICBM
 		chance[14] = 0; // F177
+		chance[15] = 10; // B52
 		
 	}
 
@@ -209,6 +212,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[12] = 7; // Mine
 		chance[13] = 10; // ICBM
 		chance[14] = 2; // F177
+		chance[15] = 10; // B52
 	}
 	
 	// increase according to tier
@@ -231,6 +235,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[12] = 10; // Mine
 		chance[13] = 10; // ICBM
 		chance[14] = 5; // F177
+		chance[15] = 10; // B52
 	}
 	
 	// increase according to tier
@@ -253,6 +258,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[12] = 15; // Mine
 		chance[13] = 18; // ICBM
 		chance[14] = 10; // F177
+		chance[15] = 10; // B52
 	}
 	
 	// increase according to tier
@@ -275,6 +281,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[12] = 25; // Mine
 		chance[13] = 25; // ICBM
 		chance[14] = 30; // F177
+		chance[15] = 8; // B52
 	}
 	
 	// increase according to tier
@@ -297,6 +304,7 @@ void EnemyList::generate(int n, int t, Map *m)
 		chance[12] = 20; // Mine
 		chance[13] = 20; // ICBM
 		chance[14] = 35; // F177
+		chance[15] = 5; // B52
 	}
 		
 	// total chance ? 
@@ -351,6 +359,7 @@ void EnemyList::generate(int n, int t, Map *m)
 			
 			case 4: 
 				s = new Zepellin(&data);
+				((Zepellin *)s)->enemyList = this; // needs to know this to spawn "crew" when crashing
 			break;
 			
 			case 5: 
@@ -391,6 +400,12 @@ void EnemyList::generate(int n, int t, Map *m)
 			
 			case 14:
 				s = new F117(&data);
+				((F117 *)s)->enemyList = this; // F117 needs to know this to spawn "pilot" when crashing
+			break;
+			
+			case 15:
+				s = new B52(&data);
+				((B52 *)s)->enemyList = this; // needs to know this to drop paratroopers
 			break;
 			
 			default:
