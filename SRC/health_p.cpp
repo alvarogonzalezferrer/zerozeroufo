@@ -44,6 +44,12 @@ HealthPrize::HealthPrize(Datafile *data) : Enemy(data)
 	collideWithUFO = false; // very important so UFO can pick it up!
 }
 
+HealthPrize::HealthPrize(float x, float y, Datafile *data) : HealthPrize(data) 
+{
+	Logger::log("HealthPrize::HealthPrize(x %f,y %f)", x, y);
+	this->x = x;
+	this->y = y;
+}
 
 HealthPrize::~HealthPrize()
 {

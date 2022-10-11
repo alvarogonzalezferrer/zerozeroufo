@@ -20,6 +20,7 @@ class WeaponPrize : public Enemy
 {
 	public:
 		WeaponPrize(Datafile *data); // needs preloaded datafile with sprites, sound, etc
+		WeaponPrize(float x, float y, Datafile *data);
 		~WeaponPrize();
 	
 		bool update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots ); 

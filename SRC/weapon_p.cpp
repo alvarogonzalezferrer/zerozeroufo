@@ -45,6 +45,13 @@ WeaponPrize::WeaponPrize(Datafile *data) : Enemy(data)
 	collideWithUFO = false; // very important so UFO can pick it up!
 }
 
+WeaponPrize::WeaponPrize(float x, float y, Datafile *data) : WeaponPrize(data) 
+{
+	Logger::log("WeaponPrize::WeaponPrize(x %f,y %f)", x, y);
+	this->x = x;
+	this->y = y;
+}
+
 
 WeaponPrize::~WeaponPrize()
 {

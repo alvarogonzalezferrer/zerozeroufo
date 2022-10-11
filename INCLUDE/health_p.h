@@ -20,6 +20,7 @@ class HealthPrize : public Enemy
 {
 	public:
 		HealthPrize(Datafile *data); // needs preloaded datafile with sprites, sound, etc
+		HealthPrize(float x, float y, Datafile *data);
 		~HealthPrize();
 	
 		bool update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots ); 
