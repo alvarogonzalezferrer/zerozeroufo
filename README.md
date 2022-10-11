@@ -56,6 +56,8 @@ Z or SPACE - use your beam to abduct cows and soldiers 🐄
 
 X or ENTER - shoot in the direction you're moving  ⚡
 
+NOTE: if we press both beam & shoot, we shoot down, only in first weapon tier.
+
 F1 to see help screen
 F2 to configure keyboard / mouse / joystick
 F10 or ESC to quit the game

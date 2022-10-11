@@ -142,6 +142,12 @@ void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies)
 	{
 		
 		float ssy = sy*2;
+		
+		if ((key[KEY_SPACE] || key[KEY_Z]) &&  weapon < 1)
+		{
+			// if we press both beam & shoot, we shoot down, only in first weapon tier
+			ssy = rand()%3 + 1 + sy;
+		}
 
 		// main shoot left or right?
 		float ssx = (sx < 0) ? -4 : 4; // min speed for shoot
