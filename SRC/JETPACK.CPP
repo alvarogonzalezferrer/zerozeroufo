@@ -279,11 +279,13 @@ bool Jetpack::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 
 void Jetpack::render(BITMAP *bmp)
 {
-	if (sx <= 0) // left or right?
-		draw_sprite(bmp, sprite, (int)x, (int)y);
+	if (life > 0)
+	{
+		if (sx <= 0) // left or right?
+			draw_sprite(bmp, sprite, (int)x, (int)y); // left
+		else
+			draw_sprite_h_flip(bmp, sprite, (int)x, (int)y);
+	}
 	else
-		draw_sprite_h_flip(bmp, sprite, (int)x, (int)y);
-	
-	// DEBUG
-	//textprintf_ex(bmp, font, x, y, makecol(255,255,255), -1, "%d", life);
+		 rotate_sprite(bmp, sprite, (int)x, (int)y, itofix(rand()%255)); // tumble falling	
 }
