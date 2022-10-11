@@ -80,7 +80,7 @@ bool ICBM::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		ia = 5; 
 		
 		// movement
-		sx = -1; // always go left
+		sx = -2.4; // always go left
 		
 		// semi-chase the player 
 		if (ufo->y < y)

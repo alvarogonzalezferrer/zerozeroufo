@@ -164,7 +164,7 @@ void EnemyList::generate(int n, int t, Map *m)
 	chance[11] = 0; // APC
 	chance[12] = 0; // Mine
 	chance[13] = 0; // ICBM
-	chance[14] = 1000; // F177	
+	chance[14] = 0; // F177	
 	
 	// increase according to tier
 	if (t > 1)
@@ -387,6 +387,10 @@ void EnemyList::generate(int n, int t, Map *m)
 			
 			case 13:
 				s = new ICBM(&data);
+			break;
+			
+			case 14:
+				s = new F117(&data);
 			break;
 			
 			default:
