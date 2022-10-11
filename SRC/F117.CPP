@@ -9,6 +9,9 @@
 // this two so the pilot can eject
 #include "enemies.h"
 #include "paratroo.h"
+// to release prizes
+#include "weapon_p.h"
+#include "health_p.h"
 
 // static data for all the objects
 BITMAP *F117::spr[3];
@@ -94,18 +97,18 @@ bool F117::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 			shoots->add(new Shoot(sx, sy,
 								  ssx, 0, 
 								  200, 
-								  1,
+								  2,
 								  0.0, 
-								  15, 
+								  5, 
 								  makecol(255,255,85),
 								  0));
 			
 			shoots->add(new Shoot(sx, sy,
-								  ssx, 1.5, 
+								  ssx, 1.3, 
 								  200, 
-								  1,
+								  2,
 								  0.0, 
-								  15, 
+								  3, 
 								  makecol(255,255,85),
 								  0));
 		}
@@ -127,7 +130,10 @@ bool F117::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		ia = 30;
 		
 		// change altitude
-		y = rand()%200;
+		y = rand()%150;
+		
+		if (rand()%10 < 3)
+			return true; // abandon battle
 	}
 	
 	// dont crash on ground! unless im dead 
@@ -163,8 +169,19 @@ bool F117::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	if (!jumped)
 	{
 		if (enemyList)
+		{
+			// release some prize? 
+			if (rand()%10<6)
+			{
+				if (rand()%2)
+					enemyList->addEnemy(new WeaponPrize(x, y, spr_data));
+				else
+					enemyList->addEnemy(new HealthPrize(x, y, spr_data));
+			}
+
+			// pilot eject
 			enemyList->addEnemy(new Paratrooper(x, y, spr_data));
-		
+		}
 		jumped = true; 
 	}
 	
