@@ -140,8 +140,8 @@ B17::B17(Datafile *data) : Enemy(data)
 	sprite = spr[0];
 	frame = rand()%3;
 	ia = 0;
-	bomb_run = false;
-	machine_gun = false;
+	bomb_run = 0;
+	machine_gun = 0;
 	
 	bbox = new Collide2D(x, y, sprite->w, sprite->h);
 }
