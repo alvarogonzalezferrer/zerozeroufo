@@ -1,10 +1,18 @@
 ALGUNAS IDEAS RANDOM DEL DESARROLLO
+---
+HAY QUE OPTIMIZARLO PARA 386 CAMBIANDO TODOS LOS CALCULOS FLOTANTES A FIXED, EN LA REALIDAD ESTO ES ESCRIBIR CASI TODO DE NUEVO
+
+---
+PORTARLO A WINDOWS Y LINUX
+
+---
+HAY MUCHAS COSAS REDUNDANTES Y MAL OPTIMIZADAS, SE HIZO A LAS APURADAS!!
 
 --- 
 
 DESARROLLO
 
-El juego fue creado usando el emulador DOSBOX para poder ejecutar el compilador para MS DOS y probarlo. 
+El juego fue creado usando el emulador DOSBOX para poder ejecutar el compilador DJGPP+ALLEGRO 4.2 para MS DOS y probarlo. 
 
 No tengo hardware real para probarlo, tengo una 486 DX2 real, pero no funciona por ahora.
 ---
@@ -118,9 +126,15 @@ instrucciones
 capturar las vacas recarga energia de vida, y permite sobrecargar la energia, a mas de 100% aunque se descarga lentamente (tipo el nuevo doom)
 
 ------
+IDEAS VARIADAS
+
+* MODO HISTORIA Y DESAFIO 
+* MENUS DE CONFIGURACION 
+* SOPORTE JOYSTICK Y MOUSE
+
 * UFO TIRA HUMO AL ROMPERSE {ok}
 * TABLA DE PUNTAJES 
-* MUSICA Y SONIDO STEREO
+* MUSICA Y SONIDO STEREO {SEMI OK}
 * MAPA AUTOGENERADO CON ARBOLES Y CASAS {ok}
 * USANDO EL BEAM NO PODES MOVERTE EN ALTURA {OK} 
 * DISPAROS EN 8 DIRECCIONES {OK}
@@ -131,7 +145,7 @@ capturar las vacas recarga energia de vida, y permite sobrecargar la energia, a 
 	HELICOPTERO MISILES {OK}
 	SOLDADO JETPACK {ok}
 	AVIONES GRANDES Y CHICOS {ok}
-	MISILES CRUCERO
+	MISILES CRUCERO {OK}
 	
 	
 	
@@ -140,8 +154,8 @@ capturar las vacas recarga energia de vida, y permite sobrecargar la energia, a 
 	SOLDADO BAZOOKA
 	TANQUE {OK}
 	ARTILLERIA {ok}
-	FLAK
-	MISILES
+	FLAK {OK}
+	
 	
 * GANADO
 	VACAS {OK}
@@ -149,6 +163,6 @@ capturar las vacas recarga energia de vida, y permite sobrecargar la energia, a 
 	GENTE
 	
 * PREMIOS
-	ENERGIA {SON LAS VACAS}
+	ENERGIA {OK}
 	ARMAS {ok}
 	
