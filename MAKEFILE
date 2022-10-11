@@ -80,10 +80,10 @@ ifdef DJDIR
 
 	# ** IMPORTANT - CONFIGURE **
 	# ** If you need extra link options (like more librarys, add them HERE!)
-	LFLAGS = -g -s -lalleg
+	LFLAGS = -s -lalleg
 
 	# ** Compiler flags
-	CFLAGS = -g -I$(INCDIR) -Wall -Wfatal-errors -O3 -fomit-frame-pointer 
+	CFLAGS = -I$(INCDIR) -Wall -Wfatal-errors -O3 -fomit-frame-pointer 
 	
 	# command for deletion
 	DELETE_CMD = del
