@@ -15,6 +15,8 @@
 #include "enemy.h"
 #include "datafile.h"
 
+#include "enemies.h"
+
 class F117 : public Enemy
 {
 	public:
@@ -28,11 +30,15 @@ class F117 : public Enemy
 		int frame; // sprite frame
 		
 		int ia; // IA counter
+		
+		bool jumped ; // pilot already jumped? 
 			
 		static BITMAP *spr[3];	
 		static SAMPLE *explosion_wav;
 		static Datafile *spr_data;
 		static int count;
+		
+		static EnemyList *enemyList; // will spawn a "pilot" when going down, remeber to set this when creating this enemy!!
 };
 
 #endif

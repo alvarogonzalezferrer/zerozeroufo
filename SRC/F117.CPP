@@ -6,12 +6,17 @@
 #include "shoots.h"
 #include "randomiz.h"
 
+// this two so the pilot can eject
+#include "enemies.h"
+#include "paratroo.h"
 
 // static data for all the objects
 BITMAP *F117::spr[3];
 SAMPLE *F117::explosion_wav = NULL;
 Datafile *F117::spr_data = NULL;
 int F117::count = 0;
+
+EnemyList *F117::enemyList = NULL; // will spawn a "pilot" when going down, remeber to set this when creating this enemy!!
 
 
 F117::F117(Datafile *data) : Enemy(data)
@@ -39,6 +44,8 @@ F117::F117(Datafile *data) : Enemy(data)
 	life = 40;
 	
 	sx = -1.5f;  // always go left, then will bounce on right
+	
+	jumped = false; // pilot did not jump yet
 		
 	bbox = new Collide2D(x, y, sprite->w, sprite->h);
 }
@@ -151,6 +158,15 @@ bool F117::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	ia = 1000; // disable IA next step
 	life--; // keep going below 0
 	sy = abs(sy) + .3; // go down fast
+	
+	// eject 
+	if (!jumped)
+	{
+		if (enemyList)
+			enemyList->addEnemy(new Paratrooper(x, y, spr_data));
+		
+		jumped = true; 
+	}
 	
 	// dont crash below ground
 	if (y > m->getHeight(x) - sprite->h+10)
