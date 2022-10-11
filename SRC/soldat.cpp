@@ -141,14 +141,14 @@ bool Soldat::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	if  (x > m->mapW)
 	{
 		sx = -2; // go left
-		ia = Randomize::random(15, 25); 
+		ia = 30; 
 	}
 	
 	if (x < 0)
 	{
 		x = 0;
-		sx = 3 + rand()%3; // go right
-		ia = Randomize::random(20, 30); 
+		sx = 2; // go right
+		ia = 30; 
 		
 		if (rand()%10 < 5)
 			return true; // disappear for good, ran away from battle
@@ -198,6 +198,9 @@ bool Soldat::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 						int cp = makecol(170,0,0); // red
 						for (int p=0; p<pz;p++)
 							pm->add(new Spark(cmx, cmy, Randomize::random(-2.0f, 2.0f), Randomize::random(2.0f, 3.0f), Randomize::random(8, 16), cp));
+						
+						play_sample(scream, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
+						return true; // gone
 					}
 				
 				// Im above the UFO??
@@ -223,9 +226,13 @@ bool Soldat::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	else
 	{
 		ufo->score++;
-		
-		
 		play_sample(scream, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
+		
+		// add some blood particles
+		int pz = rand()%5+10; // particle ammount
+		int cp = makecol(170,0,0); // red
+		for (int p=0; p<pz;p++)
+			pm->add(new Spark(x+sprite->w/2, y+sprite->h/2, Randomize::random(-2.0f, 2.0f), Randomize::random(-3.0f, -2.0f), Randomize::random(8, 16), cp));
 		
 		return true; // im dead
 	}
