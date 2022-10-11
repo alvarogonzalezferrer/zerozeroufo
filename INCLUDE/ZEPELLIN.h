@@ -15,6 +15,8 @@
 #include "enemy.h"
 #include "datafile.h"
 
+#include "enemies.h"
+
 class Zepellin : public Enemy
 {
 	public:
@@ -28,10 +30,15 @@ class Zepellin : public Enemy
 		int frame; // sprite frame, goes in 1 increments 0,1
 		int ia; // IA counter
 	
+		bool jumped ; // pilot already jumped? 
+
+	
 		static BITMAP *spr[2];	
 		static Datafile *spr_data;
 		static SAMPLE *explosion_wav;
 		static int count;
+		
+		static EnemyList *enemyList; // will spawn a "pilot" when going down, remeber to set this when creating this enemy!!
 };
 
 #endif

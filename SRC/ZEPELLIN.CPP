@@ -4,12 +4,17 @@
 #include "logger.h"
 #include "enemy.h"
 
+// this two so the pilot can eject
+#include "enemies.h"
+#include "paratroo.h"
+
 // static data for all the objects
 BITMAP *Zepellin::spr[2];
 SAMPLE *Zepellin::explosion_wav = NULL;
 Datafile *Zepellin::spr_data = NULL;
 int Zepellin::count = 0;
 
+EnemyList *Zepellin::enemyList = NULL; // will spawn a "pilot" when going down, remeber to set this when creating this enemy!!
 
 Zepellin::Zepellin(Datafile *data) : Enemy(data)
 {
@@ -34,6 +39,8 @@ Zepellin::Zepellin(Datafile *data) : Enemy(data)
 	sprite = spr[0];
 	frame = rand()%2;
 	ia = 0;
+	
+	jumped = false; // pilot still inside
 		
 	bbox = new Collide2D(x, y, sprite->w, sprite->h);
 }
@@ -175,6 +182,26 @@ bool Zepellin::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	sy = 1; // go down slow
 	sx = -1; // go left slow
 	
+	if (!jumped)
+	{
+		// pilot jump!
+		if (enemyList)
+		{
+			// random crew, up to 3
+			if (rand()%100 < 50)
+				enemyList->addEnemy(new Paratrooper(x, y + rand()%5, spr_data));
+			
+			if (rand()%100 < 50)
+				enemyList->addEnemy(new Paratrooper(x + sprite->w / 2, y + rand()%5, spr_data));
+			
+			if (rand()%100 < 50)
+				enemyList->addEnemy(new Paratrooper(x + sprite->w, y + rand()%5, spr_data));
+		}
+		
+		jumped = true; 
+	}
+	
+	
 	// dont crash below ground
 	if (y > m->getHeight(x) - sprite->h)
 	{
@@ -219,7 +246,4 @@ void Zepellin::render(BITMAP *bmp)
 		draw_sprite(bmp, sprite, (int)x, (int)y);
 	else
 		draw_sprite_h_flip(bmp, sprite, (int)x, (int)y);
-	
-	// DEBUG
-	//textprintf_ex(bmp, font, x, y, makecol(255,255,255), -1, "%d", life);
 }
