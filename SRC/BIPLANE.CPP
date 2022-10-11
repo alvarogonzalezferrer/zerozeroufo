@@ -143,6 +143,7 @@ bool Biplane::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	{
 		y = m->getHeight(x) - sprite->h+10;
 		sy = 0;
+		life = -100; // die on crash
 	}
 	
 	// smoke and burn
@@ -175,8 +176,13 @@ bool Biplane::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 
 void Biplane::render(BITMAP *bmp)
 {
-	if (sx <= 0) // left or right?
-		draw_sprite(bmp, sprite, (int)x, (int)y); // left
+	if (life > 0)
+	{
+		if (sx <= 0) // left or right?
+			draw_sprite(bmp, sprite, (int)x, (int)y); // left
+		else
+			draw_sprite_h_flip(bmp, sprite, (int)x, (int)y);
+	}
 	else
-		draw_sprite_h_flip(bmp, sprite, (int)x, (int)y);
+		 rotate_sprite(bmp, sprite, (int)x, (int)y, itofix(rand()%255)); // tumble falling
 }
