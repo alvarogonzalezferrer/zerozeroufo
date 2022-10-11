@@ -81,14 +81,13 @@ Cow::Cow()
 
 	count++;
 
-	y = Map::mapH*0.98;
+	y = 190;
 	sy = 0;
-	sx = rand()% sprite->w / 10 + sprite->w / 10;
-
+	sx = rand()%3+1;
 	
-	life = rand()%30+70;
+	life = 30;
 	
-	respawn = rand()%(Map::mapW*3) + Map::mapW/2; // min respawn time
+	respawn = rand()%450 + 150; // min respawn time in ticks
 	
 	insideBeam = false;
 
@@ -97,12 +96,12 @@ Cow::Cow()
 	// start walking off screen
 	if (rand()%2 < 1)
 	{
-		x = Map::mapW*1.2 + sprite->w * (rand()%5 + 1);
+		x = Map::mapW + sprite->w * (rand()%5 + 1);
 		sx = -sx;
 	}
 	else
 	{
-		x = -sprite->w * (rand()%5 + 1) -Map::mapW*1.2;
+		x = -sprite->w * (rand()%5 + 1) -Map::mapW;
 	}
 }
 
@@ -117,17 +116,16 @@ Cow::~Cow()
 
 void Cow::update(Map *m, UFO *ufo, ParticleManager *pm)
 {
-	
 	if (life <= 0)
 	{
 		respawn--; // regenerate after a while - DEBUG SHOULD BE BASED ON DIFFICULTY
 		if (respawn < 0) // recycle cow
 		{
-				respawn = rand()%(Map::mapW*3) + Map::mapW/2; // min respawn time
-				life = rand()%30+70;
-				x = Map::mapW*1.2 + sprite->w * (rand()%5 + 1);
-				sx = -(rand()% sprite->w / 10 + sprite->w / 10);
-				y = Map::mapH*0.98;
+				respawn = rand()%450 + 150; // min respawn time
+				life = 30;
+				x = Map::mapW + sprite->w * (rand()%5 + 1);
+				sx = -(rand()%3+1);
+				y = 190;
 				sy = 0;
 				insideBeam=false;
 		}
@@ -178,7 +176,7 @@ void Cow::update(Map *m, UFO *ufo, ParticleManager *pm)
 							ufo->life = rand()%2; // on the brink of dead (0% or 1%)
 						
 						// add some sparks particles
-						int pz = rand()%8+8; // particle ammount
+						int pz = rand()%8+10; // particle ammount
 						int cp = makecol(85,255,255); // light cyan
 						for (int p=0; p<pz;p++)
 							pm->add(new Spark(cmx, cmy, (rand()%50-25)/10.0, (rand()%20+25)/10.0, rand()%8+8, cp));
@@ -207,33 +205,22 @@ void Cow::update(Map *m, UFO *ufo, ParticleManager *pm)
 
 	sprite = walk[(int)(anm/10)]; // change sprite
 
-	y += sy; // move in y
-
+	// move
+	y += sy;
+	x += sx; 
+	
 	// fall to ground or stay on ground
 	// does not apply if inside beam
 	if (!insideBeam)
 	{
-		if (y > m->getHeight((int)(x + sprite->w/2)) - sprite->h *0.95)
+		if (y > m->getHeight((int)(x + sprite->w/2)) - sprite->h+2)
 		{
-			y = m->getHeight((int)(x + sprite->w/2)) - sprite->h *0.95;
+			y = m->getHeight((int)(x + sprite->w/2)) - sprite->h+2;
 			sy = 0;
 		}
 		else
-			sy += 0.80; // gravity / another friction force? maybe :P
+			sy += 0.5; // gravity
 	}
-	
-
-	// friction
-	/***** float f = 1;
-	if (m->tm == Map::SNOW)
-		f = 1.10;
-
-	if (m->tm == Map::ROCK)
-		f = 0.9; *****/
-
-	//x += sx*f; // move in x
-	
-	x += sx; // friction disabled
 
 	// randomly turn around harder to aim!
 	if (!insideBeam)
@@ -244,29 +231,18 @@ void Cow::update(Map *m, UFO *ufo, ParticleManager *pm)
 		}
 
 		// jump? maybe... harder to aim!	
-		if (sy < 1 && rand()%1000<10) // sy < 1 means "not jumping already"
-			sy = -(rand()%4+4);
+		if (sy == 0 && rand()%1000<10) // sy == 0 means "not jumping already"
+			sy = -(rand()%4+3);
 
-		// bounce on borders or if Im too slow
-		if (x < -sprite->w*2 || abs(sx) < 2)
-		{
-			
-			sx = rand()% sprite->w / 10 + sprite->w / 10;
-			life *= 1.1; // heal
-		}
+		// bounce on borders
+		if (x < -sprite->w)
+			sx = rand()%3+1;	
 		
-		if (x > Map::mapW + sprite->w*2)
-		{
-			
-			sx = -(rand()% sprite->w / 10 + sprite->w / 10);
-			life *= 1.1; // heal
-		}
 		
-		// DEBUG, since map scrolls always left, we should move 1 unit with map on each tick
-		x--;
+		if (x > Map::mapW + sprite->w)
+			sx = -(rand()%3+1);
+			
 	}
-	
-
 }
 
 void Cow::render(BITMAP *bmp)
