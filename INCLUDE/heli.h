@@ -31,6 +31,7 @@ class Helicopter : public Enemy
 	
 		static BITMAP *heli[3];	
 		static BITMAP *heli_mis; // missile
+		static SAMPLE *explosion_wav;
 		static Datafile *helicopter_data;
 		static int count;
 };

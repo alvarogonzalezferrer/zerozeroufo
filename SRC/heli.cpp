@@ -8,6 +8,7 @@
 BITMAP *Helicopter::heli[3];
 BITMAP *Helicopter::heli_mis = NULL;
 Datafile *Helicopter::helicopter_data = NULL;
+SAMPLE *Helicopter::explosion_wav = NULL;
 int Helicopter::count = 0;
 
 
@@ -29,7 +30,8 @@ Helicopter::Helicopter(Datafile *data) : Enemy(data)
 		heli[2] = (BITMAP *)data->getObject("HELI_2_BMP")->dat;
 		
 		heli_mis = (BITMAP *)data->getObject("HELI_MIS_BMP")->dat; // missile
-		// TODO - add sounds
+		
+		explosion_wav = (SAMPLE *)data->getObject("EXPLOSION_WAV")->dat;
 	}
 	count++;
 	
@@ -193,6 +195,7 @@ bool Helicopter::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoot
 	if (life < -60) // takes 2 seconds to die
 	{
 		ufo->score++;
+		play_sample(explosion_wav, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
 		return true;
 	}
 		
