@@ -7,6 +7,7 @@
 // static data for all the objects
 BITMAP *Tank::tank[4];
 Datafile *Tank::tank_data = NULL;
+SAMPLE *Tank::explosion_wav = NULL;
 int Tank::count = 0;
 
 
@@ -28,7 +29,7 @@ Tank::Tank(Datafile *data) : Enemy(data)
 		tank[2] = (BITMAP *)data->getObject("TANK_2_BMP")->dat;
 		tank[3] = (BITMAP *)data->getObject("TANK_3_BMP")->dat;
 
-		// TODO - add sounds
+		explosion_wav = (SAMPLE *)data->getObject("EXPLOSION_WAV")->dat;
 	}
 	count++;
 	
@@ -160,6 +161,7 @@ bool Tank::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	if (life < -60) // takes about 2 seconds to die
 	{
 		ufo->score++;
+		play_sample(explosion_wav, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
 		return true;
 	}
 

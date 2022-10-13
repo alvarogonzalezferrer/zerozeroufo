@@ -30,6 +30,7 @@ class Tank : public Enemy
 		int ia; // IA counter
 	
 		static BITMAP *tank[4];	
+		static SAMPLE *explosion_wav;
 		static Datafile *tank_data;
 		static int count;
 };
