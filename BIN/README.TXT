@@ -10,10 +10,10 @@ UFO arcade game
 
 ** !! HARDWARE !!
 ** I ONLY TESTED ON DOSBOX 0.74, CANT SAY IF IT REALLY WORKS ON REAL HARDWARE FROM THE ERA (386,486,ETC) **
-** IM QUITE SURE IT NEEDS A 387 OR 487 AT LEAST, I USED LOTS OF FLOAT POINTER OPERATIONS, DIDNT HAD TIME TO OPTIMIZE **
+** IM QUITE SURE IT NEEDS A 387 OR 487 AT LEAST, I USED LOTS OF FLOAT POINT OPERATIONS, DIDNT HAD TIME TO OPTIMIZE **
 ** ALL FEEDBACK WELCOME!!
 
-V 0.23.09.2022 BETA - ALFA UNFINISHED RELEASE - NO SOUND PRESENT
+ALFA UNFINISHED RELEASE
 
 By Kronoman - Copyright (c) 2022
 
@@ -43,7 +43,9 @@ ENTER or X            -> shoot weapon
 
 ESC or F10            -> quit game
 
+NOTE: if we press both beam & shoot, we shoot down, only in first weapon tier.
 
 Thanks for playing!
 
 K+R+O / cheat code !  
+F12 / debug info !
