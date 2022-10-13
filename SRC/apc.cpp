@@ -7,6 +7,7 @@
 // static data for all the objects
 BITMAP *APC::spr[4];
 Datafile *APC::enemy_data = NULL;
+SAMPLE *APC::explosion_wav = NULL;
 int APC::count = 0;
 
 
@@ -28,7 +29,7 @@ APC::APC(Datafile *data) : Enemy(data)
 		spr[2] = (BITMAP *)data->getObject("APC_2_BMP")->dat;
 		spr[3] = (BITMAP *)data->getObject("APC_3_BMP")->dat;
 
-		// TODO - add sounds
+		explosion_wav = (SAMPLE *)data->getObject("EXPLOSION_WAV")->dat;
 	}
 	count++;
 	
@@ -198,6 +199,7 @@ bool APC::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	if (life < -60) // takes about 2 seconds to die
 	{
 		ufo->score++;
+		play_sample(explosion_wav, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
 		return true;
 	}
 

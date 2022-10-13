@@ -34,6 +34,7 @@ class APC : public Enemy
 		
 	
 		static BITMAP *spr[4];	
+		static SAMPLE *explosion_wav;
 		static Datafile *enemy_data;
 		static int count;
 };
