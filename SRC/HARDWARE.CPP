@@ -39,8 +39,8 @@ int HardwareManager::videoMode = GFX_AUTODETECT_FULLSCREEN; // screen desired gr
 int HardwareManager::colorDepth = 8;  // default color depth, -1 = autodetect from desktop default
 
 bool HardwareManager::wantSound = true;
-bool HardwareManager::wantMouse = true;
-bool HardwareManager::wantJoystick = true;
+bool HardwareManager::wantMouse = false;
+bool HardwareManager::wantJoystick = false;
 
 
 // -----------------------------------------------------------------------
