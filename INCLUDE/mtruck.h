@@ -37,6 +37,7 @@ class MissileTruck : public Enemy
 	
 		static BITMAP *mtruck[4];	
 		static Datafile *enemy_data;
+		static SAMPLE *explosion_wav;
 		static int count;
 };
 

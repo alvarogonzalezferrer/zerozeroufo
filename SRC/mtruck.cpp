@@ -7,6 +7,7 @@
 // static data for all the objects
 BITMAP *MissileTruck::mtruck[4];
 Datafile *MissileTruck::enemy_data = NULL;
+SAMPLE *MissileTruck::explosion_wav = NULL;
 int MissileTruck::count = 0;
 
 
@@ -28,7 +29,7 @@ MissileTruck::MissileTruck(Datafile *data) : Enemy(data)
 		mtruck[2] = (BITMAP *)data->getObject("MTRUCK_2_BMP")->dat;
 		mtruck[3] = (BITMAP *)data->getObject("MTRUCK_3_BMP")->dat;
 
-		// TODO - add sounds
+		explosion_wav = (SAMPLE *)data->getObject("EXPLOSION_WAV")->dat;
 	}
 	count++;
 	
@@ -218,6 +219,7 @@ bool MissileTruck::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *sho
 	if (life < -60) // takes about 2 seconds to die
 	{
 		ufo->score++;
+		play_sample(explosion_wav, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
 		return true;
 	}
 
