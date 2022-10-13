@@ -206,6 +206,28 @@ void MainGameLoop::update()
 			ticks=0; // reset game ticks each new level!
 		}
 	break;
+	
+	// the level finished, we do a little pause before going for next level
+	case STATE_WAIT_FOR_NEXT_LEVEL:
+	{
+		// update logic, but stop scrolling
+		ufo->update(doubleBuffer->w, map, pm, enemyList); // update player UFO
+		cowL.update(map, ufo, pm); // update cows
+		pm->update(); // update particles
+		weather.update(); // update weather
+		enemyList->update(map, ufo, pm); // update enemies -- should be none for this time, I do to finish the enemy shoots flying...
+		
+		if (ufo->life <0)
+			ufo->life=1; // prevent dead in case UFO damaged!
+		
+		camerashake = 0;
+		
+		if (--wait < 0)
+		{
+				changeState(STATE_NEXTLEVEL);
+		}
+	}
+	break;
 
 	// gameplay
 	case STATE_OK:
@@ -262,7 +284,10 @@ void MainGameLoop::update()
 		
 		// end level when enough travel and no enemies - DEBUG CHECK BOSSES TOO
 		if (ret_e == 0 && finished) 
-				changeState(STATE_NEXTLEVEL);
+		{
+				wait = 90;
+				changeState(STATE_WAIT_FOR_NEXT_LEVEL);
+		}
 			
 		// UFO is dying??
 		if (ufo->life < 1)
@@ -345,6 +370,22 @@ void MainGameLoop::render()
 		textprintf_ex(doubleBuffer, font,  doubleBuffer->w/2 -  text_length(font, "WAVE XX")/2, doubleBuffer->h/2 - text_height(font)/2, makecol(255,255,255),makecol(85,85,85) , "WAVE %d", wave);
 	break;
 
+	// the wait for next level change
+	case STATE_WAIT_FOR_NEXT_LEVEL:
+	{
+		parallax->render(doubleBuffer); // render background
+		map->render(doubleBuffer); // render map
+		ufo->render(doubleBuffer); // render player UFO
+		cowL.render(doubleBuffer); // render cows
+		enemyList->render(doubleBuffer); // render enemies
+		weather.render(doubleBuffer); // render weather
+		pm->render(doubleBuffer,0,0); // render particles
+		//ufo->render_HUD(doubleBuffer); // render HUD
+		
+		// DEBUG -- ADD SOME MESSAGE! 
+		textprintf_ex(doubleBuffer, font,  doubleBuffer->w/2 -  text_length(font, "CONGRATULATIONS!")/2, doubleBuffer->h/2 - text_height(font)/2, makecol(255,255,255),makecol(170,0,0) , "CONGRATULATIONS!");
+	}
+	break;
 
 	case STATE_OK: // main game state
 	{

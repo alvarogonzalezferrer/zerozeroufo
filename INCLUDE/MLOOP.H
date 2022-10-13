@@ -36,12 +36,13 @@ class MainGameLoop : public GameMachine
 		void update(); // updates the game, will return states if needed...
 		void render(); // renders what is happening
 
-		static const unsigned int STATE_NEXTLEVEL = 2;
-		static const unsigned int STATE_INTRONEXTLEVEL = 3;
-		static const unsigned int STATE_INTRO = 4; 
-		static const unsigned int STATE_GAMEOVER = 5; 
-		static const unsigned int STATE_FBI = 6; 
-		static const unsigned int STATE_KRONOMAN = 7; 
+		static const unsigned int STATE_NEXTLEVEL = 2; // generates next level 
+		static const unsigned int STATE_INTRONEXTLEVEL = 3; // next level intro screen
+		static const unsigned int STATE_INTRO = 4;  // intro screen
+		static const unsigned int STATE_GAMEOVER = 5;  // gameover screen
+		static const unsigned int STATE_FBI = 6; // fbi splash screen
+		static const unsigned int STATE_KRONOMAN = 7; // kronoman splash
+		static const unsigned int STATE_WAIT_FOR_NEXT_LEVEL = 8; // when you finish the level , there is a little pause before changing wave		
 
 		int wait; // delay for various screen pauses...
 		int camerashake; // delay for camera shake effects...
