@@ -110,6 +110,7 @@ class BombB17;
 BITMAP *B17::spr[3];
 BITMAP *B17::spr_bomb = NULL;
 Datafile *B17::spr_data = NULL;
+SAMPLE *B17::explosion_wav = NULL;
 int B17::count = 0;
 
 
@@ -133,7 +134,7 @@ B17::B17(Datafile *data) : Enemy(data)
 		// bomb 
 		spr_bomb = (BITMAP *)data->getObject("B17_BOMB_BMP")->dat;
 		
-		// TODO - add sounds
+		explosion_wav = (SAMPLE *)data->getObject("EXPLOSION_WAV")->dat;
 	}
 	count++;
 	
@@ -334,6 +335,7 @@ bool B17::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	if (life < -60) // takes 2 seconds to die
 	{
 		ufo->score++;
+		play_sample(explosion_wav, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
 		return true;
 	}
 		

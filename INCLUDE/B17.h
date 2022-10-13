@@ -64,6 +64,7 @@ class B17 : public Enemy
 	
 		static BITMAP *spr[3];	
 		static BITMAP *spr_bomb; // bomb sprite
+		static SAMPLE *explosion_wav;
 		static Datafile *spr_data;
 		static int count;
 };
