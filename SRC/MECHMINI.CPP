@@ -7,7 +7,9 @@
 
 // static data for all the objects
 BITMAP *MechMini::spr[4];
+SAMPLE *MechMini::explosion_wav = NULL;
 Datafile *MechMini::spr_data = NULL;
+
 int MechMini::count = 0;
 
 
@@ -31,7 +33,7 @@ MechMini::MechMini(Datafile *data) : Enemy(data)
 		
 		spr[3] = (BITMAP *)data->getObject("MECH_3_BMP")->dat; // SHOOTING
 		
-		// TODO - add sounds
+		explosion_wav = (SAMPLE *)data->getObject("EXPLOSION_WAV")->dat;
 	}
 	count++;
 	
@@ -216,6 +218,7 @@ bool MechMini::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	
 	if (life < -40) // takes 2 seconds to die
 	{
+		play_sample(explosion_wav, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
 		ufo->score++;
 		return true;
 	}

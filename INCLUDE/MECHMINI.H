@@ -30,6 +30,7 @@ class MechMini : public Enemy
 		int shoot_c; // shoot counter
 	
 		static BITMAP *spr[4];	
+		static SAMPLE *explosion_wav;
 		static Datafile *spr_data;
 		static int count;
 };
