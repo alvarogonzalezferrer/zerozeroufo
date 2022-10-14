@@ -21,7 +21,7 @@ class HardwareManager
 {
 	public:
 		// configuration desired
-		static char *configFilename;
+		static const char *configFilename;
 		
 		static int screenW;
 		static int screenH;

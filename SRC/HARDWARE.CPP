@@ -31,7 +31,7 @@
 #include "logger.h"
 
 // default configuration -- setup
-char *HardwareManager::configFilename = "game.cfg";
+const char *HardwareManager::configFilename = "game.cfg";
 
 int HardwareManager::screenW = 320;
 int HardwareManager::screenH = 200;
