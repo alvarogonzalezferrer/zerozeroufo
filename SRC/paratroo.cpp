@@ -80,11 +80,18 @@ bool Paratrooper::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 	y += sy;
 	
 	// base for my feet
-	int feet =  m->getHeight(x) - sprite->h + 2;
+	int feet =  m->getHeight(x) - sprite->h;
 
 		
 	if (airborne)
 	{
+		ia--;
+		if (ia < 0)
+		{
+			sx = Randomize::random(-1.5f, 1.5f);
+			ia = 30+rand()%30;
+		}
+		
 		frame++;
 		if (life > 0)
 		{
@@ -95,21 +102,21 @@ bool Paratrooper::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 		}
 		else // falling without parachute
 		{	
-			if (frame > 19)
-				frame = 0;
+			if (frame > 2)
+				frame = 0; // faster flap of broken parachute
 				
-			sprite = parachute[(frame/10)+3]; // 3,4 = falling down	without parachute
+			sprite = parachute[frame+3]; // 3,4 = falling down	without parachute
 		}
 		
 		if (!insideBeam)
 		{
 			// fall on map
 			if (y < feet && life > 0)
-				sy = 0.2; // fall down
+				sy = 0.3; // fall down
 		
 			if (life < 0) // falling dead without parachute
 			{
-				sy += 0.25;
+				sy += 0.3;
 				
 				if (rand()%10 > 5)
 					play_sample(scream, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0); // scream falling...
@@ -123,13 +130,6 @@ bool Paratrooper::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 				ia = 0;
 				airborne = false; // reached ground!
 			}
-		}
-		
-		ia--;
-		if (ia < 0)
-		{
-			sx = Randomize::random(-1.5f, 1.5f);
-			ia = 30+rand()%30;
 		}
 	}
 	else // Im on the ground
@@ -189,7 +189,7 @@ bool Paratrooper::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 		// bounce on borders 
 
 		// side right should not clip since i can come from outside screen!
-		if  (x > m->mapW)
+		if  (x + sprite->w > m->mapW)
 		{
 			sx = -2; // go left
 			ia = 10; 
