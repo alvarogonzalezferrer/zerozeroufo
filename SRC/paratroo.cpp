@@ -102,7 +102,7 @@ bool Paratrooper::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 		}
 		else // falling without parachute
 		{	
-			if (frame > 2)
+			if (frame > 1)
 				frame = 0; // faster flap of broken parachute
 				
 			sprite = parachute[frame+3]; // 3,4 = falling down	without parachute
