@@ -125,7 +125,7 @@ bool Paratrooper::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 			if (y > feet) // reached ground 
 			{
 				// since the walking sprite is shorter than parachute sprite, I need to move the Y further to walking sprite 0
-				y = m->getHeight(x) - walk[0];
+				y = m->getHeight(x) - walk[0]->h;
 				sy = 0;
 				sx = 0;
 				ia = 0;
