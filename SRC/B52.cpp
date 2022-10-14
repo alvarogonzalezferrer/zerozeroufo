@@ -91,10 +91,9 @@ bool B52::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		sx = -0.25; // always left very slow
 		
 		sy = (rand()%30-15) / 10.0; // up or down?
-	
-	
+
 		// try to go above the UFO to bomb it 
-		if (ufo->y > y + sprite->h*2)
+		if (ufo->y > y + sprite->h)
 			sy = -0.5;
 		else
 		{
@@ -108,14 +107,14 @@ bool B52::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		if (rand()%100 < 60)
 		{
 			machine_gun = rand()%15+15;
-			ia += rand()%15;
+			ia = machine_gun + ia;
 		}
 		
-		if (rand()%100 < 50 || ufo->y > y + sprite->h * 2)
+		if (rand()%100 < 80)
 		{
-			jumps = rand()%15+10;
+			jumps = rand()%15+30;
 			sy = -abs(sy); // always fly up or level
-			ia += rand()%15;
+			ia = jumps + ia;
 		}
 	}
 	
@@ -156,6 +155,8 @@ bool B52::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		// drop paratrooper
 		if (enemyList)
 			enemyList->addEnemy(new Paratrooper(x + sprite->w/2 + rand()%5, y + sprite->h/2 + rand()%5, spr_data));
+		else
+			ia = 0; // do something else, we cant drop paratroopers, someone set enemyList NULL (should never come here)
 	}
 	
 	// borders 
@@ -176,10 +177,10 @@ bool B52::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	// sides
 	
 	// side right should not clip since i can come from outside screen!
-	if (x > m->mapW + sprite->w)
+	if (x + sprite->w - 5 > m->mapW)
 	{
 		jumps=0; // dont drop paratroopers outside screen
-		sx = -3;
+		sx = -4;
 		sy = 0;
 		ia = 5; 
 	}
