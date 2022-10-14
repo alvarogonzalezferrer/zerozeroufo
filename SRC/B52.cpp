@@ -131,7 +131,7 @@ bool B52::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 							
 		// turret
 		shoots->add(new Shoot(x + sprite->w / 2, y + sprite->h / 2,
-							-3, -2, 
+							-3, 2, 
 							100, 
 							2, 
 							0.02, 
@@ -141,7 +141,7 @@ bool B52::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 
 		// tail gunner
 		shoots->add(new Shoot(x + sprite->w / 2, y + sprite->h / 2,
-							3, 0, 
+							3, 0.2, 
 							100, 
 							2, 
 							0.01, 
@@ -154,7 +154,13 @@ bool B52::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	{
 		// drop paratrooper
 		if (enemyList)
-			enemyList->addEnemy(new Paratrooper(x + sprite->w/2 + rand()%5, y + sprite->h/2 + rand()%5, spr_data));
+		{
+			if (!enemyList->addEnemy(new Paratrooper(x + sprite->w/2 + rand()%5, y + sprite->h/2 + rand()%5, spr_data)))
+			{
+				// paratropper queue is full, activate machine guns! 
+				machine_gun = rand()%15;
+			}
+		}
 		else
 			ia = 0; // do something else, we cant drop paratroopers, someone set enemyList NULL (should never come here)
 	}
