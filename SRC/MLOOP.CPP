@@ -276,7 +276,7 @@ void MainGameLoop::update()
 		int ret_e = enemyList->update(map, ufo, pm); // update enemies
 		
 		// add enemies each screen, dont add if we traveled enough
-		bool finished = ticks > 2000 + wave*200; // each wave the level is a little longer  
+		bool finished = (ticks > 2000 + wave*200); // each wave the level is a little longer  
 		
 		// generate new enemies
 		if ((ticks % 300 == 0 || ret_e == 0) && !finished)
