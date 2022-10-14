@@ -122,9 +122,10 @@ bool Paratrooper::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 					play_sample(scream, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0); // scream falling...
 			}
 			
-			if (y > feet)
+			if (y > feet) // reached ground 
 			{
-				y = feet;
+				// since the walking sprite is shorter than parachute sprite, I need to move the Y further to walking sprite 0
+				y = m->getHeight(x) - walk[0];
 				sy = 0;
 				sx = 0;
 				ia = 0;
