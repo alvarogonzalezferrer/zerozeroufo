@@ -71,8 +71,8 @@ void BaseParticle::render(BITMAP *bmp, int sx, int sy)
 // ---------------------------------------------------------------------------
 Blood::Blood(float x, float y, float dx, float dy, int life) : BaseParticle(x, y, dx, dy, life)
 {
-	color =  makecol(rand()%55+200,0,0);
-	t = rand()%4;
+	color =  makecol(170,0,0);
+	t = rand()%2;
 }
 
 void Blood::render(BITMAP *bmp, int sx, int sy)

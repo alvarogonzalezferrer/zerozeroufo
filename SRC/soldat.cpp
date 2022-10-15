@@ -113,18 +113,15 @@ bool Soldat::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 		// shoot? 40% chance
 		if (rand()%100 < 40)
 		{
-	
 			// shoot up
-			float ssy = Randomize::random(-3, -1);
+			float ssy = Randomize::random(-3.0f, -1.0f);
 			
 			// left or right?
 			float ssx = (sx <= 0) ? -1 : 1;
 			
-			ssx = ssx * Randomize::random(1, 2); // speed up
+			ssx = ssx * Randomize::random(1.0f, 2.0f); // speed up
 			
-			float sx = (sx <= 0) ? x : x + sprite->w;
-			
-			shoots->add(new Shoot(sx,y,
+			shoots->add(new Shoot(x + sprite->w/2,y+2,
 								ssx, ssy, 
 								200, 
 								0, 
@@ -138,17 +135,17 @@ bool Soldat::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 	// bounce on borders 
 
 	// side right should not clip since i can come from outside screen!
-	if  (x > m->mapW)
+	if  (x > m->mapW - sprite->w)
 	{
-		sx = -2; // go left
-		ia = 30; 
+		sx = -1.5; // go left
+		ia = 30+rand()%30; 
 	}
 	
 	if (x < 0)
 	{
 		x = 0;
-		sx = 2; // go right
-		ia = 30; 
+		sx = 1.5; // go right
+		ia = 30+rand()%30; 
 		
 		if (rand()%10 < 5)
 			return true; // disappear for good, ran away from battle
@@ -174,11 +171,16 @@ bool Soldat::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots )
 
 				// fly X to center of UFO
 				if (cmx > ufo->beam_xu + 3)
+				{
 					sx = -(rand()%2+1);
-				else if (cmx < ufo->beam_xu - 3)
-					sx = rand()%2+1;
-				else
-					sx = 0; // keep it centered, already reached center, prevents flip seizure!
+				}
+				else 
+				{
+					if (cmx < ufo->beam_xu - 3)
+						sx = rand()%2+1;
+					else
+						sx = 0; // keep it centered, already reached center, prevents flip seizure!
+				}
 					
 				insideBeam = true;
 				

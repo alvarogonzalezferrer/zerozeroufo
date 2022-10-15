@@ -126,9 +126,11 @@ bool Paratrooper::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 			{
 				// since the walking sprite is shorter than parachute sprite, I need to move the Y further to walking sprite 0
 				y = m->getHeight(x) - walk[0]->h;
+				feet = y;
+				sprite = walk[0];
 				sy = 0;
-				sx = 0;
 				ia = 0;
+				frame = 0;
 				airborne = false; // reached ground!
 			}
 		}
@@ -144,14 +146,12 @@ bool Paratrooper::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 		if (!insideBeam)
 		{
 			if (y < feet)
-				sy = +0.3; // fall down
+				sy += 0.3; // fall down
 			
 			if (y > feet)
 				{
 					y = feet;
 					sy = 0;
-					sx = 0;
-					ia = 0;
 				}
 		}
 		
@@ -167,16 +167,14 @@ bool Paratrooper::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 			if (rand()%100 < 30)
 			{
 				// shoot up
-				float ssy = Randomize::random(-3, -1);
+				float ssy = Randomize::random(-3.0f, -1.0f);
 				
 				// left or right?
 				float ssx = (sx <= 0) ? -1 : 1;
 				
-				ssx = ssx * Randomize::random(1, 2); // speed up
-				
-				float sx = (sx <= 0) ? x : x + sprite->w;
-				
-				shoots->add(new Shoot(sx,y,
+				ssx = ssx * Randomize::random(1.0f, 2.5f); // speed up
+								
+				shoots->add(new Shoot(x + sprite->w/2,y+2,
 									ssx, ssy, 
 									200, 
 									1, 
@@ -192,15 +190,17 @@ bool Paratrooper::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 		// side right should not clip since i can come from outside screen!
 		if  (x + sprite->w > m->mapW)
 		{
-			sx = -2; // go left
-			ia = 10; 
+			sx = -1.5; // go left
+			ia = 30+rand()%30; 
 		}
 
 		if (x < 0)
 		{
 			x = 0;
-			sx = 2; // go right
-			ia = 10;
+			sx = 1.5; // go right
+			ia = 30+rand()%30;
+
+			// paratrooper will not run away from battle
 		}
 	
 		if (life <= 0)
@@ -237,11 +237,16 @@ bool Paratrooper::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoo
 
 				// fly X to center of UFO
 				if (cmx > ufo->beam_xu + 3)
+				{
 					sx = -(rand()%2+1);
-				else if (cmx < ufo->beam_xu - 3)
-					sx = rand()%2+1;
-				else
-					sx = 0; // keep it centered, already reached center, prevents flip seizure!
+				}
+				else 
+				{
+					if (cmx < ufo->beam_xu - 3)
+						sx = rand()%2+1;
+					else
+						sx = 0; // keep it centered, already reached center, prevents flip seizure!
+				}
 					
 				insideBeam = true;
 				
