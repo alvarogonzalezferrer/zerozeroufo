@@ -30,7 +30,8 @@
 *.exe
 *.out
 *.app
-docs/jsdos_v7.4.7.zip
-envio concurso TEC.txt
+
+# Others
 RELEASE/
 BIN/LOG.TXT
+BIN/GAME.CFG

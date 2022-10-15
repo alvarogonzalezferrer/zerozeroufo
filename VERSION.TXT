@@ -1,5 +1,0 @@
-MS-DOS version
-
-Allegro 4.2 + DJGPP + DOSBOX
-
-Kronoman 2022
