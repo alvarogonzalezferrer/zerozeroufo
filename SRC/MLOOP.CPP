@@ -39,6 +39,10 @@ MainGameLoop::MainGameLoop()
 	
 	wave = 0; // current wave
 	
+	// destroy last enemy message
+	x_destroy_m = y_destroy_m = 0;
+	t_destroy_m = -1;
+	
 }
 
 MainGameLoop::~MainGameLoop()
@@ -192,6 +196,10 @@ void MainGameLoop::update()
 		
 		// the shoots of UFO and enemies are handled by themselves, so they get reset without need to call here
 
+		// destroy last enemy message
+		x_destroy_m = y_destroy_m = 0;
+		t_destroy_m = -1;
+
 		// done, go to level intro
 		wait = 150;
 		changeState(STATE_INTRONEXTLEVEL);
@@ -276,14 +284,29 @@ void MainGameLoop::update()
 		int ret_e = enemyList->update(map, ufo, pm); // update enemies
 		
 		// add enemies each screen, dont add if we traveled enough
-		bool finished = (ticks > (unsigned  long int)(2000 + wave*200); // each wave the level is a little longer  
+		bool finished = ticks > (unsigned  long int)(2000 + wave*200); // each wave the level is a little longer  
 		
 		// generate new enemies
 		if ((ticks % 300 == 0 || ret_e == 0) && !finished)
 			enemyList->generate(rand() % 5 + wave, wave, map); //  GENERATE TIER / WAVE APPROPIATE ENEMIES // TODO - ADD BOSSES
 		
+		// taking too long to kill enemies, show message
+		if (ticks > (unsigned  long int)(2400 + wave*200))
+		{
+			if (enemyList->enemies_n>0)
+			{
+				t_destroy_m = 30;
+				x_destroy_m = enemyList->enemy[enemyList->enemies_n-1]->x;
+				y_destroy_m = enemyList->enemy[enemyList->enemies_n-1]->y;
+			}
+			else
+			{
+				ret_e = 0; // finish anyways, there arent enemies
+			}
+		}
+		
 		// end level when enough travel and no enemies - DEBUG CHECK BOSSES TOO
-		if (ret_e == 0 && finished) 
+		if (finished && ret_e == 0) 
 		{
 				wait = 90;
 				changeState(STATE_WAIT_FOR_NEXT_LEVEL);
@@ -299,6 +322,9 @@ void MainGameLoop::update()
 				changeState(STATE_GAMEOVER);
 			}
 		}
+		
+		if (t_destroy_m > 0)
+			t_destroy_m--; // remove slowly "kill" message
 	}
 	break;
 
@@ -408,6 +434,12 @@ void MainGameLoop::render()
 		pm->render(doubleBuffer,0,0); // render particles
 		
 		ufo->render_HUD(doubleBuffer); // render HUD
+		
+		// destroy last enemy message
+		if (t_destroy_m > 0)
+		{
+			 textout_centre_ex(doubleBuffer, font, "KILL!", x_destroy_m - 5, y_destroy_m - 5, makecol(170,rand()%128+128,0), -1);
+		}
 		
 		// DEBUG
 		if (debug)

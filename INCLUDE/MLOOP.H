@@ -67,6 +67,12 @@ class MainGameLoop : public GameMachine
 		int wave; // current wave?
 		
 		int ufo_last_life; // to check if UFO received damage and shake camera
+		
+		// destroy message
+		// this message shows up when there is 1 enemy left and player takes too long to kill it
+		int x_destroy_m;
+		int y_destroy_m;
+		int t_destroy_m; // timer, -1 dont show
 
 		// data stuff
 		Datafile intro_screens_data; // screens for intro / next level / etc
