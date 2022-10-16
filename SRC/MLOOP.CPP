@@ -438,7 +438,7 @@ void MainGameLoop::render()
 		// destroy last enemy message
 		if (t_destroy_m > 0)
 		{
-			 textout_centre_ex(doubleBuffer, font, "KILL!", x_destroy_m - 5, y_destroy_m - 5, makecol(170,rand()%128+128,0), -1);
+			 textout_centre_ex(doubleBuffer, font, "KILL!", x_destroy_m - 5, y_destroy_m - 5, makecol(170,0,0), -1);
 		}
 		
 		// DEBUG
