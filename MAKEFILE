@@ -83,8 +83,8 @@ ifdef DJDIR
 	LFLAGS = -s -lalleg
 
 	# ** Compiler flags
-	# NOTA - OPTIMIZADO PARA 486 POR EL CONCURSO, SACAR -mpc32 -march=i486 PARA OTROS USOS!
-	CFLAGS = -I$(INCDIR) -Wall -Wfatal-errors -O3 -fomit-frame-pointer -mpc32 -march=i386
+	# NOTA : para hardware real 386, poner los parametros: -mpc32 -march=i386 (-mpc32 dudoso, investigar bien)
+	CFLAGS = -I$(INCDIR) -Wall -Wfatal-errors -O3 -fomit-frame-pointer 
 	
 	# command for deletion
 	DELETE_CMD = del
