@@ -135,7 +135,7 @@ void Menu::render(BITMAP *bmp)
 		if (i == selected)
 		{
 			c_f = fg_s;
-			b_f = bg_s;
+			c_b = bg_s;
 		}
 		else
 		{
