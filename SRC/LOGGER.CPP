@@ -15,7 +15,6 @@
 
 #include <time.h> // for time stamp
 
-const char *Logger::file = "log.txt"; // file to log on (append)
 bool Logger::enabled = false; // logger to file enabled? default = false
 
 void Logger::log(const char *msg, ...)
