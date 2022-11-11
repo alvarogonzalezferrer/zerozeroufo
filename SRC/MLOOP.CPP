@@ -29,7 +29,7 @@ MainGameLoop::MainGameLoop()
 	
 	intro_screens_data.load("screens.dat"); // intro screens
 	
-	// DEBUG - do this here?
+	// initialization
 	
 	ufo = new UFO(); // new player
 	map = new Map(); // new map
@@ -39,7 +39,7 @@ MainGameLoop::MainGameLoop()
 	
 	wave = 0; // current wave
 	
-	// destroy last enemy message
+	// remove last enemy message
 	x_destroy_m = y_destroy_m = 0;
 	t_destroy_m = -1;
 	
@@ -50,6 +50,8 @@ MainGameLoop::MainGameLoop()
 	menu_main->menuItems.push_back("Options");
 	menu_main->menuItems.push_back("About");
 	menu_main->menuItems.push_back("Quit game");
+	
+	menu_main->init();
 	// DEBUG - CONFIGURE MENU HERE
 }
 
