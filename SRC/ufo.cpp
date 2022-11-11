@@ -472,6 +472,6 @@ void UFO::render_HUD(BITMAP *bmp)
 		textprintf_ex(bmp, ufo_hud_font, 0, (fh+2)*2, makecol(255,255,255), makecol(255,0,0), "CRITICAL DAMAGE");
 
 
-	// debug - alpha message - remove when finished
-	textprintf_ex(bmp, ufo_hud_font, 0, bmp->h - text_height(ufo_hud_font), makecol(128,128,128), -1, "Alpha preview version.");
+	// debug - beta message - remove when finished
+	textprintf_ex(bmp, ufo_hud_font, 0, bmp->h - text_height(ufo_hud_font), makecol(128,128,128), -1, "Beta preview version.");
 }

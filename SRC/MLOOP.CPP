@@ -43,6 +43,14 @@ MainGameLoop::MainGameLoop()
 	x_destroy_m = y_destroy_m = 0;
 	t_destroy_m = -1;
 	
+	// main menu of the game
+	menu_main = new Menu();
+	menu_main->menuItems.push_back("Story mode");
+	menu_main->menuItems.push_back("Endurance");
+	menu_main->menuItems.push_back("Options");
+	menu_main->menuItems.push_back("About");
+	menu_main->menuItems.push_back("Quit game");
+	// DEBUG - CONFIGURE MENU HERE
 }
 
 MainGameLoop::~MainGameLoop()
@@ -56,6 +64,7 @@ MainGameLoop::~MainGameLoop()
 	delete(map);
 	delete(pm);
 	delete(parallax);
+	delete(menu_main);
 }
 
 
@@ -149,7 +158,23 @@ void MainGameLoop::update()
 		camerashake = 0;
 		wave = 0; // first level
 		if (--wait < 0)
+			changeState(STATE_MAIN_MENU);
+	break;
+	
+	
+	case STATE_MAIN_MENU:
+	{
+		int rm = menu_main->update();
+		
+		if (rm == 4) // quit game
+			changeState(STATE_QUIT);
+			
+		if (rm == 0 || rm == 1) // start game, DEBUG CHANCE STORY AND ENDURANCE!
 			changeState(STATE_NEXTLEVEL);
+			
+		// DEBUG OTHER options, not done yet 
+		// 
+	}
 	break;
 
 	// waits game over message
@@ -379,7 +404,15 @@ void MainGameLoop::render()
 
 	// shows intro screen
 	case STATE_INTRO:
-		blit(intro_bmp, doubleBuffer, 0, 0, 0, 0, intro_bmp->w, intro_bmp->h);		
+		blit(intro_bmp, doubleBuffer, 0, 0, 0, 0, intro_bmp->w, intro_bmp->h);	
+	break;
+	
+	case STATE_MAIN_MENU:
+	{
+		// DEBUG ADD STAR ANIMATION OR SOMETHING!
+		clear_to_color(doubleBuffer, makecol(0, 0, 0));
+		menu_main->render(doubleBuffer);
+	}
 	break;
 
 	// shows game over screen
@@ -390,7 +423,6 @@ void MainGameLoop::render()
 
 	// shows intro to next level
 	case STATE_INTRONEXTLEVEL:
-		
 		blit(next_wave_bmp, doubleBuffer, 0, 0, 0, 0, intro_bmp->w, intro_bmp->h);
 		
 		textprintf_ex(doubleBuffer, font,  doubleBuffer->w/2 -  text_length(font, "WAVE XX")/2, doubleBuffer->h/2 - text_height(font)/2, makecol(255,255,255),makecol(85,85,85) , "WAVE %d", wave);

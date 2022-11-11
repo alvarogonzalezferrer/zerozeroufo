@@ -23,6 +23,8 @@
 #include "enemies.h"
 #include "parallax.h"
 
+#include "menu.h"
+
 // internal game resolution (not video screen)
 #define GAME_W_RES 320
 #define GAME_H_RES 200
@@ -47,6 +49,8 @@ class MainGameLoop : public GameMachine
 		// menus, main and in game 
 		static const unsigned int STATE_MAIN_MENU = 9;
 		static const unsigned int STATE_INGAME_MENU = 10;
+		
+		Menu *menu_main; //main menu
 		
 		int wait; // delay for various screen pauses...
 		int camerashake; // delay for camera shake effects...
