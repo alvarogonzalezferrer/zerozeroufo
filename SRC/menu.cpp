@@ -21,6 +21,8 @@ Menu::Menu()
 	
 	w = -1;
 	h = 0;
+	
+	border = -1; 
 }
 
 Menu::~Menu()
@@ -57,6 +59,8 @@ void Menu::init()
 		
 		fg_s = makecol(255,255,85);
 		bg_s = makecol(170,0,0);
+		
+		border = makecol(32,32,32);
 	}
 	
 	// calculate dimensiones of the menu
@@ -129,6 +133,10 @@ void Menu::render(BITMAP *bmp)
 	
 	// step y
 	int rys = text_height(fm) + gap;
+	
+	// border ? 
+	if (border>=0)
+		rectfill(bmp, x-w/2-gap, y-h/2-gap, x+w/2+gap, y-h/2+gap, border);
 	
 	for(int i = 0; i<menuItems.size(); i++)
 	{

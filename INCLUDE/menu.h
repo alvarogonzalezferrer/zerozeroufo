@@ -57,9 +57,10 @@ class Menu
 		int bg_s; // text background 
 		
 		// position on bitmap to render
-		int x,y; // middle top position of menu, if -1 will be auto calculated
+		int x,y; // middle position of menu, if -1 will be auto calculated
 		int gap; // y gap between items
 		
+		int border; // do I need a border? -1 no, other number = color
 		
 		// items of the menu
 		// DEBUG FOR NOW THEY SHOULD FIT ALL INSIDE SCREEN OR ELSE WILL NOT BE SHOWN		
