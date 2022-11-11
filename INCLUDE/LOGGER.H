@@ -15,7 +15,7 @@
 class Logger
 {
 	public:
-		static const char *file = "log.txt"; ///< file to log on (append)
+		static constexpr char *file = "log.txt"; ///< file to log on (append)
 		static bool enabled; ///< logger to file enabled? default = false
 
 		static void log(const char *msg, ...); ///< append a message to log file
