@@ -137,6 +137,7 @@ void MainGameLoop::update()
 		menu_ingame->menuItems.push_back("Quit game");
 
 		menu_ingame->init();
+		
 		// options menu			
 		menu_options->menuItems.push_back("Sound");
 		menu_options->menuItems.push_back("Music");
@@ -238,7 +239,7 @@ void MainGameLoop::update()
 		// 4 joystick
 		// 5 continue 
 		
-		int rm = menu_ingame->update();
+		int rm = menu_options->update();
 		if (rm == 5 || rm == -2) // -2 is cancel menu
 		{
 			ticks = old_ticks;
