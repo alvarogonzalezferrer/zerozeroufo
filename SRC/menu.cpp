@@ -33,6 +33,9 @@ Menu::~Menu()
 // INIT
 // menu items should already be loaded in the vector when calling this!
 // also any init like colors, gap, etc
+//
+// THIS MUST BE CALLED BEFORE USING THE MENU, OR MEMORY LEAKS WILL HAPPEN!
+//
 void Menu::init()
 {
 	// initialize position of items, etc
@@ -74,7 +77,7 @@ void Menu::init()
 		h += rh + gap;
 	}
 	
-	// DEBUG CALCULATE ACCORDING TO MAX MENU HEIGHT
+	// default position, center of 320x200 screen
 	if (x < 0 || y < 0)
 	{
 		x = 160;
