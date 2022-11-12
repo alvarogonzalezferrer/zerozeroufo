@@ -43,44 +43,11 @@ MainGameLoop::MainGameLoop()
 	x_destroy_m = y_destroy_m = 0;
 	t_destroy_m = -1;
 	
-	// DEBUG THIS SHOULD NOT BE DONE HERE, SINCE COLOR PALETTE IS NOT LOADED YET
-	// MENU COLORS WILL BE WRONG!!! MOVE TO STATE START!!
-	
-	// main menu of the game
-	menu_main = new Menu();
-	
-	menu_main->menuItems.push_back("Story mode");
-	menu_main->menuItems.push_back("Endurance");
-	menu_main->menuItems.push_back("Options");
-	menu_main->menuItems.push_back("About");
-	menu_main->menuItems.push_back("Quit game");
-	
-	menu_main->init();
-	
-	
-	// ingame menu 
-	menu_ingame = new Menu();
-	
-	menu_ingame->menuItems.push_back("Continue...");
-	menu_ingame->menuItems.push_back("Restart game");
-	menu_ingame->menuItems.push_back("Options");
-	menu_ingame->menuItems.push_back("Quit game");
-	
-	menu_ingame->init();
-	
-	// options menu
-	menu_options = new Menu();
-	
-	menu_options->menuItems.push_back("Sound");
-	menu_options->menuItems.push_back("Music");
-	menu_options->menuItems.push_back("Keyboard");
-	menu_options->menuItems.push_back("Mouse");
-	menu_options->menuItems.push_back("Joystick");
-	menu_options->menuItems.push_back("Continue...");
-	
-	menu_options->init();
-	
-	// DEBUG SETUP COLORS AND FONT OF EACH MENU! IT WILL BE DEFAULT FOR NOW
+	// menus ; they're setup at state start below	
+	menu_main = new Menu(); // main menu of the game	
+	menu_ingame = new Menu(); // ingame menu 
+	menu_options = new Menu(); // options menu
+
 }
 
 MainGameLoop::~MainGameLoop()
@@ -152,11 +119,36 @@ void MainGameLoop::update()
 		// kronoman screen 
 		kronoman_bmp =  (BITMAP *)intro_screens_data.getObject("KRONOMAN_BMP")->dat;
 		kronoman_wav =  (SAMPLE *)intro_screens_data.getObject("KRONOMAN_WAV")->dat;
-		  
-		/*
-		// sounds
-		shootSND=(SAMPLE *)data.getObject("SHOOTSND")->dat;
-		*/
+		
+		// menu init, must be done here so the colors are ok with the palette
+		// main menu
+		menu_main->menuItems.push_back("Story mode");
+		menu_main->menuItems.push_back("Endurance");
+		menu_main->menuItems.push_back("Options");
+		menu_main->menuItems.push_back("About");
+		menu_main->menuItems.push_back("Quit game");
+
+		menu_main->init();
+		
+		// ingame menu 		
+		menu_ingame->menuItems.push_back("Continue...");
+		menu_ingame->menuItems.push_back("Restart game");
+		menu_ingame->menuItems.push_back("Options");
+		menu_ingame->menuItems.push_back("Quit game");
+
+		menu_ingame->init();
+		// options menu			
+		menu_options->menuItems.push_back("Sound");
+		menu_options->menuItems.push_back("Music");
+		menu_options->menuItems.push_back("Keyboard");
+		menu_options->menuItems.push_back("Mouse");
+		menu_options->menuItems.push_back("Joystick");
+		menu_options->menuItems.push_back("Continue...");
+
+		menu_options->init();
+		// DEBUG SETUP COLORS AND FONT OF EACH MENU! IT WILL BE DEFAULT FOR NOW
+		
+		// -- end menu init 
 		
 		help_show = 300; // show help screen for 10 seconds
 		

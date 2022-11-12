@@ -155,15 +155,19 @@ The terrain is procedurally generated randomly, so no two games are the same.
 
 * Data will be automatically loaded - unloaded when needed to keep RAM usage to a minimum.
 
-* This game is old-school, no DLCs, no loot boxes, no pay walls, no DRM, no phone-home spyware, no monetization bullshit, just art.
-
 **Random ramblings**
 
-* I'm pretty tired of recruiters wasting my time, they don't know anything about programming and they judge without knowing. 
+* I'm pretty tired of recruiters wasting my time, they don't know anything about programming, and they judge without knowing. 
 
 * Some developers think that "retro" is just slapping pixelated sprites on a Unity engine, and making a game thats huge in gigabytes, but small in content. It is not. 
 
 * Electron sucks: consumes a high amount of RAM, and requires an expansive amount of storage.
+
+* This game is old-school, no DLCs, no loot boxes, no pay walls, no DRM, no phone-home spyware, no telemetry, no monetization bullshit, no socialist bullshit, no mining, no garbage, just art.
+
+* Discord client is garbage. Visual Studio code sucks. 
+
+* Cheers to the old school scene. You know who you are. Stay legit.
 
 ## REUSED CODE & STUFF
 
