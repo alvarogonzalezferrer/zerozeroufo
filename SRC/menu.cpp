@@ -49,11 +49,9 @@ void Menu::init()
 		gap = text_height(fm)+3;
 	}
 	
-	
-	
+	// default colors, VGA palette safe
 	if (fg < 0)
 	{
-		// set default colors 
 		fg = makecol(255,255,255);
 		bg = -1;
 		

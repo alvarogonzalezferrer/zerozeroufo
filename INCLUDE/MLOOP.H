@@ -51,6 +51,8 @@ class MainGameLoop : public GameMachine
 		static const unsigned int STATE_INGAME_MENU = 10;
 		
 		Menu *menu_main; //main menu
+		Menu *menu_ingame; //ingame menu
+		unsigned long int old_ticks; // to restore ticks after menu (to resume game)
 		
 		int wait; // delay for various screen pauses...
 		int camerashake; // delay for camera shake effects...

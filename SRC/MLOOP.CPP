@@ -45,6 +45,7 @@ MainGameLoop::MainGameLoop()
 	
 	// main menu of the game
 	menu_main = new Menu();
+	
 	menu_main->menuItems.push_back("Story mode");
 	menu_main->menuItems.push_back("Endurance");
 	menu_main->menuItems.push_back("Options");
@@ -52,7 +53,19 @@ MainGameLoop::MainGameLoop()
 	menu_main->menuItems.push_back("Quit game");
 	
 	menu_main->init();
-	// DEBUG - CONFIGURE MENU HERE
+	
+	
+	// ingame menu 
+	menu_ingame = new Menu();
+	
+	menu_ingame->menuItems.push_back("Continue...");
+	menu_ingame->menuItems.push_back("Restart game");
+	menu_ingame->menuItems.push_back("Options");
+	menu_ingame->menuItems.push_back("Quit game");
+	
+	menu_ingame->init();
+	
+	// DEBUG SETUP COLORS AND FONT OF EACH MENU! IT WILL BE DEFAULT FOR NOW
 }
 
 MainGameLoop::~MainGameLoop()
@@ -67,6 +80,7 @@ MainGameLoop::~MainGameLoop()
 	delete(pm);
 	delete(parallax);
 	delete(menu_main);
+	delete(menu_ingame);
 }
 
 
@@ -175,7 +189,32 @@ void MainGameLoop::update()
 			changeState(STATE_NEXTLEVEL);
 			
 		// DEBUG OTHER options, not done yet 
-		// 
+		// 2 options
+		// 3 about
+	}
+	break;
+	
+	case STATE_INGAME_MENU: // only comes here when playing the game
+	{
+		// in game menu
+		int rm = menu_ingame->update();
+		if (rm == 0 || rm == -2) // -2 is cancel menu
+		{
+			ticks = old_ticks; // resume ticks
+			changeState(STATE_OK); // resune game!
+		}
+		
+		// restart game -- DEBUG, CONFIRM !!
+		if (rm == 1)
+		{
+			wait = 180;
+			changeState(STATE_GAMEOVER);
+		}
+		
+		// 2 options not done yet -- DEBUG
+		
+		if (rm == 3) // quit game
+			changeState(STATE_QUIT);
 	}
 	break;
 
@@ -275,6 +314,14 @@ void MainGameLoop::update()
 
 		// keyboard
 		
+		
+		if (key[KEY_ESC]) // ingame menu 
+		{
+			old_ticks = ticks; // save current ticks to resume game
+			changeState(STATE_INGAME_MENU);
+			while (key[KEY_ESC]); // wait key release
+		}
+		
 		if (key[KEY_F1]) // help
 		{
 			help_show = 150; // show help screen for 5 seconds
@@ -373,7 +420,8 @@ void MainGameLoop::update()
 		}
 	}
 
-	if (key[KEY_F10] || key[KEY_ESC]) // key to exit...DEBUG - confirm!
+	
+	if (key[KEY_F10] ) // key to hard quit...DEBUG - confirm!
 		changeState(STATE_QUIT);
 		
 	if (key[KEY_F12]) // debug key
@@ -386,6 +434,9 @@ void MainGameLoop::update()
 		camerashake --;
 }
 
+// ----------------------------------------------
+// rendering pipeline
+// ----------------------------------------------
 void MainGameLoop::render()
 {
 	switch (currentState)
@@ -412,8 +463,16 @@ void MainGameLoop::render()
 	case STATE_MAIN_MENU:
 	{
 		// DEBUG ADD STAR ANIMATION OR SOMETHING!
-		clear_to_color(doubleBuffer, makecol(0, 0, 0));
+		//clear_to_color(doubleBuffer, makecol(0, 0, 0));
 		menu_main->render(doubleBuffer);
+	}
+	break;
+	
+	case STATE_INGAME_MENU:
+	{
+		// DEBUG ADD ANIMATION OR SOMETHING!
+		//clear_to_color(doubleBuffer, makecol(0, 0, 0));
+		menu_ingame->render(doubleBuffer);
 	}
 	break;
 
@@ -487,6 +546,7 @@ void MainGameLoop::render()
 	break;
 	}
 
+	// ---------------------------
 	// fill screen -- lame way to support many resolutions :P
 	if (camerashake > 0) // do camera shake effect, for explosions / damage / etc
 	{
