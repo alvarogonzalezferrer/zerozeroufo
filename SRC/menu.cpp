@@ -52,7 +52,7 @@ void Menu::init()
 	// default colors, VGA palette safe
 	if (fg < 0)
 	{
-		fg = makecol(255,255,255);
+		fg = makecol(170,170,170);
 		bg = -1;
 		
 		fg_s = makecol(255,255,85);
