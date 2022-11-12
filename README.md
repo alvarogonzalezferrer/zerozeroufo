@@ -6,6 +6,12 @@ Under the MIT license
 
 Copyright (c) Kronoman, 2022
 
+## Accolades :trophy:
+
+Thanks to the nice people of [Espacio TEC](https://espaciotec.com.ar/) :trophy: :3rd_place_medal:
+
+November 2022: This game was on the podium, in the retro video game contest for old consoles and computers. :3rd_place_medal:
+
 ## Play online 🎮 👽
 
 **EXPERIMENTAL FEATURE**
@@ -65,12 +71,6 @@ SPACE to skip intro screen, etc
 
 The command line takes some switches.
 Try -? to see the commands.
-
-## Accolades :trophy:
-
-Thanks to the nice people of [Espacio TEC](https://espaciotec.com.ar/) :trophy: :3rd_place_medal:
-
-November 2022: This game was on the podium, in the retro video game contest for old consoles and computers. :3rd_place_medal:
 
 ## Tools and Libraries Used 🔧
 
