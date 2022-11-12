@@ -43,6 +43,9 @@ MainGameLoop::MainGameLoop()
 	x_destroy_m = y_destroy_m = 0;
 	t_destroy_m = -1;
 	
+	// DEBUG THIS SHOULD NOT BE DONE HERE, SINCE COLOR PALETTE IS NOT LOADED YET
+	// MENU COLORS WILL BE WRONG!!! MOVE TO STATE START!!
+	
 	// main menu of the game
 	menu_main = new Menu();
 	
@@ -65,6 +68,18 @@ MainGameLoop::MainGameLoop()
 	
 	menu_ingame->init();
 	
+	// options menu
+	menu_options = new Menu();
+	
+	menu_options->menuItems.push_back("Sound");
+	menu_options->menuItems.push_back("Music");
+	menu_options->menuItems.push_back("Keyboard");
+	menu_options->menuItems.push_back("Mouse");
+	menu_options->menuItems.push_back("Joystick");
+	menu_options->menuItems.push_back("Continue...");
+	
+	menu_options->init();
+	
 	// DEBUG SETUP COLORS AND FONT OF EACH MENU! IT WILL BE DEFAULT FOR NOW
 }
 
@@ -81,6 +96,7 @@ MainGameLoop::~MainGameLoop()
 	delete(parallax);
 	delete(menu_main);
 	delete(menu_ingame);
+	delete(menu_options);
 }
 
 
@@ -91,7 +107,7 @@ void MainGameLoop::update()
 	// handle the states...
 	switch (currentState)
 	{
-	case STATE_START: // game starts here , this is state 0 , when you run the exe, this is the entry point
+	case STATE_START: // game starts here , this is state 0 , when you run the exe, this is the entry point, will run just once per execution!
 	{
 		camerashake = 0;
 		// I re create the bitmap as a GAME_W_RES * GAME_H_RES only, to support any resolution
@@ -187,9 +203,11 @@ void MainGameLoop::update()
 			
 		if (rm == 0 || rm == 1) // start game, DEBUG CHANCE STORY AND ENDURANCE!
 			changeState(STATE_NEXTLEVEL);
-			
+		
+		if (rm == 2)
+			changeState(STATE_OPTIONS_MENU);
+		
 		// DEBUG OTHER options, not done yet 
-		// 2 options
 		// 3 about
 	}
 	break;
@@ -211,10 +229,29 @@ void MainGameLoop::update()
 			changeState(STATE_GAMEOVER);
 		}
 		
-		// 2 options not done yet -- DEBUG
+		if (rm == 2)
+			changeState(STATE_OPTIONS_MENU);
 		
 		if (rm == 3) // quit game
 			changeState(STATE_QUIT);
+	}
+	break;
+	
+	case STATE_OPTIONS_MENU:
+	{
+		// 0 sound
+		// 1 music 
+		// 2 keyboard
+		// 3 mouse 
+		// 4 joystick
+		// 5 continue 
+		
+		int rm = menu_ingame->update();
+		if (rm == 5 || rm == -2) // -2 is cancel menu
+		{
+			ticks = old_ticks;
+			changeState(previousState);
+		}	
 	}
 	break;
 
@@ -442,7 +479,6 @@ void MainGameLoop::render()
 	switch (currentState)
 	{
 	case STATE_START:
-		// TODO -- add loading message
 		textprintf_ex(doubleBuffer, font,0,0, makecol(255,255,255), -1, "Loading, please wait.");
 	break;
 	
@@ -476,6 +512,12 @@ void MainGameLoop::render()
 	}
 	break;
 
+	case STATE_OPTIONS_MENU:
+	{
+		menu_options->render(doubleBuffer);
+	}
+	break;
+	
 	// shows game over screen
 	case STATE_GAMEOVER:
 		blit(gameover_bmp, doubleBuffer, 0, 0, 0, 0, gameover_bmp->w, gameover_bmp->h);
