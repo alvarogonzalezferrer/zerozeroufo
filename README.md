@@ -66,6 +66,10 @@ SPACE to skip intro screen, etc
 The command line takes some switches.
 Try -? to see the commands.
 
+## Accolades :trophy:
+
+Thanks to the nice people of [Espacio TEC](https://espaciotec.com.ar/) :trophy: :3rd_place_medal:
+
 ## Tools and Libraries Used 🔧
 
 Tools I used:
