@@ -139,8 +139,8 @@ void MainGameLoop::update()
 		menu_ingame->init();
 		
 		// options menu			
-		menu_options->menuItems.push_back("Sound");
-		menu_options->menuItems.push_back("Music");
+		menu_options->menuItems.push_back("Sound ON");
+		menu_options->menuItems.push_back("Music ON");
 		menu_options->menuItems.push_back("Keyboard");
 		menu_options->menuItems.push_back("Mouse");
 		menu_options->menuItems.push_back("Joystick");
@@ -440,15 +440,16 @@ void MainGameLoop::update()
 
 
 	// for all states
+	// DEBUG - THIS IS BUGGY
 	if (key[KEY_SPACE]) // avoid waiting screens!
 	{
-		//if (wait > 30) // 30 ticks = 1 second real life
-		//{
+		if (wait > 30) // 30 ticks = 1 second real life
+		{
 			wait = wait / 2;
 			help_show = help_show / 2; // speed up help screen too, if available
-			while(key[KEY_SPACE]);
+			//while(key[KEY_SPACE]);
 			//clear_keybuf();
-		//}
+		}
 	}
 
 	
