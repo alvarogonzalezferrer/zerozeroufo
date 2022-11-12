@@ -134,7 +134,7 @@ void Menu::render(BITMAP *bmp)
 	
 	// border ? 
 	if (border>=0)
-		rectfill(bmp, x-w/2-gap, y-h/2-gap, x+w/2+gap, y-h/2+gap, border);
+		rectfill(bmp, x-w/2-gap, y-h/2-gap, x+w/2+gap, y+h/2+gap, border);
 	
 	for(int i = 0; i<menuItems.size(); i++)
 	{
