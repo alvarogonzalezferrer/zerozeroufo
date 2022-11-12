@@ -70,6 +70,8 @@ Try -? to see the commands.
 
 Thanks to the nice people of [Espacio TEC](https://espaciotec.com.ar/) :trophy: :3rd_place_medal:
 
+November 2022: This game was on the podium, in the retro video game contest for old consoles and computers. :3rd_place_medal:
+
 ## Tools and Libraries Used 🔧
 
 Tools I used:
