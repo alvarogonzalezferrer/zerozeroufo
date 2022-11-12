@@ -114,10 +114,17 @@ int Menu::update()
 		selected = 0;
 
 	if (key[KEY_SPACE] || key[KEY_Z] || key[KEY_ENTER] || key[KEY_X])
+	{
+		while (key[KEY_SPACE] || key[KEY_Z] || key[KEY_ENTER] || key[KEY_X]); // wait release 
+		
 		return selected;
+	}
 	
 	if (key[KEY_ESC])
+	{
+		while(key[KEY_ESC]); // wait release|
 		return -2 ; // cancel
+	}
 	
 	return -1; // all OK
 }

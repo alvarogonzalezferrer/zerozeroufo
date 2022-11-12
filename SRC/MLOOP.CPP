@@ -442,12 +442,13 @@ void MainGameLoop::update()
 	// for all states
 	if (key[KEY_SPACE]) // avoid waiting screens!
 	{
-		if (wait > 30) // 30 ticks = 1 second real life
-		{
+		//if (wait > 30) // 30 ticks = 1 second real life
+		//{
 			wait = wait / 2;
 			help_show = help_show / 2; // speed up help screen too, if available
-			clear_keybuf();
-		}
+			while(key[KEY_SPACE]);
+			//clear_keybuf();
+		//}
 	}
 
 	
