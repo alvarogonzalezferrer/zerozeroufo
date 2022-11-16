@@ -98,7 +98,12 @@ void MessageBox::showMessage(std::string msg, std::string ok)
 	
 	// wait for keyboard
 	clear_keybuf();
-	while (!keypressed()) 
-	{
-	}
+	clear_keybuf();
+	rest(50);
+	
+	while (!keypressed());
+	
+	rest(50);
+	clear_keybuf();
+	clear_keybuf();
 }
