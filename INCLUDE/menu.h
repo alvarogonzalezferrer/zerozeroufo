@@ -64,19 +64,8 @@ class Menu
 		int border_fg; // around the border outline color
 		
 		// items of the menu
-		// DEBUG FOR NOW THEY SHOULD FIT ALL INSIDE SCREEN OR ELSE WILL NOT BE SHOWN		
+		// DEBUG FOR NOW THEY SHOULD FIT VERTICALLY ALL INSIDE SCREEN OR ELSE SOME WILL NOT BE SHOWN		
 		std::vector<std::string> menuItems;
 		
-		/*** DEV NOTE
-		remember how to use vector strings: 
-		
-			vector<string> animal_vec;
-			animal_vec.push_back("Elephant");
-			animal_vec.push_back("Lion");
-			animal_vec.push_back("Deer");
-			animal_vec.push_back("Tiger");
-			for(int i = 0; i<animal_vec.size(); i++) {
-			  cout << animal_vec[i] << endl;
-		*******/
 };
 #endif
