@@ -24,6 +24,7 @@
 #include "parallax.h"
 
 #include "menu.h"
+#include "msgbox.h"
 
 // internal game resolution (not video screen)
 #define GAME_W_RES 320
@@ -55,6 +56,7 @@ class MainGameLoop : public GameMachine
 		Menu *menu_main; //main menu
 		Menu *menu_ingame; //ingame menu
 		Menu *menu_options; // options menu
+		MessageBox *message_box; // message box
 		unsigned long int old_ticks; // to restore ticks after menu (to resume game)
 		
 		int wait; // delay for various screen pauses...

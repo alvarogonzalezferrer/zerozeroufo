@@ -47,6 +47,9 @@ MainGameLoop::MainGameLoop()
 	menu_main = new Menu(); // main menu of the game	
 	menu_ingame = new Menu(); // ingame menu 
 	menu_options = new Menu(); // options menu
+	
+	// message box 
+	message_box = new MessageBox();
 
 }
 
@@ -64,6 +67,7 @@ MainGameLoop::~MainGameLoop()
 	delete(menu_main);
 	delete(menu_ingame);
 	delete(menu_options);
+	delete(message_box);
 }
 
 
@@ -149,6 +153,8 @@ void MainGameLoop::update()
 		menu_options->init();
 		// DEBUG SETUP COLORS AND FONT OF EACH MENU! IT WILL BE DEFAULT FOR NOW
 		
+		message_box->init();
+		
 		// -- end menu init 
 		
 		help_show = 300; // show help screen for 10 seconds
@@ -201,6 +207,10 @@ void MainGameLoop::update()
 			changeState(STATE_OPTIONS_MENU);
 		
 		// DEBUG OTHER options, not done yet 
+		if (rm == 3)
+		{
+			message_box->showMessage("By Kronoman\n(c) 2022\nThanks!", "< OK >");
+		}
 		// 3 about
 	}
 	break;
@@ -240,11 +250,15 @@ void MainGameLoop::update()
 		// 5 continue 
 		
 		int rm = menu_options->update();
+		if (rm >= 0 && rm <= 4)
+			message_box->showMessage("Not done yet!\nWorking on it!\nThanks!", "< Continue >");
+		
 		if (rm == 5 || rm == -2) // -2 is cancel menu
 		{
 			ticks = old_ticks;
 			changeState(previousState);
-		}	
+		}
+		
 	}
 	break;
 

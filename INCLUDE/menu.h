@@ -59,11 +59,12 @@ class Menu
 		int x,y; // middle position of menu, if -1 will be auto calculated
 		int gap; // y gap between items
 		
-		int border; // do I need a border? -1 no, other number = color
-		int border_fg; // around the border outline color
+		int background; // do I need a rectangular background? -1 no, other number = color 
+		int border_fg; // around the background border outline color
 		
 		// items of the menu
-		// DEBUG FOR NOW THEY SHOULD FIT VERTICALLY ALL INSIDE SCREEN OR ELSE SOME WILL NOT BE SHOWN		
+		// DEBUG FOR NOW THEY SHOULD FIT VERTICALLY ALL INSIDE SCREEN OR ELSE SOME WILL NOT BE SHOWN	
+	    // use push_back(..) to add items to this
 		std::vector<std::string> menuItems;
 		
 };

@@ -22,7 +22,7 @@ Menu::Menu()
 	w = -1;
 	h = 0;
 	
-	border = border_fg = -1; 
+	background = border_fg = -1; 
 }
 
 Menu::~Menu()
@@ -61,7 +61,7 @@ void Menu::init()
 		fg_s = makecol(255,255,85);
 		bg_s = makecol(170,0,0);
 		
-		border = makecol(32,32,32);
+		background = makecol(32,32,32);
 		border_fg = makecol(255,85,85);
 	}
 	
@@ -69,7 +69,7 @@ void Menu::init()
 	w = 0; // calculate
 	h = 0;
 	int rh = text_height(fm);
-	for(int i = 0; i<menuItems.size(); i++)
+	for(unsigned int i = 0; i<menuItems.size(); i++)
 	{
 		int rw = text_length(fm, menuItems[i].c_str());
 		if (rw > w)
@@ -143,20 +143,20 @@ void Menu::render(BITMAP *bmp)
 	// step y
 	int rys = text_height(fm) + gap;
 	
-	// border ? 
-	if (border>=0)
+	// background ? 
+	if (background>=0)
 	{
 		int x1 = x-(w/2)-gap;
 		int y1 = y-(h/2)-gap;
 		int x2 = x+(w/2)+gap;
 		int y2 = y+(h/2);
-		rectfill(bmp,x1,y1,x2,y2, border);
+		rectfill(bmp,x1,y1,x2,y2, background);
 		
 		if (border_fg>=0)
 			rect(bmp,x1,y1,x2,y2, border_fg);
 	}
 	
-	for(int i = 0; i<menuItems.size(); i++)
+	for(unsigned int i = 0; i<menuItems.size(); i++)
 	{
 		if (i == selected)
 		{
