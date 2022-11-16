@@ -202,13 +202,13 @@ void MainGameLoop::update()
 			
 		if (rm == 0) // start game, story mode
 		{
-			message_box->showMessage("This game mode is not ready yet!\nWe will play endurance instead\nSurvive as many waves as you can!\nGo for the highest score!", "< OK! >");
+			message_box->showMessage("Story mode\n\nThis game mode is not ready yet!\nWe will play endurance instead\nSurvive as many waves as you can!\nGo for the highest score!", "[ OK! ]");
 			changeState(STATE_NEXTLEVEL);
 		}
 			
 		if (rm == 1) // start game, endurance mode
 		{
-			message_box->showMessage("Endurance mode\n\nSurvive as many waves as you can.\nGo for the highest score!", "< OK! >");
+			message_box->showMessage("Endurance mode\n\nSurvive as many waves as you can.\nGo for the highest score!", "[ OK! ]");
 			changeState(STATE_NEXTLEVEL);
 		}
 		
@@ -218,7 +218,7 @@ void MainGameLoop::update()
 		// DEBUG OTHER options, not done yet 
 		if (rm == 3)
 		{
-			message_box->showMessage("By Kronoman\n(c) 2022\nDone in Costa Rica\nRetro fun\nThanks for playing!", "< Pura Vida >");
+			message_box->showMessage("By Kronoman\n(c) 2022\nDone in Costa Rica\nRetro fun\nC++ & Allegro\nThanks for playing!", "[ Pura Vida ]");
 		}
 		// 3 about
 	}
@@ -260,7 +260,7 @@ void MainGameLoop::update()
 		
 		int rm = menu_options->update();
 		if (rm >= 0 && rm <= 4)
-			message_box->showMessage("Not done yet!\nWorking on it!\nThanks!", "< Continue >");
+			message_box->showMessage("Not done yet!\nWorking on it!\nThanks!", "[ Continue ]");
 		
 		if (rm == 5 || rm == -2) // -2 is cancel menu
 		{
