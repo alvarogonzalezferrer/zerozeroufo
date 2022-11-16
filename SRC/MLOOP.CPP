@@ -209,7 +209,7 @@ void MainGameLoop::update()
 		// DEBUG OTHER options, not done yet 
 		if (rm == 3)
 		{
-			message_box->showMessage("By Kronoman\n(c) 2022\nThanks!", "< OK >");
+			message_box->showMessage("By Kronoman\n(c) 2022\nDone in Costa Rica\nRetro fun\nThanks for playing!", "< Pura Vida >");
 		}
 		// 3 about
 	}
