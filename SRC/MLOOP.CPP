@@ -200,8 +200,17 @@ void MainGameLoop::update()
 		if (rm == 4) // quit game
 			changeState(STATE_QUIT);
 			
-		if (rm == 0 || rm == 1) // start game, DEBUG CHANCE STORY AND ENDURANCE!
+		if (rm == 0) // start game, story mode
+		{
+			message_box->showMessage("This game mode is not ready yet!\nWe will play endurance instead.", "< OK! >");
 			changeState(STATE_NEXTLEVEL);
+		}
+			
+		if (rm == 1) // start game, endurance mode
+		{
+			message_box->showMessage("Endurance mode\n\nSurvive as many waves as you can.\nGo for the highest score!", "< OK! >");
+			changeState(STATE_NEXTLEVEL);
+		}
 		
 		if (rm == 2)
 			changeState(STATE_OPTIONS_MENU);
