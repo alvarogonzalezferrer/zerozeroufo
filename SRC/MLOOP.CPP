@@ -202,7 +202,7 @@ void MainGameLoop::update()
 			
 		if (rm == 0) // start game, story mode
 		{
-			message_box->showMessage("This game mode is not ready yet!\nWe will play endurance instead.", "< OK! >");
+			message_box->showMessage("This game mode is not ready yet!\nWe will play endurance instead\nSurvive as many waves as you can!\nGo for the highest score!", "< OK! >");
 			changeState(STATE_NEXTLEVEL);
 		}
 			
