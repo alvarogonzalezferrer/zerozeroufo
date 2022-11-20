@@ -14,19 +14,15 @@ November 2022: This game was on the podium, in the retro video game contest for 
 
 ## Play online 🎮 👽
 
-**EXPERIMENTAL FEATURE**
-
 **REMEMBER THE GAME IS UNFINISHED!** 
 
-Im working on it, this is a live **preview**
+*Thanks to the magic of [js-dos](https://js-dos.com/) , you can play online this game.*
 
-Check it out here: 
+Check it out here:
 
 https://alvarogonzalezferrer.github.io/zerozeroufo/
 
 All feedback welcome. 
-
-*Thanks to the magic of [js-dos](https://js-dos.com/) , you can play online this game.*
 
 ## Screenshoots
 
