@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
 
 #ifdef __DJGPP__
 	// little message for MS DOS
-	std::cout << "Thanks for playing! - Krono 2022" << std::endl;
+	std::cout << "Thanks for playing! - Krono" << std::endl;
 #endif 
 
 
