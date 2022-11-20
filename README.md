@@ -28,6 +28,16 @@ All feedback welcome.
 
 *Thanks to the magic of [js-dos](https://js-dos.com/) , you can play online this game.*
 
+## Screenshoots
+
+![Screenshoot](/docs/screen1.jpg)
+
+![Screenshoot](/docs/screen2.jpg)
+
+![Screenshoot](/docs/screen3.jpg)
+
+![Screenshoot](/docs/screen4.jpg)
+
 ## Download for MS-DOS 💾
 
 Go to release section : https://github.com/alvarogonzalezferrer/zerozeroufo/releases
@@ -46,13 +56,6 @@ Abduct cows to regain energy, fight the army that will try impede your mission. 
 
 Thanks for playing!
 
-## Screenshoots
-
-![Screenshoot](/docs/screen1.jpg)
-
-![Screenshoot](/docs/screen2.jpg)
-
-![Screenshoot](/docs/screen3.jpg)
 
 ## How to Play 🎮
 
