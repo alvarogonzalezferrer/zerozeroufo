@@ -218,7 +218,7 @@ void MainGameLoop::update()
 		
 		if (rm == 3)
 		{
-			message_box->showMessage("By Kronoman from Argentina\nCopyright (c) 2022\nDone in exile in Costa Rica\nRetro fun, no DRM bullshit!\nC++ & Allegro\nThanks for playing!", "[ Pura Vida ]");
+		message_box->showMessage("By Kronoman from Argentina\nCopyright (c) 2022\nDone in exile in Costa Rica\nRetro fun, no DRM bullshit!\nC++ & Allegro\nThanks to testers:\nZir, Joel, Slava, Sebas,\nJuane, Nacho, Pablo-San, Guille\nThanks for playing!", "[ Pura Vida ]");
 			
 			if (rand()%100 > 95) // easter egg, fuck kirchner & peronism
 				message_box->showMessage("Cristina Kirchner Thief of Argentina\nKirchner = corrupts", "[ C.F.K.L.D.L.N.A ]"); // cristina fernandez de kirchner ladrona de la nacion argentina
