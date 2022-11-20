@@ -521,6 +521,7 @@ void MainGameLoop::render()
 	{
 		// DEBUG ADD STAR ANIMATION OR SOMETHING!
 		//clear_to_color(doubleBuffer, makecol(0, 0, 0));
+		blit(intro_bmp, doubleBuffer, 0, 0, 0, 0, intro_bmp->w, intro_bmp->h);	
 		menu_main->render(doubleBuffer);
 	}
 	break;
@@ -529,6 +530,7 @@ void MainGameLoop::render()
 	{
 		// DEBUG ADD ANIMATION OR SOMETHING!
 		//clear_to_color(doubleBuffer, makecol(0, 0, 0));
+		blit(intro_bmp, doubleBuffer, 0, 0, 0, 0, intro_bmp->w, intro_bmp->h);	
 		menu_ingame->render(doubleBuffer);
 	}
 	break;
