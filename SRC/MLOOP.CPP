@@ -215,12 +215,15 @@ void MainGameLoop::update()
 		if (rm == 2)
 			changeState(STATE_OPTIONS_MENU);
 		
-		// DEBUG OTHER options, not done yet 
+		
 		if (rm == 3)
 		{
-			message_box->showMessage("By Kronoman\n(c) 2022\nDone in Costa Rica\nRetro fun\nC++ & Allegro\nThanks for playing!", "[ Pura Vida ]");
+			message_box->showMessage("By Kronoman from Argentina\nCopyright (c) 2022\nDone in exile in Costa Rica\nRetro fun, no DRM bullshit!\nC++ & Allegro\nThanks for playing!", "[ Pura Vida ]");
+			
+			if (rand()%100 > 95) // easter egg, fuck kirchner & peronism
+				message_box->showMessage("Cristina Kirchner Thief of Argentina\nKirchner = corrupts", "[ C.F.K.L.D.L.N.A ]"); // cristina fernandez de kirchner ladrona de la nacion argentina
 		}
-		// 3 about
+		
 	}
 	break;
 	
