@@ -154,6 +154,10 @@ The terrain is procedurally generated randomly, so no two games are the same.
 
 * Data will be automatically loaded - unloaded when needed to keep RAM usage to a minimum.
 
+* Game logic as a singleton: Can you only ever imagine having one of them in your runtime? If you can imagine having two, try not to make it a singleton / global now because you're limiting yourself needlessly. - Will it be needed in disparate parts of software, ie, is it very tedious to pass it to everybody who needs it? If the answer to both of those is yes, then make it a global or singleton.
+
+* Statements of the form "never use x-feature" are always nonsensical. Use features when it makes sense to do so, and don't use them when it doesn't.
+
 **Random ramblings**
 
 * I'm pretty tired of recruiters wasting my time, they don't know anything about programming, and they judge without knowing. 
