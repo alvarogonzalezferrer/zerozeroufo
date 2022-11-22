@@ -51,7 +51,7 @@ float Map::createColumn(float y)
 	// parameters, normal map
 	float max_slope = 0.6f;
 	float min_height = mapH * 0.8;
-	float man_height = mapH * 0.98;
+	float max_height = mapH * 0.98;
 	float min_s_length = 4;
 	float max_s_length = (int)(mapW/10);
 	
@@ -81,9 +81,9 @@ float Map::createColumn(float y)
 		segment_slope = Randomize::random(0.1f, max_slope); // slope down
 	}
 	
-	if (y > min_height) // too low , bounce up
+	if (y > max_height) // too low , bounce up
 	{
-		y = min_height;
+		y = max_height;
 		
 		segment_length = Randomize::random(min_s_length, max_s_length);
 		segment_slope = Randomize::random(-max_slope, -0.1f); // slope up

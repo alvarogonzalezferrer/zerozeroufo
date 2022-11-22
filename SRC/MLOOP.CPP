@@ -465,7 +465,8 @@ void MainGameLoop::update()
 	}
 
 
-	// for all states
+	// -- for all states --
+	
 	// DEBUG - THIS IS BUGGY
 	if (key[KEY_SPACE]) // avoid waiting screens!
 	{
@@ -482,6 +483,7 @@ void MainGameLoop::update()
 	if (key[KEY_F10] ) // key to hard quit...DEBUG - confirm!
 		changeState(STATE_QUIT);
 		
+	// --- debug commands ---
 	if (key[KEY_F12]) // debug key
 	{
 		debug = !debug; // toggle debug
@@ -493,7 +495,7 @@ void MainGameLoop::update()
 		map->boss_mode = !map->boss_mode; // toggle debug
 		while(key[KEY_F11]); // wait key release
 	}
-
+	// --- debug end ---
 	
 	
 
