@@ -50,6 +50,10 @@ MainGameLoop::MainGameLoop()
 	
 	// message box 
 	message_box = new MessageBox();
+	
+	// active boss = none
+	boss = NULL;
+	boss_defeated = false;
 
 }
 
@@ -68,6 +72,11 @@ MainGameLoop::~MainGameLoop()
 	delete(menu_ingame);
 	delete(menu_options);
 	delete(message_box);
+	
+	if (boss) // remove active boss from RAM
+	{
+		delete(boss);
+	}
 }
 
 
@@ -293,6 +302,12 @@ void MainGameLoop::update()
 	case STATE_NEXTLEVEL:
 	{
 		wave ++; // next wave 
+		
+		// is a wave with stage boss ? 
+		if (wave % 3 == 0)
+			boss_defeated = false;
+		else 
+			boss_defeated = true; // no boss
 
 		// map generation
 		// is a chain to select aproppiate weather, land and background
@@ -416,14 +431,21 @@ void MainGameLoop::update()
 		// add enemies each screen, dont add if we traveled enough
 		bool finished = ticks > (unsigned  long int)(2000 + wave*200); // each wave the level is a little longer  
 		
-		// generate new enemies
-		if ((ticks % 300 == 0 || ret_e == 0) && !finished)
+		// generate new enemies if we re not against the boss level
+		if ((ticks % 300 == 0 || ret_e == 0) && !finished && !boss)
 			enemyList->generate(rand() % 5 + wave, wave, map); //  GENERATE TIER / WAVE APPROPIATE ENEMIES // TODO - ADD BOSSES
 		
-		// taking too long to kill enemies, show message
-		if (ticks > (unsigned  long int)(2400 + wave*200))
+		// if we finished and we dont defeated the boss, spawn boss
+		// only if appropiate wave 
+		if (finished && wave%3 == 0 && !boss && !boss_defeated)
 		{
-			if (enemyList->enemies_n>0)
+			// DEBUG -- SPAWN BOSS HERE!
+		}			
+		
+		// taking too long to kill enemies, show message if boss is not active
+		if (ticks > (unsigned  long int)(2400 + wave*200) && !boss)
+		{
+			if (enemyList->enemies_n > 0)
 			{
 				t_destroy_m = 30;
 				x_destroy_m = enemyList->enemy[enemyList->enemies_n-1]->x;
@@ -435,8 +457,8 @@ void MainGameLoop::update()
 			}
 		}
 		
-		// end level when enough travel and no enemies - DEBUG CHECK BOSSES TOO
-		if (finished && ret_e == 0) 
+		// end level when enough travel and no enemies and boss defeated
+		if (finished && ret_e == 0 && (boss_defeated || !boss) ) 
 		{
 				wait = 90;
 				changeState(STATE_WAIT_FOR_NEXT_LEVEL);

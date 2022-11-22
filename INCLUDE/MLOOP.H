@@ -26,6 +26,9 @@
 #include "menu.h"
 #include "msgbox.h"
 
+#include "boss.h" // enemy bosses
+#include "bossheli.h" 
+
 // internal game resolution (not video screen)
 #define GAME_W_RES 320
 #define GAME_H_RES 200
@@ -70,6 +73,9 @@ class MainGameLoop : public GameMachine
 		CowList cowL; // cow list 
 		
 		EnemyList *enemyList; // enemy list
+		
+		Boss *boss; // boss active, usually is NULL
+		bool boss_defeated; // did I defeat this stage boss yet?
 		
 		Weather weather; // weather of the map
 		

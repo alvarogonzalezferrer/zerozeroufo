@@ -3,7 +3,6 @@
 // -----------------------------------------------------------------------
 // NOTE THIS IS A PURE VIRTUAL CLASS
 // base BOSS class , all bosses should derive from here
-//
 // -----------------------------------------------------------------------
 #ifndef BOSS_H
 #define BOSS_H
