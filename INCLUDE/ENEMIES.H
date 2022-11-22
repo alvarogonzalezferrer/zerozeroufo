@@ -46,7 +46,7 @@ class EnemyList
 		bool addEnemy(Enemy *e); // add enemy e to active enemy list, will DELETE it IF list is full, no need to manage this, returns TRUE if added, FALSE if list is full 
 		
 		// I need to receive UFO to test against my own shoots and test against theirs, ETC
-		int update(Map *m, UFO *ufo, ParticleManager *pm); // returns how many enemies are alive yet... DEBUG SHOULD RECEIVE PARTICLE AND UFO SHOOT LIST TOO!
+		int update(Map *m, UFO *ufo, ParticleManager *pm); // returns how many enemies are alive yet...
 		
 		// render enemies AND SHOOTS
 		void render(BITMAP *bmp);

@@ -309,6 +309,13 @@ void MainGameLoop::update()
 		else 
 			boss_defeated = true; // no boss
 
+		// safeguard delete previous boss
+		if (boss)
+		{
+			delete(boss);
+			boss = NULL;
+		}
+
 		// map generation
 		// is a chain to select aproppiate weather, land and background
 		
@@ -320,7 +327,7 @@ void MainGameLoop::update()
 		
 		// end of map generation
 		
-		cowL.generate(rand() % (CowList::maxCOWS - 5) + 5); // DEBUG CHECK MAX SIZE !! ADJUST TO DIFFICULTY, HARDER LESS COWS!
+		cowL.generate(rand() % (CowList::maxCOWS - 5) + 5); 
 	
 		camerashake = 0;
 		
@@ -426,6 +433,20 @@ void MainGameLoop::update()
 		
 		weather.update(); // update weather
 		
+		bool ret_b = true; // Im dead boss
+
+		if (boss)
+		{
+			ret_b = boss->update(map, ufo, pm); // update boss
+			
+			if (ret_b) // boss killed!
+			{
+				delete(boss);
+				boss = NULL;
+				boss_defeated = true;
+			}
+		}
+		
 		int ret_e = enemyList->update(map, ufo, pm); // update enemies
 		
 		// add enemies each screen, dont add if we traveled enough
@@ -437,9 +458,10 @@ void MainGameLoop::update()
 		
 		// if we finished and we dont defeated the boss, spawn boss
 		// only if appropiate wave 
-		if (finished && wave%3 == 0 && !boss && !boss_defeated)
+		if (finished && wave % 3 == 0 && !boss && !boss_defeated)
 		{
-			// DEBUG -- SPAWN BOSS HERE!
+			// DEBUG -- SPAWN BOSS HERE according to wave!
+			boss = new BossHeli();
 		}			
 		
 		// taking too long to kill enemies, show message if boss is not active
@@ -599,7 +621,7 @@ void MainGameLoop::render()
 		pm->render(doubleBuffer,0,0); // render particles
 		//ufo->render_HUD(doubleBuffer); // render HUD
 		
-		// DEBUG -- ADD SOME MESSAGE! 
+		 
 		textprintf_ex(doubleBuffer, font,  doubleBuffer->w/2 -  text_length(font, "CONGRATULATIONS!")/2, doubleBuffer->h/2 - text_height(font)/2, makecol(255,255,255),makecol(170,0,0) , "CONGRATULATIONS!");
 	}
 	break;
@@ -619,6 +641,9 @@ void MainGameLoop::render()
 		cowL.render(doubleBuffer); // render cows
 		
 		enemyList->render(doubleBuffer); // render enemies
+		
+		if (boss)
+			boss->render(doubleBuffer); // render boss 
 		
 		weather.render(doubleBuffer); // render weather
 		

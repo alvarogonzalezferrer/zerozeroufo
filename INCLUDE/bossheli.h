@@ -37,7 +37,9 @@ class BossHeli : public Boss
 		SAMPLE *explosion_wav;
 		
 		Datafile data;
-				
+		
+		bool face; // face right or left? 
+		
 		EnemyList *enemyList; // will spawn paratroopers, remember to set this when doing new boss !
 };
 
