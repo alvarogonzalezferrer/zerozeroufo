@@ -50,12 +50,12 @@ float Map::createColumn(float y)
 {
 	// parameters, normal map
 	float max_slope = 0.6f;
-	float min_height = mapH * 0.8;
+	float min_height = mapH * 0.7;
 	float max_height = mapH * 0.98;
 	float min_s_length = 4;
 	float max_s_length = (int)(mapW/10);
 	
-	// for boss fight
+	// for boss fight we have a flatter map
 	if (boss_mode)
 	{
 		max_slope = 0.2f;
