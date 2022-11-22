@@ -138,8 +138,6 @@ bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies, Bo
 		}
 	}
 	
-	
-	
 	// detect collision against UFO?
 	if (ufo) 
 	{
@@ -189,7 +187,47 @@ bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies, Bo
 		}
 	}
 	
-	// against boss ? DEBUG NOT DONE YET
+	// against boss ? 
+	if (boss)
+	{
+		if (boss->shoot_bbox) // damage area?
+		{
+			// check first against shoot box of boss
+			if (bbox->collide(boss->shoot_bbox))
+			{
+				boss->life -= damage; 
+				
+				// DEBUG - PLAY HIT SOUND? boss should have one!
+				// add "damage" sparks
+				int pz = rand()%5 + 5 + (damage/5); // particle ammount
+			
+				for (int p=0; p<pz;p++)
+					pm->add(new Spark(x, y, (rand()%50-25)/10.0, (rand()%50-25)/10.0, rand()%10+5, color));
+
+				return true; // I collided 
+			}
+		}
+		
+		// check against non-damage area, if there is one
+		if (boss->bbox)
+		{
+			// check first against shoot box of boss
+			if (bbox->collide(boss->bbox))
+			{
+				//boss->life -= damage; this does not damage the boss
+				
+				// DEBUG - show message that this is not a damage area!
+				
+				// add "damage" sparks
+				int pz = 5; // particle ammount
+			
+				for (int p=0; p<pz;p++)
+					pm->add(new Spark(x, y, (rand()%50-25)/10.0, (rand()%50-25)/10.0, rand()%10+5, makecol(85,85,85)));
+
+				return true; // I collided 
+			}
+		}
+	}
 	
 	// add particles? 
 	if (particle_trail > 0)
