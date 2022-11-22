@@ -22,6 +22,7 @@
 #include "collide.h"
 #include "enemies.h"
 #include "ufo.h" 
+#include "boss.h"
 
 // forward declaration 
 class UFO;
@@ -111,7 +112,12 @@ class ShootsList
 
 		void reset(); // clear all shoots, removing them from RAM too!
 		
-		void update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies); // moves the shoots and test against enemies or UFO (any can be NULL to avoid friendly fire)
+		// overloaded 
+		void update(Map *m, ParticleManager *pm, UFO *ufo); // for enemies against UFO
+		
+		void update(Map *m, ParticleManager *pm, EnemyList *enemies, Boss *boss); // for UFO against enemies and boss 
+		
+		void update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies, Boss *boss); // moves the shoots and test against enemies or UFO or boss (any can be NULL to avoid friendly fire)
 		
 		void add(Shoot *shoot); // add a shoot, will be auto deleted when life <= 0 or hit something
 		

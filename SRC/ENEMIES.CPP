@@ -485,7 +485,8 @@ int EnemyList::update(Map *m, UFO *ufo, ParticleManager *pm)
 	}
 	
 	// test enemies shoots against player
-	shootsE->update(m, pm, ufo, NULL);
+	// the boss enemies also puts shoots in this list!
+	shootsE->update(m, pm, ufo);
 	
 	return enemies_n; // how many are alive yet, used by game loop master to decide next wave,  etc
 }

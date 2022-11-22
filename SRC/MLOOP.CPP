@@ -363,7 +363,7 @@ void MainGameLoop::update()
 	case STATE_WAIT_FOR_NEXT_LEVEL:
 	{
 		// update logic, but stop scrolling
-		ufo->update(doubleBuffer->w, map, pm, enemyList); // update player UFO
+		ufo->update(doubleBuffer->w, map, pm, enemyList, boss); // update player UFO
 		cowL.update(map, ufo, pm); // update cows
 		pm->update(); // update particles
 		weather.update(); // update weather
@@ -417,7 +417,7 @@ void MainGameLoop::update()
 		
 		map->update(); // update game map
 
-		ufo->update(doubleBuffer->w, map, pm, enemyList); // update player UFO
+		ufo->update(doubleBuffer->w, map, pm, enemyList, boss); // update player UFO
 		
 		// -- camera shake on damage --
 		// did ufo receive damage? shake camera  (i check last frame life with new life)
@@ -437,7 +437,7 @@ void MainGameLoop::update()
 
 		if (boss)
 		{
-			ret_b = boss->update(map, ufo, pm); // update boss
+			ret_b = boss->update(map, ufo, pm, enemyList->shootsE); // update boss
 			
 			if (ret_b) // boss killed!
 			{
@@ -461,7 +461,10 @@ void MainGameLoop::update()
 		if (finished && wave % 3 == 0 && !boss && !boss_defeated)
 		{
 			// DEBUG -- SPAWN BOSS HERE according to wave!
+			
+			// #1 helicopter boss
 			boss = new BossHeli();
+			(BossHeli *)boss->enemyList = enemyList; // to be able to deploy paratroopers
 		}			
 		
 		// taking too long to kill enemies, show message if boss is not active

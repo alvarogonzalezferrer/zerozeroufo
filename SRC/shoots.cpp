@@ -73,7 +73,18 @@ Shoot::~Shoot()
 		delete(bbox);
 }
 
-bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies)
+bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo)
+{
+	update(m, pm, ufo, NULL, NULL); // enemis call this
+}
+
+bool Shoot::update(Map *m, ParticleManager *pm, EnemyList *enemies, Boss *boss)
+{
+	update(m, pm, NULL, enemies, boss); // UFO call this
+}
+
+// real show 
+bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies, Boss *boss)
 {
 	// update movement 
 	life --;
@@ -129,7 +140,7 @@ bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies)
 	
 	
 	
-	// detect collision ?
+	// detect collision against UFO?
 	if (ufo) 
 	{
 		// check against UFO
@@ -155,6 +166,7 @@ bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies)
 		}
 	}
 	
+	// against enemies?
 	if (enemies)
 	{
 		// check against ALL enemies 
@@ -176,6 +188,8 @@ bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies)
 			}
 		}
 	}
+	
+	// against boss ? DEBUG NOT DONE YET
 	
 	// add particles? 
 	if (particle_trail > 0)

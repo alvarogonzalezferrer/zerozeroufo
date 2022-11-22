@@ -14,6 +14,7 @@
 #include "ufo.h"
 #include "logger.h"
 #include "enemies.h"
+#include "boss.h"
 #include "shoots.h"
 #include "randomiz.h"
 
@@ -102,7 +103,7 @@ UFO::~UFO()
 }
 
 
-void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies)
+void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies, Boss *boss)
 {
 	// DEBUG ADD JOYSTICK CONTROL FROM MY ARCADE FRAMEWORK
 	// DEBUT TODO KEYS SHOULD BE CONFIGURABLE
@@ -382,8 +383,8 @@ void UFO::update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies)
 		}
 	}
 	
-	// update my shoots
-	shoots->update(map, pm, NULL, enemies);
+	// update my shoots against enemies and boss -- DEBUG boss not done!
+	shoots->update(map, pm, enemies, boss);
 	
 	shoot_recharge--;
 	if (shoot_recharge <0)

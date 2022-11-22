@@ -96,13 +96,91 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	x += sx;
 	y += sy;
 	
+	// my middle point is quite used for AI
+	int mx = x + sprite->w / 2; 
+	int my = y + sprite->h / 2;
+	
+	// always face the player
+	if (ufo->x < mx )
+		face = false; // face left
+	else 
+		face = true;  // face right
+	
 	// AI
-	ai_c--
+	ai_c--;
 	if (ai_c <0)
 	{
 		// do something DEBUG
 		
-		ai_c = 30;
+		// fly to opposite of screen of player
+		if (ufo->x < 160)
+			sx = 0.2;
+		else 
+			sx = -0.2;
+		
+		// try to match in height the UFO 
+		if (ufo->y < my)
+			sy = -0.2;
+		else 
+			sy = 0.2;
+		
+		// open fire? 
+		
+		// shoot? 80% chance
+		if (rand()%100 < 80)
+		{			
+			float ssx = (face) ? -2.5 : 2.5; // left or right?
+			
+			// machine gun is at 25,30 px in the sprites , so we shoot from there
+			float sx = x + 25;
+			float sy = y + 30;
+			
+			shoots->add(new Shoot(sx, sy,
+								  ssx, 0, 
+								  200, 
+								  3,
+								  0.1, 
+								  7, 
+								  makecol(255,85,85),
+								  0));
+			
+			shoots->add(new Shoot(sx, sy,
+								  ssx, 1.3, 
+								  200, 
+								  3,
+								  0.1, 
+								  7, 
+								  makecol(255,85,85),
+								  0));
+								  
+			shoots->add(new Shoot(sx, sy,
+								ssx, -1.3, 
+								200, 
+								3,
+								0.1, 
+								7, 
+								makecol(255,85,85),
+								0));
+		}
+		
+		// deploy paratroopers or prizes
+		if (enemyList)
+		{
+			// release some prize? 
+			if (rand()%100<3)
+			{
+				if (rand()%2)
+					enemyList->addEnemy(new WeaponPrize(mx, my, &enemyList->data));
+				else
+					enemyList->addEnemy(new HealthPrize(mx, my, &enemyList->data));
+			}
+
+			// deploy paratrooper
+			if (rand()%100 < 20)
+				enemyList->addEnemy(new Paratrooper(mx, my, &enemyList->data));
+		}
+		
+		ai_c = 15 + rand()%15;
 	}
 	
 	return false; 

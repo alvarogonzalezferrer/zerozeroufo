@@ -22,6 +22,7 @@
 #include "particle.h"
 #include "shoots.h" 
 #include "enemies.h"
+#include "boss.h"
 
 #include "control.h" // controller 
 
@@ -37,7 +38,7 @@ class UFO
 		UFO();
 		~UFO();
 		
-		void update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies);
+		void update(int maxW, Map *map, ParticleManager *pm, EnemyList *enemies, Boss *boss);
 		
 		void render(BITMAP *bmp);
 		
