@@ -27,6 +27,7 @@ Map::Map()
 	tm = 0;
 	segment_length = 0;
 	segment_slope = 0;
+	boss_mode = false;
 }
 
 Map::~Map()
@@ -49,8 +50,8 @@ float Map::createColumn(float y)
 {
 	if (--segment_length < 1) // next segment
 	{
-		segment_length = Randomize::random(4, (int)(mapW/10));  //rand() % mapW/10 + 4; // new segment lenght
-		segment_slope =  Randomize::random(-0.4f, 0.4f);  //(float)(rand() % 80 - 40) / 100.0f; // slope -- DEBUG -- TODO, ADD A "BOSS" MODE TO MAKE FLAT LAND!
+		segment_length = Randomize::random(4, (int)(mapW/10));  // new segment lenght
+		segment_slope =  Randomize::random(-0.4f, 0.4f);  // slope -- DEBUG -- TODO, ADD A "BOSS" MODE TO MAKE FLAT LAND!
 	}
 
 	y += segment_slope;

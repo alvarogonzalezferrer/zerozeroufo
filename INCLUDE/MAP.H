@@ -37,6 +37,10 @@ class Map
 
 		float createColumn(float y); // helper creates map column following previous slope
 
+		// boss mode makes a map that is almost flat, this is useful for boss fights, so they can walk easily on ground
+		// remember to set false after boss fight
+		bool boss_mode; 
+
 		// map size 
 		static const int mapW = 320;
 		static const int mapH = 200;
