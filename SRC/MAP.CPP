@@ -48,29 +48,45 @@ Map::~Map()
 // ----------------------------
 float Map::createColumn(float y)
 {
+	// parameters, normal map
+	float max_slope = 0.6f;
+	float min_height = mapH * 0.8;
+	float man_height = mapH * 0.98;
+	float min_s_length = 4;
+	float max_s_length = (int)(mapW/10);
+	
+	// for boss fight
+	if (boss_mode)
+	{
+		max_slope = 0.2f;
+		min_height = mapH * 0.9;
+		min_s_length = 50;
+		max_s_length = mapW;
+	}
+	
 	if (--segment_length < 1) // next segment
 	{
-		segment_length = Randomize::random(4, (int)(mapW/10));  // new segment lenght
-		segment_slope =  Randomize::random(-0.4f, 0.4f);  // slope -- DEBUG -- TODO, ADD A "BOSS" MODE TO MAKE FLAT LAND!
+		segment_length = Randomize::random(min_s_length, max_s_length);  // new segment lenght
+		segment_slope =  Randomize::random(-max_slope, max_slope);  // slope -- DEBUG -- TODO, ADD A "BOSS" MODE TO MAKE FLAT LAND!
 	}
 
 	y += segment_slope;
 	
-	if (y < mapH * 0.8) // too high, bounce down
+	if (y < min_height) // too high, bounce down
 	{
-		y = mapH * 0.8;
+		y = min_height;
 		//segment_length = 0; 
 		// force bounce down
-		segment_length = Randomize::random(4, (int)(mapW/10));
-		segment_slope = Randomize::random(0.1f, 0.6f); // slope down
+		segment_length = Randomize::random(min_s_length, max_s_length);
+		segment_slope = Randomize::random(0.1f, max_slope); // slope down
 	}
 	
-	if (y > mapH * 0.97) // too low , bounce up
+	if (y > min_height) // too low , bounce up
 	{
-		y = mapH * 0.97;
+		y = min_height;
 		
-		segment_length = Randomize::random(4, (int)(mapW/10));
-		segment_slope = Randomize::random(-0.6f, -0.1f); // slope up
+		segment_length = Randomize::random(min_s_length, max_s_length);
+		segment_slope = Randomize::random(-max_slope, -0.1f); // slope up
 	}
 	
 	return y;

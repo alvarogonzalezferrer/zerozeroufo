@@ -487,6 +487,15 @@ void MainGameLoop::update()
 		debug = !debug; // toggle debug
 		while(key[KEY_F12]); // wait key release
 	}
+	
+	if (key[KEY_F11]) // debug key for map boss
+	{
+		map->boss_mode = !map->boss_mode; // toggle debug
+		while(key[KEY_F11]); // wait key release
+	}
+
+	
+	
 
 	if (camerashake > 0)
 		camerashake --;
