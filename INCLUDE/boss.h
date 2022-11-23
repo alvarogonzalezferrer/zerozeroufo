@@ -36,6 +36,8 @@ class Boss
 		virtual bool update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots ) = 0; 
 		
 		virtual void render(BITMAP *bmp) = 0; // render in bmp
+		
+		void collide(UFO *ufo, ParticleManager *pm); // does the math of colliding with UFO, call froom update()
 
 		// position & direction
 		float x,y;
@@ -49,10 +51,10 @@ class Boss
 		
 		// we have two collisions
 		// one is the hot spot to receive shoots from player 
-		// two is a general collision that does not damage the boss
+		// two is a general collision with UFO that does not damage the boss
 		// can be NULL if not needed
-		Collide2D *shoot_bbox; // bounding box for collisions against enemy shoots, bosses have a "hot spot" for shoots 
-		Collide2D *bbox; // bounding box for collisions in general, no damage taken in this area
+		Collide2D *shoot_bbox; // bounding box for collisions against UFO shoots, bosses have a "hot spot" for shoots 
+		Collide2D *bbox; // bounding box for collisions against UFO only, no damage taken in this area
 		
 		// animation in general 
 		

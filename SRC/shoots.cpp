@@ -199,7 +199,8 @@ bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies, Bo
 		}
 		
 		// check against non-damage area, if there is one
-		if (boss->bbox)
+		// DEBUG DISABLED FOR NOW DOESNT WORK VERY GOOD
+		/*if (boss->bbox)
 		{
 			// check first against shoot box of boss
 			if (bbox->collide(boss->bbox))
@@ -216,7 +217,7 @@ bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies, Bo
 
 				return true; // I collided 
 			}
-		}
+		}*/
 	}
 	
 	// add particles? 
