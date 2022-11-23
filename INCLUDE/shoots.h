@@ -67,7 +67,7 @@ class Shoot
 		// moves the shoots and test against enemies or UFO (any can be NULL to avoid friendly fire) 
 		// also test against ground and screen limits
 		// returns TRUE when shoot is dead and must be deleted
-		virtual bool update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies);
+		virtual bool update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies, Boss *boss);
 		
 		virtual void render(BITMAP *bmp); // render in bmp
 

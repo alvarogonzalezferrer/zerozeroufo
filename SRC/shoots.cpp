@@ -73,17 +73,7 @@ Shoot::~Shoot()
 		delete(bbox);
 }
 
-bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo)
-{
-	update(m, pm, ufo, NULL, NULL); // enemis call this
-}
-
-bool Shoot::update(Map *m, ParticleManager *pm, EnemyList *enemies, Boss *boss)
-{
-	update(m, pm, NULL, enemies, boss); // UFO call this
-}
-
-// real show 
+// update shoots
 bool Shoot::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies, Boss *boss)
 {
 	// update movement 
@@ -332,11 +322,22 @@ void ShootsList::reset()
 	shoots_n = 0;
 }
 
+
+void ShootsList::update(Map *m, ParticleManager *pm, UFO *ufo)
+{
+	update(m, pm, ufo, NULL, NULL); // enemis call this
+}
+
+void ShootsList::update(Map *m, ParticleManager *pm, EnemyList *enemies, Boss *boss)
+{
+	update(m, pm, NULL, enemies, boss); // UFO call this
+}
+
 // moves the shoots and test against enemies or UFO (any can be NULL to avoid friendly fire)
-void ShootsList::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies)
+void ShootsList::update(Map *m, ParticleManager *pm, UFO *ufo, EnemyList *enemies, Boss *boss)
 {
 	for (int i=0; i < shoots_n; i++)
-		if (shoots[i]->update(m, pm, ufo, enemies))
+		if (shoots[i]->update(m, pm, ufo, enemies, boss))
 		{
 			// shoot is dead , remove from last one
 			delete(shoots[i]);
