@@ -90,10 +90,13 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 		sy = 0.5;
 	}
 	
-	if (y > m->getHeight(x) - sprite->h - 5)
+	if (life > 0) // prevent ground crash only if alive
 	{
-		y = m->getHeight(x) - sprite->h - 5;
-		sy = -0.5;
+		if (y > m->getHeight(x) - sprite->h - 5)
+		{
+			y = m->getHeight(x) - sprite->h - 5;
+			sy = -0.5;
+		}
 	}
 	
 	x += sx;
@@ -166,8 +169,8 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 		
 		// open fire? 
 		
-		// shoot? 80% chance
-		if (rand()%100 < 80)
+		// shoot? 60% chance
+		if (rand()%100 < 60)
 		{
 			openfire = 60; // engage machine gun
 			ai_c = 90;
@@ -177,7 +180,7 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 		if (enemyList)
 		{
 			// release some prize? 
-			if (rand()%100<3)
+			if (rand()%100<8)
 			{
 				if (rand()%2)
 					enemyList->addEnemy(new WeaponPrize(mx, my, &enemyList->data));
@@ -186,21 +189,19 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 			}
 
 			// deploy paratrooper
-			if (rand()%100 < 20)
+			if (rand()%100 < 35)
 				enemyList->addEnemy(new Paratrooper(mx, my, &enemyList->data));
 		}
-		
-		
 	}
 	
-	// update 
+	// update bbox
 	bbox->x = x;
 	bbox->y = y;
 	
-	shoot_bbox->x = x+15;
-	shoot_bbox->y = y+5;
+	shoot_bbox->x = x + 15;
+	shoot_bbox->y = y + 5;
 	
-	// COLLISION WITH UFO!
+	// collision with UFO!
 	collide(ufo, pm);
 	
 	if (life < 0) // animate dead
@@ -243,8 +244,8 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 		}
 
 		
-		/*if (y > m->getHeight(x))
-			life = -100; // explode on impact*/
+		if (y > 200 - sprite->h - 10)
+			life -= 10; // speed up explosion when going out of screen
 		
 		if (life < -100)
 			return true; // died 
