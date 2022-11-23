@@ -44,8 +44,8 @@ BossHeli::BossHeli()
 	y = 100;
 	
 	// bounding box 
-	bbox = NULL;
-	shoot_bbox = NULL;
+	bbox = new Collide2D(x, y, sprite->w, sprite->h);
+	shoot_bbox = new Collide2D(x+15, y+5, 50, 15); // only cabin gets damaged
 	
 	collideWithUFO = true;
 
@@ -55,7 +55,11 @@ BossHeli::BossHeli()
 BossHeli::~BossHeli()
 {
 	Logger::log("BossHeli::~BossHeli()");
+	
 	// release data 
+	delete(bbox);
+	delete(shoot_bbox);
+	
 	data.unload(); // unload datafile
 }
 
@@ -154,13 +158,13 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 								  0));
 								  
 			shoots->add(new Shoot(sx, sy,
-								ssx, -1.3, 
-								200, 
-								3,
-								0.1, 
-								7, 
-								makecol(255,85,85),
-								0));
+								  ssx, -1.3, 
+								  200, 
+								  3,
+								  0.1, 
+								  7, 
+								  makecol(255,85,85),
+								  0));
 		}
 		
 		// deploy paratroopers or prizes
@@ -182,6 +186,13 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 		
 		ai_c = 15 + rand()%15;
 	}
+	
+	// update 
+	bbox->x = x;
+	bbox->y = y;
+	
+	shoot_bbox->x = x+15;
+	shoot_bbox->y = y+5;
 	
 	return false; 
 }

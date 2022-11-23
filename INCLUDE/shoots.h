@@ -28,6 +28,7 @@
 class UFO;
 class EnemyList;
 class Map;
+class Boss;
 
 // -----------------------------------------------------------------------
 // base shoot class , all new weapons should derive from here
