@@ -35,7 +35,7 @@ BossHeli::BossHeli()
 	frame = 0;
 	ai_c = 0;
 	
-	life = 1000;
+	life = 250;
 	
 	// position outside screen 
 	sx = -2;
@@ -115,10 +115,9 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	{		
 		float ssx = (face) ? -2.5 : 2.5; // left or right?
 		
-		float sx = mx;
-		float sy = my;
+		play_sample(shoot_wav, 255, x * 255 / 320, 900 + rand()%300, 0);
 		
-		shoots->add(new Shoot(sx, sy,
+		shoots->add(new Shoot(mx, my,
 							  ssx, 0, 
 							  200, 
 							  3,
@@ -127,7 +126,7 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 							  makecol(255,85,85),
 							  0));
 		
-		shoots->add(new Shoot(sx, sy,
+		shoots->add(new Shoot(mx, my,
 							  ssx, 1.3, 
 							  200, 
 							  3,
@@ -136,7 +135,7 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 							  makecol(255,85,85),
 							  0));
 							  
-		shoots->add(new Shoot(sx, sy,
+		shoots->add(new Shoot(mx, my,
 							  ssx, -1.3, 
 							  200, 
 							  3,
@@ -204,22 +203,61 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	// COLLISION WITH UFO!
 	collide(ufo, pm);
 	
-	if (life < 0)
-		return true; // died -- DEBUG ANIMATE DEAD!! 
+	if (life < 0) // animate dead
+	{
+		sy = rand()%2+2;
+		sx = 0;
+		
+		collideWithUFO = false;
+		ai_c = 1000;
+		life--;
+		
+		// add smoke
+		int cmx = x + sprite->w/2 + rand()%8 - 4;
+		int cmy = y + sprite->h/2 + rand()%8 - 4;
+
+		int f = rand()%85+25; // smoke shade
+		int cp = makecol(f,f,f); // smoke	
+		pm->add(new Smoke(cmx, cmy, (((rand()%50)-50)/10.0), -(rand()%30)/10.0, rand()%5+7, cp, rand()%4+1, (rand()%100)/100.0));
+		
+		// add burn
+		cp = makecol(170,0,0); // red	
+		pm->add(new Smoke(cmx, cmy, (((rand()%50)-50)/10.0), -(rand()%30)/10.0, rand()%5+7, cp, rand()%4+1, (rand()%100)/100.0));
+
+		// sparks when almost dead
+		if (life < -50)
+		{
+			cp = makecol(255,255,85); // yellow
+			int pz = rand()%5+5; // particle ammount
+			for (int p=0; p<pz;p++)
+				pm->add(new Spark(cmx, cmy, (rand()%100-50)/10.0, (rand()%20+20)/-10.0, rand()%15+10, cp));
+			
+			if (rand()%2)
+				play_sample(explosion_wav, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
+		}
+
+		if (life < -95)
+		{
+			ufo->score++;
+			play_sample(explosion_wav, 200 + rand()%55, x * 255 / 320, 800+rand()%600, 0);
+		}
+
+		
+		/*if (y > m->getHeight(x))
+			life = -100; // explode on impact*/
+		
+		if (life < -100)
+			return true; // died 
+	}
 	
-	return false; 
+	return false; // alive
 }
 
 void BossHeli::render(BITMAP *bmp)
-{
-	if (life > 0)
-	{
-		// we always face the enemy UFO
-		if (face) // left or right?
-			draw_sprite(bmp, sprite, (int)x, (int)y); // left
-		else
-			draw_sprite_h_flip(bmp, sprite, (int)x, (int)y);
-	}
+{	
+	// we always face the enemy UFO
+	if (face) // left or right?
+		draw_sprite(bmp, sprite, (int)x, (int)y); // left
 	else
-		 rotate_sprite(bmp, sprite, (int)x, (int)y, itofix(rand()%255)); // tumble falling
+		draw_sprite_h_flip(bmp, sprite, (int)x, (int)y);
 }

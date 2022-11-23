@@ -1,6 +1,6 @@
 #include "boss.h"
 #include "logger.h"
-
+#include "randomiz.h"
 
 // -----------------------------------------------------------------------
 // base boss class 
