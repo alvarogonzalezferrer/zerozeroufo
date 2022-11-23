@@ -60,8 +60,8 @@ float Map::createColumn(float y)
 	{
 		max_slope = 0.2f;
 		min_height = mapH * 0.9;
-		min_s_length = 25;
-		max_s_length = mapW/2;
+		min_s_length = 16;
+		max_s_length = mapW/5;
 	}
 	
 	if (--segment_length < 1) // next segment
@@ -77,7 +77,7 @@ float Map::createColumn(float y)
 		//y = min_height; // commented to avoid abrupt cut on boss mode
 		//segment_length = 0; 
 		// force bounce down
-		segment_length = max_s_length;
+		segment_length = Randomize::random(min_s_length, max_s_length);
 		segment_slope = Randomize::random(0.1f, max_slope); // slope down
 	}
 	
@@ -220,7 +220,7 @@ int Map::generate(int typemap)
 {
 	Logger::log("Map::generate()");
 
-	float y = mapH - mapH / 3;
+	float y = mapH * 0.9;
 	tm = typemap; // map type
 
 	// reset length & slope

@@ -244,8 +244,8 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 		}
 
 		
-		if (y > 200 - sprite->h - 10)
-			life -= 10; // speed up explosion when going out of screen
+		/*if (y > 200 - sprite->h - 10)
+			life -= 10; // speed up explosion when going out of screen*/
 		
 		if (life < -100)
 			return true; // died 
