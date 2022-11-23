@@ -40,7 +40,7 @@ BossHeli::BossHeli()
 	// position outside screen 
 	sx = -2;
 	sy = 0;
-	x = 360;
+	x = 321;
 	y = 100;
 	
 	// bounding box 
@@ -49,7 +49,9 @@ BossHeli::BossHeli()
 	
 	collideWithUFO = true;
 
-	face = false; // face left
+	face = true; // face left
+	
+	openfire = 0;
 }
 
 BossHeli::~BossHeli()
@@ -75,26 +77,23 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	// check boundaries 
 	if (x < 0)
 	{
-		x = 0;
-		sx = 0.2;
+		sx = 0.5;
 	}
 	
-	if (x > 320+sprite->w)
+	if (x > 320)
 	{
-		x = 320+sprite->w;
-		sx = -0.2;
+		sx = -0.5;
 	}
 	
 	if (y < 0)
 	{
-		y = 0;
-		sy = 0.2;
+		sy = 0.5;
 	}
 	
 	if (y > m->getHeight(x) - sprite->h - 5)
 	{
 		y = m->getHeight(x) - sprite->h - 5;
-		sy = -0.2;
+		sy = -0.5;
 	}
 	
 	x += sx;
@@ -106,65 +105,73 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	
 	// always face the player
 	if (ufo->x < mx )
-		face = false; // face left
+		face = true; // face left
 	else 
-		face = true;  // face right
+		face = false;  // face right
 	
 	// AI
+	openfire--;
+	if (openfire > 0 && openfire % 4 == 0) // machine gun
+	{		
+		float ssx = (face) ? -2.5 : 2.5; // left or right?
+		
+		float sx = mx;
+		float sy = my;
+		
+		shoots->add(new Shoot(sx, sy,
+							  ssx, 0, 
+							  200, 
+							  3,
+							  0, 
+							  7, 
+							  makecol(255,85,85),
+							  0));
+		
+		shoots->add(new Shoot(sx, sy,
+							  ssx, 1.3, 
+							  200, 
+							  3,
+							  0, 
+							  7, 
+							  makecol(255,85,85),
+							  0));
+							  
+		shoots->add(new Shoot(sx, sy,
+							  ssx, -1.3, 
+							  200, 
+							  3,
+							  0, 
+							  7, 
+							  makecol(255,85,85),
+							  0));
+	}
+	
+	
 	ai_c--;
 	if (ai_c <0)
 	{
-		// do something DEBUG
+		ai_c = 30 + rand()%30;
 		
 		// fly to opposite of screen of player
-		if (ufo->x < 160)
-			sx = 0.2;
-		else 
-			sx = -0.2;
+		if (ufo->x < 160 && x < 160)
+			sx = 1.2;
+		
+		if (ufo->x > 160 && x > 160)
+			sx = -1.2;
 		
 		// try to match in height the UFO 
 		if (ufo->y < my)
-			sy = -0.2;
+			sy = -0.7;
 		else 
-			sy = 0.2;
+			sy = 0.7;
 		
 		// open fire? 
 		
 		// shoot? 80% chance
 		if (rand()%100 < 80)
-		{			
-			float ssx = (face) ? -2.5 : 2.5; // left or right?
-			
-			// machine gun is at 25,30 px in the sprites , so we shoot from there
-			float sx = x + 25;
-			float sy = y + 30;
-			
-			shoots->add(new Shoot(sx, sy,
-								  ssx, 0, 
-								  200, 
-								  3,
-								  0.1, 
-								  7, 
-								  makecol(255,85,85),
-								  0));
-			
-			shoots->add(new Shoot(sx, sy,
-								  ssx, 1.3, 
-								  200, 
-								  3,
-								  0.1, 
-								  7, 
-								  makecol(255,85,85),
-								  0));
-								  
-			shoots->add(new Shoot(sx, sy,
-								  ssx, -1.3, 
-								  200, 
-								  3,
-								  0.1, 
-								  7, 
-								  makecol(255,85,85),
-								  0));
+		{
+			openfire = 60; // engage machine gun
+			ai_c = 90;
 		}
 		
 		// deploy paratroopers or prizes
@@ -184,7 +191,7 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 				enemyList->addEnemy(new Paratrooper(mx, my, &enemyList->data));
 		}
 		
-		ai_c = 15 + rand()%15;
+		
 	}
 	
 	// update 

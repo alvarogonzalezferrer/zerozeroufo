@@ -40,6 +40,8 @@ class BossHeli : public Boss
 		
 		bool face; // face right or left? 
 		
+		int openfire; // open fire?
+		
 		EnemyList *enemyList; // will spawn paratroopers, remember to set this when doing new boss !
 };
 

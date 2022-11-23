@@ -52,7 +52,7 @@ float Map::createColumn(float y)
 	float max_slope = 0.6f;
 	float min_height = mapH * 0.7;
 	float max_height = mapH * 0.98;
-	float min_s_length = 4;
+	float min_s_length = 8;
 	float max_s_length = (int)(mapW/10);
 	
 	// for boss fight we have a flatter map
@@ -60,8 +60,8 @@ float Map::createColumn(float y)
 	{
 		max_slope = 0.2f;
 		min_height = mapH * 0.9;
-		min_s_length = 50;
-		max_s_length = mapW;
+		min_s_length = 25;
+		max_s_length = mapW/2;
 	}
 	
 	if (--segment_length < 1) // next segment
@@ -74,10 +74,10 @@ float Map::createColumn(float y)
 	
 	if (y < min_height) // too high, bounce down
 	{
-		y = min_height;
+		//y = min_height; // commented to avoid abrupt cut on boss mode
 		//segment_length = 0; 
 		// force bounce down
-		segment_length = Randomize::random(min_s_length, max_s_length);
+		segment_length = max_s_length;
 		segment_slope = Randomize::random(0.1f, max_slope); // slope down
 	}
 	

@@ -325,6 +325,8 @@ void MainGameLoop::update()
 		// then weather according to map
 		weather.generate(map->generate(parallax->load(wave)));
 		
+		map->boss_mode = false; // reset map boss mode
+		
 		// end of map generation
 		
 		cowL.generate(rand() % (CowList::maxCOWS - 5) + 5); 
@@ -462,6 +464,8 @@ void MainGameLoop::update()
 		{
 			// DEBUG -- SPAWN BOSS HERE according to wave!
 			
+			map->boss_mode = true; // DEBUG NOT ALL BOSSES SHOULD SET UP THIS! ONLY LAND ONES
+			
 			// #1 helicopter boss
 			boss = new BossHeli();
 			((BossHeli *)boss)->enemyList = enemyList; // to be able to deploy paratroopers
@@ -537,9 +541,9 @@ void MainGameLoop::update()
 		while(key[KEY_F12]); // wait key release
 	}
 	
-	if (key[KEY_F11]) // debug key for map boss
+	if (key[KEY_F11]) // debug key for jumping to end of level (or boss)
 	{
-		map->boss_mode = !map->boss_mode; // toggle debug
+		ticks += 3000;
 		while(key[KEY_F11]); // wait key release
 	}
 	// --- debug end ---
