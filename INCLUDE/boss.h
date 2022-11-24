@@ -36,8 +36,11 @@ class Boss
 		virtual bool update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots ) = 0; 
 		
 		virtual void render(BITMAP *bmp) = 0; // render in bmp
+
+		virtual void renderHUD(BITMAP *bmp); // should render the boss life etc, or messages
 		
 		void collide(UFO *ufo, ParticleManager *pm); // does the math of colliding with UFO, call froom update()
+
 
 		// position & direction
 		float x,y;

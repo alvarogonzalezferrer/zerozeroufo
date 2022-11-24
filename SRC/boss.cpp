@@ -33,6 +33,17 @@ Boss::~Boss()
 	Logger::log("Boss::~Boss()");
 }
 
+void Boss::renderHUD(BITMAP *bmp)
+{
+	int c = makecol(255,255,255); // white
+	int bg = makecol(0,0,170); // blue
+	int yh = bmp->h - text_height(font) - 2;
+	
+	if (life > 0)
+		textprintf_centre_ex(bmp, font, bmp->w/2, yh, c, bg, "BOSS POWER %04d", life);
+	else 
+		textprintf_centre_ex(bmp, font, bmp->w/2, yh, c, bg, "** BOSS DYING **");
+}
 
 // collide with UFO
 void Boss::collide(UFO *ufo, ParticleManager *pm)

@@ -45,7 +45,7 @@ BossHeli::BossHeli()
 	
 	// bounding box 
 	bbox = new Collide2D(x, y, sprite->w, sprite->h); // non damage area, only collision with UFO
-	shoot_bbox = new Collide2D(x+15, y+5, 50, 15); // only cabin gets damaged
+	shoot_bbox = new Collide2D(x, y, sprite->w, sprite->h);
 	
 	collideWithUFO = true;
 
@@ -198,8 +198,8 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	bbox->x = x;
 	bbox->y = y;
 	
-	shoot_bbox->x = x + 15;
-	shoot_bbox->y = y + 5;
+	shoot_bbox->x = x;
+	shoot_bbox->y = y;
 	
 	// collision with UFO!
 	collide(ufo, pm);

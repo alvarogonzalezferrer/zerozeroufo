@@ -448,6 +448,10 @@ void MainGameLoop::update()
 				boss_defeated = true;
 			}
 		}
+		else
+		{
+			map->boss_mode = false; // we dont have active boss, normal map
+		}
 		
 		int ret_e = enemyList->update(map, ufo, pm); // update enemies
 		
@@ -469,7 +473,7 @@ void MainGameLoop::update()
 			// #1 helicopter boss
 			boss = new BossHeli();
 			((BossHeli *)boss)->enemyList = enemyList; // to be able to deploy paratroopers
-		}			
+		}
 		
 		// taking too long to kill enemies, show message if boss is not active
 		if (ticks > (unsigned  long int)(2400 + wave*200) && !boss)
@@ -657,6 +661,9 @@ void MainGameLoop::render()
 		pm->render(doubleBuffer,0,0); // render particles
 		
 		ufo->render_HUD(doubleBuffer); // render HUD
+		
+		if (boss)
+			boss->renderHUD(doubleBuffer); // boss HUD
 		
 		// destroy last enemy message
 		if (t_destroy_m > 0)
