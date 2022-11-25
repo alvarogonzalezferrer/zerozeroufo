@@ -1,40 +1,75 @@
 <!doctype html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <style>
-         html, body, #jsdos {
-             width: 100%;
-             height: 100%;
-             margin: 5px;
-             padding: 5px;
-         }
-        </style>
-        <script src="js-dos.js"></script>
-        <link href="js-dos.css" rel="stylesheet">
-    </head>
-    <body>
-		<p style="color:red;font-weight: bold;font-size:x-large;">Zero Zero UFO</p>		
-		<p style="color:red;font-weight: bold;text-decoration: underline;">BETA VERSION NOT FINISHED YET</p>
-		<p>Version 0.2022.11.24</p>
-		<p style="font-size:small;">
-			A,S,D,W or arrow keys : move the UFO <br>
-			Z or SPACE - use your beam to abduct cows and soldiers<br>
-			X or ENTER - shoot in the direction you're moving<br>
-			NOTE: if we press both beam & shoot, we shoot down, only in first weapon tier.<br>
-			K+R+O - cheat code to skip levels
-		<br><br>
-		<a style="color:blue;text-decoration: underline;" href="https://github.com/alvarogonzalezferrer/zerozeroufo" target="_blank">Get source code, and releases for MS DOS here. </a>
-		<br><br>	
-		</p>
-			
-        <div id="jsdos" />
-        <script>
-         emulators.pathPrefix = "";
-         Dos(document.getElementById("jsdos"))
-             .run("zeroufo_0.2022.11.24.jsdos");
-        </script>
-    </body>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>
+        html,
+        body,
+        #jsdos {
+            width: 100%;
+            height: 100%;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        body {
+            background-color: rgb(17, 17, 17);
+            ;
+        }
+
+        p {
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        a:link {
+            color: lightblue;
+        }
+
+        /* visited link */
+        a:visited {
+            color: lightblue;
+        }
+
+        /* mouse over link */
+        a:hover {
+            color: yellow;
+        }
+
+        /* selected link */
+        a:active {
+            color: yellow;
+        }
+    </style>
+    <script src="js-dos.js"></script>
+    <link href="js-dos.css" rel="stylesheet">
+</head>
+
+<body>
+    <p style="color:yellow;font-weight: bold;font-size:x-large;">Zero Zero UFO</p>
+    <p style="color:pink;font-weight: bold;">BETA VERSION NOT FINISHED YET</p>
+    <p>Version 0.2022.11.24</p>
+    <p style="font-size:small;">
+        A,S,D,W or arrow keys : move the UFO <br>
+        Z or SPACE - use your beam to abduct cows and soldiers<br>
+        X or ENTER - shoot in the direction you're moving<br>
+        NOTE: if we press both beam & shoot, we shoot down, only in first weapon tier.<br>
+        K+R+O - cheat code to skip levels<br>
+        <br>
+        <a href="https://github.com/alvarogonzalezferrer/zerozeroufo"
+            target="_blank">Get source code, and releases for MS DOS here. </a>
+        <br><br>
+    </p>
+
+    <div id="jsdos" />
+    <script>
+        emulators.pathPrefix = "";
+        Dos(document.getElementById("jsdos"))
+            .run("zeroufo_0.2022.11.24.jsdos");
+    </script>
+</body>
+
 </html>
 
 <!-- 
