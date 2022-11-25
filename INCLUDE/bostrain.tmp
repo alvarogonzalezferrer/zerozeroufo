@@ -1,0 +1,48 @@
+// -----------------------------------------------------------------------
+// bostrain.h
+// -----------------------------------------------------------------------
+// Train boss
+// -----------------------------------------------------------------------
+// Copyright (c) 2022, Kronoman
+// In loving memory of my father.
+// -----------------------------------------------------------------------
+// Released under The MIT License.
+// -----------------------------------------------------------------------
+
+#ifndef BOSSTRAIN_H
+#define BOSSTRAIN_H
+
+
+#include <allegro.h>
+
+#include "boss.h"
+#include "datafile.h"
+
+#include "enemies.h" // to spawn landmines
+
+
+class BossTrain : public Boss
+{
+	public:
+		BossTrain();
+		~BossTrain();
+	
+		bool update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots ); 
+
+		void render(BITMAP *bmp);
+		
+
+		BITMAP *spr[4];	
+		SAMPLE *shoot_wav;
+		SAMPLE *explosion_wav;
+		
+		Datafile data;
+		
+		bool face; // face right or left? 
+		
+		int openfire; // open fire?
+		
+		
+};
+
+#endif 
