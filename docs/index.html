@@ -15,7 +15,6 @@
 
         body {
             background-color: rgb(17, 17, 17);
-            ;
         }
 
         p {
@@ -41,15 +40,43 @@
         a:active {
             color: yellow;
         }
+
+        h1 {
+            font-weight: bold;
+            font-size: x-large;
+            color: yellow;
+        }
+
+        h2 {
+            font-weight: bold;
+            font-size: large;
+            color: yellow;
+        }
     </style>
     <script src="js-dos.js"></script>
     <link href="js-dos.css" rel="stylesheet">
 </head>
 
 <body>
-    <p style="color:yellow;font-weight: bold;font-size:x-large;">Zero Zero UFO</p>
-    <p style="color:pink;font-weight: bold;">BETA VERSION NOT FINISHED YET</p>
-    <p>Version 0.2022.11.24</p>
+    <h1>Zero Zero UFO</h1>
+    <p>Control your UFO to abduct cows, defeat the army.</p>
+    <p>This is a real MS-DOS game, done in C++, retro fun!</p>
+    <p>Version 0.2022.11.24 - preview beta, still under development, NOT FINISHED YET</p>
+    <p>You can play it online here, thanks to a online emulator, or you can download it and play on your computer.<br>If
+        you download, you
+        will need a emulator like DOSBox, or a real 486+ computer with MS-DOS.</p>
+    <p><br>
+        <a href="#jsdos" style="font-size: large; font-weight: bold;">Play on emulator online here.</a>
+        <br>
+        <a href="https://github.com/alvarogonzalezferrer/zerozeroufo" target="_blank">Get source code, and
+            releases for
+            MS DOS here. </a>
+        <br>
+        <a href="https://www.dosbox.com/" target="_blank">Get DOSBox - MS-DOS emulator here</a>
+        <br><br>
+    </p>
+    <h2>How to play:</h2>
+    
     <p style="font-size:small;">
         A,S,D,W or arrow keys : move the UFO <br>
         Z or SPACE - use your beam to abduct cows and soldiers<br>
@@ -57,11 +84,10 @@
         NOTE: if we press both beam & shoot, we shoot down, only in first weapon tier.<br>
         K+R+O - cheat code to skip levels<br>
         <br>
-        <a href="https://github.com/alvarogonzalezferrer/zerozeroufo"
-            target="_blank">Get source code, and releases for MS DOS here. </a>
-        <br><br>
     </p>
-
+    <h1>Online emulator</h1>
+    <p>Remember this is a MS-DOS game, performance is slower here, please download the game and try it on DOSBox or real
+        hardware to enjoy full performance.</p>
     <div id="jsdos" />
     <script>
         emulators.pathPrefix = "";
