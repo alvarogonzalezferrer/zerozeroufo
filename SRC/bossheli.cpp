@@ -75,6 +75,10 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	
 	sprite = spr[frame];
 	
+	// my middle point is quite used for AI
+	int mx = x + sprite->w / 2; 
+	int my = y + sprite->h / 2;
+	
 	// check boundaries 
 	if (x < 0)
 	{
@@ -93,9 +97,9 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	
 	if (life > 0) // prevent ground crash only if alive
 	{
-		if (y > m->getHeight(x) - sprite->h - 5)
+		if (y > m->getHeight(mx) - sprite->h - 5)
 		{
-			y = m->getHeight(x) - sprite->h - 5;
+			y = m->getHeight(mx) - sprite->h - 5;
 			sy = -0.5;
 		}
 	}
@@ -103,9 +107,7 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	x += sx;
 	y += sy;
 	
-	// my middle point is quite used for AI
-	int mx = x + sprite->w / 2; 
-	int my = y + sprite->h / 2;
+	
 	
 	// always face the player
 	if (ufo->x < mx )
