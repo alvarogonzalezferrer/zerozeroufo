@@ -108,7 +108,6 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 	y += sy;
 	
 	
-	
 	// always face the player
 	if (ufo->x < mx )
 		face = true; // face left
