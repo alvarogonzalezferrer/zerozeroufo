@@ -472,7 +472,10 @@ void MainGameLoop::update()
 			
 			// #1 helicopter boss
 			boss = new BossHeli();
-			((BossHeli *)boss)->enemyList = enemyList; // to be able to deploy paratroopers
+			// DEBUG CREATE OTHERS
+			
+			// setup boss
+			boss->enemyList = enemyList; // to be able to deploy extra enemies
 		}
 		
 		// taking too long to kill enemies, show message if boss is not active

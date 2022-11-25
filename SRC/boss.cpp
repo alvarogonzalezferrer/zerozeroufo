@@ -24,6 +24,10 @@ Boss::Boss()
 	
 	frame = 0;
 	ai_c = 0;
+	
+	enemyList = NULL;
+	
+	Logger::log("Boss::Boss() -> OK");
 }
 
 

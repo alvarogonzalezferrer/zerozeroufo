@@ -18,9 +18,6 @@
 #include "boss.h"
 #include "datafile.h"
 
-#include "enemies.h" // to spawn paratroopers
-
-
 class BossHeli : public Boss
 {
 	public:
@@ -42,7 +39,7 @@ class BossHeli : public Boss
 		
 		int openfire; // open fire?
 		
-		EnemyList *enemyList; // will spawn paratroopers, remember to set this when doing new boss !
+		
 };
 
 #endif 

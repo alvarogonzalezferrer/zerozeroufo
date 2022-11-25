@@ -29,7 +29,6 @@ BossHeli::BossHeli()
 	shoot_wav = (SAMPLE *)data.getObject("SHOOT_WAV")->dat;
 	explosion_wav = (SAMPLE *)data.getObject("EXPLOSION_WAV")->dat;
 	
-	
 	// init
 	sprite = spr[0];
 	frame = 0;
@@ -52,6 +51,8 @@ BossHeli::BossHeli()
 	face = true; // face left
 	
 	openfire = 0;
+	
+	Logger::log("BossHeli::BossHeli() -> OK");
 }
 
 BossHeli::~BossHeli()
@@ -80,7 +81,7 @@ bool BossHeli::update(Map *m, UFO *ufo, ParticleManager *pm, ShootsList *shoots 
 		sx = 0.5;
 	}
 	
-	if (x > 320)
+	if (x > 320 - sprite->w)
 	{
 		sx = -0.5;
 	}

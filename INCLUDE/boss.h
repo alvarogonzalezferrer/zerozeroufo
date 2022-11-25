@@ -18,11 +18,14 @@
 
 #include "shoots.h"
 
+#include "enemies.h"
+
 
 // forward declaration
 class ShootsList;
 class Shoot;
 class UFO;
+class EnemyList;
 
 class Boss
 {
@@ -64,6 +67,8 @@ class Boss
 		BITMAP *sprite; // current sprite to draw
 		int frame; // current frame 
 		int ai_c; // AI counter for state machine
+		
+		EnemyList *enemyList; // to spawn new enemies, default NULL, used by some bosses
 };
 
 #endif
