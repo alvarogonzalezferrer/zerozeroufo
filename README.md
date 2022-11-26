@@ -12,6 +12,10 @@ Thanks to the nice people of [Espacio TEC](https://espaciotec.com.ar/) :trophy: 
 
 November 2022: This game was on the podium, in the retro video game contest for old consoles and computers. :3rd_place_medal:
 
+## Support me
+
+Go to my page: https://kronoman.itch.io/zero-zero-ufo
+
 ## Play online 🎮 👽
 
 **REMEMBER THE GAME IS UNFINISHED!** 
@@ -116,7 +120,6 @@ http://www.mingw.org/
 ### Linux
 
 You need Allegro 4.2 dev package and g++ compiler. Run 'make'
-
 
 ## Game data
 
